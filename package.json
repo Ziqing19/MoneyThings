@@ -3,9 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www"
+    "backend": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www",
+    "frontend": "cd frontend && yarn start"
   },
-  "author": ["Qiqi Chen", "Ziqing Mao"],
+  "author": "Qiqi Chen Ziqing Mao",
   "license": "MIT",
   "repository": {
     "type": "git",
