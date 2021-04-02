@@ -12,7 +12,7 @@ export default function App() {
             <Link to="/">Home</Link>
           </li>
           <li>
-            <Link to="/auth">Login</Link>
+            <Link to="/auth/login">Login</Link>
           </li>
         </ul>
         {/* content */}

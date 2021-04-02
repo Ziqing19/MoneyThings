@@ -17,10 +17,13 @@ export default function Login() {
 
   function handleSubmit(evt) {
     evt.preventDefault();
+    if (!evt.target.checkValidity()) {
+      return evt.target.classList.add("was-validated");
+    }
     setUsername("");
     setPassword("");
     const checked = document.querySelector(".form-check-input").checked;
-    fetch("/auth/login", {
+    fetch("/user/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -47,7 +50,7 @@ export default function Login() {
   }
 
   return (
-    <form className="form fade show active" onSubmit={handleSubmit}>
+    <form className="form" onSubmit={handleSubmit} noValidate>
       <h1 className="text-center mb-4">Log In</h1>
       <InputBox
         label="Username"

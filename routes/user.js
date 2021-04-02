@@ -14,4 +14,12 @@ router.post("/login", async (req, res) => {
   }
 });
 
+router.post("/signup", async (req, res) => {
+  res.sendStatus(200);
+});
+
+router.post("/reset", async (req, res) => {
+  res.sendStatus(200);
+});
+
 module.exports = router;

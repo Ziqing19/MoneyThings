@@ -31,16 +31,14 @@ export default function Signup() {
   }
 
   function handleSubmit(evt) {
+    evt.preventDefault();
     if (!evt.target.checkValidity()) {
-      evt.preventDefault();
-      evt.stopPropagation();
+      return evt.target.classList.add("was-validated");
     }
-    evt.target.classList.add("was-validated");
-
     setEmail("");
     setPassword("");
     setPasswordConfirm("");
-    fetch("/auth/signup", {
+    fetch("/user/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -66,20 +64,16 @@ export default function Signup() {
   }
 
   return (
-    <form
-      className="form fade show active needs-validation"
-      onSubmit={handleSubmit}
-      noValidate
-    >
+    <form className="form" onSubmit={handleSubmit} noValidate>
       <h1 className="text-center mb-4">Sign Up</h1>
       <InputBox
         label="Email"
         value={email}
+        type="email"
         onChange={handleEmail}
         feedback="Please provide a valid email address"
         required={true}
       />
-      <div className="invalid-feedback">no!!!</div>
       <InputBox
         label="Password"
         value={password}
