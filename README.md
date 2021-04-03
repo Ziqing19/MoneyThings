@@ -29,6 +29,22 @@ root
 - [ ] Export/Import
 
 
+1. Login Page
+2. Main Page
+    1. Overview
+    2. All time
+        1. Group by date
+        2. Group by category
+    3. Trends
+        1. Daily usage (histogram)
+        2. Category proportion (pie chart)
+    4. Budget
+        1. Set budget
+        2. Display budget/spending
+    5. Edit Profile
+
+
+
 ## Development
 ```
 yarn install

@@ -3,16 +3,26 @@ import InputBox from "../common/InputBox.js";
 import { Link } from "react-router-dom";
 import "./Auth.css";
 
-export default function Login() {
-  const [username, setUsername] = useState("");
+export default function NewPassword() {
   const [password, setPassword] = useState("");
-
-  function handleUsername(evt) {
-    setUsername(evt.target.value);
-  }
+  const [password_confirm, setPasswordConfirm] = useState("");
+  const [toggle_visibility, setToggleVisibility] = useState("password");
 
   function handlePassword(evt) {
     setPassword(evt.target.value);
+  }
+
+  function handlePasswordConfirm(evt) {
+    setPasswordConfirm(evt.target.value);
+    if (evt.target.value !== password) {
+      evt.target.classList.add("is-invalid");
+    } else {
+      evt.target.classList.remove("is-invalid");
+    }
+  }
+
+  function handleToggleVisibility() {
+    setToggleVisibility(toggle_visibility === "password" ? "text" : "password");
   }
 
   function handleSubmit(evt) {
@@ -20,21 +30,16 @@ export default function Login() {
     if (!evt.target.checkValidity()) {
       return evt.target.classList.add("was-validated");
     }
-    // setUsername("");
     // setPassword("");
-    const checked = document.querySelector(".form-check-input").checked;
-    const data = {
-      username: username,
-      password: password,
-      checked: checked,
-    };
-    console.log(data);
-    fetch("/user/login", {
+    // setPasswordConfirm("");
+    fetch("/user/new-password", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify({
+        password: password,
+      }),
     })
       .then((resRaw) => {
         console.log(resRaw);
@@ -43,7 +48,7 @@ export default function Login() {
             alert(res);
           });
         } else {
-          alert("Log in succeed");
+          alert("Update password succeed");
         }
       })
       .catch((err) => {
@@ -53,42 +58,37 @@ export default function Login() {
 
   return (
     <form className="form" onSubmit={handleSubmit} noValidate>
-      <h1 className="text-center mb-4">Log In</h1>
-      <InputBox
-        label="Username"
-        value={username}
-        onChange={handleUsername}
-        feedback="Please provide a valid username or email address"
-        required={true}
-      />
+      <h1 className="text-center mb-4">Update Password</h1>
       <InputBox
         label="Password"
         value={password}
+        type={toggle_visibility}
         onChange={handlePassword}
-        type="password"
         feedback="Please provide a valid password"
+        required={true}
+      />
+      <InputBox
+        label="Confirm Password"
+        value={password_confirm}
+        onChange={handlePasswordConfirm}
+        type={toggle_visibility}
+        feedback="Password and confirm password does not match"
         required={true}
       />
       <div className="mb-3 form-check">
         <label className="form-check-label">
-          Keep Me Logged in
-          <input type="checkbox" className="form-check-input" />
+          <input
+            type="checkbox"
+            className="form-check-input"
+            onClick={handleToggleVisibility}
+          />
+          Show Password
         </label>
       </div>
       <button className="mb-3 btn btn-primary text-center">Submit</button>
       <div className="mb-2 d-flex justify-content-end">
-        <Link className="text-end d-block" to="/auth/reset">
-          Forgot password?
-        </Link>
-      </div>
-      <div className="mb-2 d-flex justify-content-end">
-        <Link className="text-end d-block" to="/auth/signup">
-          Sign up
-        </Link>
-      </div>
-      <div className="mb-2 d-flex justify-content-end">
-        <Link className="text-end d-block" to="/auth/new-password">
-          New Password(temp)
+        <Link className="text-end d-block" to="/auth/login">
+          Log in
         </Link>
       </div>
     </form>

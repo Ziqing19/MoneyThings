@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import Login from "./Login.js";
 import Signup from "./Signup.js";
 import Reset from "./Reset.js";
+import NewPassword from "./NewPassword.js";
 
 export default function Auth() {
   return (
@@ -13,6 +14,9 @@ export default function Auth() {
         </Route>
         <Route path="/auth/reset">
           <Reset />
+        </Route>
+        <Route path="/auth/new-password">
+          <NewPassword />
         </Route>
         <Route path="/auth">
           <Login />

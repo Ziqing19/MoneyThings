@@ -35,9 +35,9 @@ export default function Signup() {
     if (!evt.target.checkValidity()) {
       return evt.target.classList.add("was-validated");
     }
-    setEmail("");
-    setPassword("");
-    setPasswordConfirm("");
+    // setEmail("");
+    // setPassword("");
+    // setPasswordConfirm("");
     fetch("/user/signup", {
       method: "POST",
       headers: {
