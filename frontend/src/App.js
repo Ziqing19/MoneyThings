@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import Auth from "./auth/Auth.js";
 import Logout from "./auth/Logout.js";
+import Workspace from "./container/Workspace.js";
 import * as utils from "./utils.js";
 
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
 
   return (
     <Router>
-      {/* nav */}
+      {/* NAV */}
       <div>
         <ul>
           <li>Welcome, {user === undefined ? "Visitor" : user.username}</li>
@@ -29,24 +30,16 @@ export default function App() {
             <Logout />
           </li>
         </ul>
-        {/* content */}
+        {/* CONTENT */}
         <Switch>
           <Route path="/auth">
             <Auth />
           </Route>
           <Route path="/">
-            <Home />
+            <Workspace />
           </Route>
         </Switch>
       </div>
     </Router>
-  );
-}
-
-function Home() {
-  return (
-    <div>
-      <h2>Home</h2>
-    </div>
   );
 }

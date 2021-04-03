@@ -19,7 +19,13 @@ function connect() {
 }
 
 function getCollection(collectionName) {
-  return db.collection(collectionName);
+  try {
+    return db.collection(collectionName);
+  } catch (err) {
+    console.log(err);
+    setTimeout(void(0), 1000);
+    return getCollection(collectionName);
+  }
 }
 
 module.exports = {
