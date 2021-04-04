@@ -7,8 +7,9 @@ export default function Logout() {
     if (!resRaw.ok) {
       const res = await resRaw.text();
       alert(res);
+    } else {
+      window.location = "/auth/login";
     }
-    window.location = "/auth/login";
   }
 
   return (

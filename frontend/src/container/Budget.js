@@ -1,9 +1,8 @@
 import React from "react";
 
-export default function Budget(props) {
-  console.log(props);
+export default function Budget() {
   return (
-    <div style={{height: "100%"}}>
+    <div className="flex-container">
       budget
     </div>
   );

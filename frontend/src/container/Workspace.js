@@ -1,5 +1,6 @@
 import React from "react";
 import {BrowserRouter as Router, Switch, Route, Link} from "react-router-dom";
+import "./stylesheet/Workspace.css";
 import Overview from "./Overview.js";
 import Profile from "./Profile.js";
 import AllTime from "./AllTime.js";
@@ -22,7 +23,7 @@ export default function Workspace() {
         <div className="flex-grow-1">
           <Switch>
             <Route path={["/all-time", "/trends", "/budget"]}>
-              <div className="row" style={{height: "100%"}}>
+              <div className="row flex-container">
                 <div className="col-4 px-0">
                   <SelectionPanel />
                 </div>

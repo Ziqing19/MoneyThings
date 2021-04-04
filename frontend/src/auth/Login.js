@@ -44,6 +44,7 @@ export default function Login() {
           });
         } else {
           alert("Log in succeed");
+          window.location = "/";
         }
       })
       .catch((err) => {

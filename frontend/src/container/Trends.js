@@ -1,9 +1,8 @@
 import React from "react";
 
-export default function Trends(props) {
-  console.log(props);
+export default function Trends() {
   return (
-    <div style={{height: "100%"}}>
+    <div className="flex-container">
       trends
     </div>
   );

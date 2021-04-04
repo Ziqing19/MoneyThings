@@ -39,8 +39,10 @@
   },
   "proxy": "http://localhost:3001",
   "devDependencies": {
+    "eslint-config-prettier": "^8.1.0",
     "eslint-plugin-react-hooks": "^4.2.0",
     "lodash": "^4.17.21",
+    "prettier": "^2.2.1",
     "prop-types": "^15.7.2"
   }
 }

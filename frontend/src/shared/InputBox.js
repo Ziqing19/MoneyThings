@@ -2,6 +2,17 @@ import React, { useState } from "react";
 import PropTypes from "prop-types";
 import _uniqueId from "lodash/uniqueId";
 
+/**
+ * InputBox is a controlled component that represents a input and label.
+ *
+ * @param props.label (required) label
+ * @param props.value (required) value
+ * @param props.onChange (required) handler of input value
+ * @param props.type "text" | "password" | "email" | ... , text by default
+ * @param props.feedback feedback if the input fails validation
+ * @param props.required true | false, false by default
+ * @returns {JSX.Element}
+ */
 export default function InputBox(props) {
   const [id] = useState(_uniqueId("input-"));
 
@@ -29,10 +40,10 @@ export default function InputBox(props) {
 }
 
 InputBox.propTypes = {
-  type: PropTypes.string,
   label: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
+  onChange: PropTypes.func.isRequired,
+  type: PropTypes.string,
   feedback: PropTypes.string,
   required: PropTypes.bool,
-  onChange: PropTypes.func.isRequired,
 };

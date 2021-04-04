@@ -1,9 +1,8 @@
 import React from "react";
 
-export default function Overview(props) {
-  console.log(props);
+export default function Overview() {
   return (
-    <div style={{height: "100%"}}>
+    <div className="flex-container">
       overview
     </div>
   );

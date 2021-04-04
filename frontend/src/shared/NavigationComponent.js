@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
-//import Logout from "./auth/Logout.js";
-import * as utils from "../utils.js";
+import PropTypes from "prop-types";
 import logo from "../image/MoneyEmoji.png";
 
-export default function NavigationComponent() {
-  const [user, setUser] = useState(undefined);
+export default function NavigationComponent(props) {
+  async function logout() {
+    document.cookie = "_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
+    const resRaw = await fetch("/user/logout");
+    if (!resRaw.ok) {
+      const res = await resRaw.text();
+      alert(res);
+    }
+    window.location = "/auth/login";
+  }
 
-  useEffect(() => {
-    utils.getUser().then((user) => {
-      setUser(user);
-    });
-  }, []);
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light">
       <div className="container-fluid">
@@ -22,7 +24,7 @@ export default function NavigationComponent() {
             width="30"
             height="24"
             className="d-inline-block align-text-top"
-          ></img>
+          />
         </Link>
         <button
           className="navbar-toggler"
@@ -33,7 +35,7 @@ export default function NavigationComponent() {
           aria-expanded="false"
           aria-label="Toggle navigation"
         >
-          <span className="navbar-toggler-icon"></span>
+          <span className="navbar-toggler-icon" />
         </button>
         <div className="collapse navbar-collapse" id="navbarScroll">
           <ul className="navbar-nav me-auto my-2 my-lg-0 navbar-nav-scroll">
@@ -44,16 +46,16 @@ export default function NavigationComponent() {
             </li>
 
             <li className="nav-item dropdown d-flex">
-              <Link
+              <div
                 className="nav-link dropdown-toggle"
-                href="#"
                 id="navbarScrollingDropdown"
                 role="button"
                 data-bs-toggle="dropdown"
                 aria-expanded="false"
               >
-                Welcome, {user === undefined ? "Visitor" : user.username}
-              </Link>
+                Welcome,{" "}
+                {props.user === undefined ? "Visitor" : props.user.username}
+              </div>
               <ul
                 className="dropdown-menu"
                 aria-labelledby="navbarScrollingDropdown"
@@ -64,9 +66,9 @@ export default function NavigationComponent() {
                   </Link>
                 </li>
                 <li>
-                  <Link className="dropdown-item" to="/auth">
+                  <div className="dropdown-item" onClick={logout}>
                     Logout
-                  </Link>
+                  </div>
                 </li>
                 <li>
                   <Link className="dropdown-item" to="/auth/new-password">
@@ -81,3 +83,7 @@ export default function NavigationComponent() {
     </nav>
   );
 }
+
+NavigationComponent.propTypes = {
+  user: PropTypes.object,
+};
