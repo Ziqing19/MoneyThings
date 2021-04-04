@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputBox from "../common/InputBox.js";
+import InputBox from "../shared/InputBox.js";
 import { Link } from "react-router-dom";
 import "./Auth.css";
 

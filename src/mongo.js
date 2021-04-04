@@ -1,5 +1,6 @@
 const { MongoClient } = require("mongodb");
-const url = process.env.MONGO_URL || "mongodb://localhost:27017";
+const url =
+  "mongodb+srv://Ziqing:fqhygi97ZKIOKnXS@photohub.gsh6i.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
 
 let client, db;
 
