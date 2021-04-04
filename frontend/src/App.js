@@ -17,7 +17,7 @@ export default function App() {
   return (
     <Router>
       {/* NAV */}
-      <div>
+      <div className="d-flex flex-column" style={{width: "100w", height: "100vh", overflow: "hidden"}}>
         <ul>
           <li>Welcome, {user === undefined ? "Visitor" : user.username}</li>
           <li>
