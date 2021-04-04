@@ -58,10 +58,24 @@ Start working on http://localhost:3000
 ## Before deployment
 ```
 cd frontend
-yarn build
+yarn build (generate build folder)
 cd ..
 yarn backend
 ```
 Check the webpage on http://localhost:3001 
+
+## Alternative
+for development start two servers
+```
+yarn install
+yarn nodemon
+```
+The backend will run on http://localhost:3001
+```
+cd frontend
+yarn install
+yarn start
+```
+The frontend will run on http://localhost:3001
 
 note: changes on the frontend will not be updated for production environment, unless re-build the frontend
