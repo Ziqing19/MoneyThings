@@ -23,10 +23,10 @@ export default function Workspace() {
           <Switch>
             <Route path={["/all-time", "/trends", "/budget"]}>
               <div className="row" style={{height: "100%"}}>
-                <div className="col-4">
+                <div className="col-4 px-0">
                   <SelectionPanel />
                 </div>
-                <div className="col-8">
+                <div className="col-8 px-0">
                   <Route path="/all-time">
                     <AllTime />
                   </Route>
