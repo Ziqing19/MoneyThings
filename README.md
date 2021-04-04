@@ -1,4 +1,4 @@
-# app name TBD
+# MoneyThings
 
 ## Project Structure
 
@@ -10,24 +10,14 @@ root
 │  ├─ public                // static files
 │  │  └─ favicon            // website favicon
 │  └─ src                   // react src
-│      ├─ component         // react components
-│      ├─ image             // website images
-│      └─ stylesheet        // stylesheets
+│      ├─ auth              // auth route
+│      ├─ common            // common components shared by diffrent routes
+│      └─ image             // static images
 ├─ routes                   // express routes
 └─ src                      // backend src
 ```
 
-## Features
-
-- [ ] Signup/Login/ResetPass
-- [ ] Multiple accounts (checking account, credit card, stock(I have no idea about it))  
-- [ ] Default spending categories
-- [ ] Diagrams showing proportions of spending (Pie chart? Use a library?)
-- [ ] Set budget (show warning if exceeds)
-- [ ] Add an entry  
-- [ ] Search for specific entries (regex?)
-- [ ] Export/Import
-
+## Hierarchy (Routes)
 
 1. Login Page
 2. Main Page
@@ -43,7 +33,16 @@ root
         2. Display budget/spending
     5. Edit Profile
 
+## Features
 
+- [ ] Signup/Login/ResetPass
+- [ ] Multiple accounts (checking account, credit card, stock(I have no idea about it))
+- [ ] Default spending categories
+- [ ] Diagrams showing proportions of spending (Pie chart? Use a library?)
+- [ ] Set budget (show warning if exceeds)
+- [ ] Add an entry
+- [ ] Search for specific entries (regex?)
+- [ ] Export/Import
 
 ## Development
 ```
@@ -59,10 +58,24 @@ Start working on http://localhost:3000
 ## Before deployment
 ```
 cd frontend
-yarn build
+yarn build (generate build folder)
 cd ..
 yarn backend
 ```
 Check the webpage on http://localhost:3001 
+
+## Alternative
+for development start two servers
+```
+yarn install
+yarn nodemon
+```
+The backend will run on http://localhost:3001
+```
+cd frontend
+yarn install
+yarn start
+```
+The frontend will run on http://localhost:3001
 
 note: changes on the frontend will not be updated for production environment, unless re-build the frontend

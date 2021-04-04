@@ -1,5 +1,5 @@
 {
-  "name": "mymint",
+  "name": "moneythings",
   "version": "0.0.0",
   "private": true,
   "scripts": {
@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:Ziqing19/MyMint.git"
+    "url": "git@github.com:Ziqing19/MoneyThings.git"
   },
   "dependencies": {
     "bcrypt": "^5.0.1",

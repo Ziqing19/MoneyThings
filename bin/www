@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 const app = require("../app");
-const debug = require("debug")("mymint:server");
+const debug = require("debug")("moneythings:server");
 const http = require("http");
 
 /**
