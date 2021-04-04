@@ -1,6 +1,5 @@
 const { MongoClient } = require("mongodb");
-const url =
-  "mongodb+srv://Ziqing:fqhygi97ZKIOKnXS@photohub.gsh6i.mongodb.net/myFirstDatabase?retryWrites=true&w=majority";
+const url = process.env.MONGO_URL || "mongodb://localhost:27017";
 
 let client, db;
 
@@ -24,7 +23,7 @@ function getCollection(collectionName) {
     return db.collection(collectionName);
   } catch (err) {
     console.log(err);
-    setTimeout(void(0), 1000);
+    setTimeout(void 0, 1000);
     return getCollection(collectionName);
   }
 }
