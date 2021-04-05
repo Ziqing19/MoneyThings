@@ -1,10 +1,14 @@
-import React from "react";
+import React, { useState } from "react";
 import "./stylesheet/SelectionPanel.css";
 import NewTransaction from "./NewTransaction";
+import RecentTransaction from "./RecentTransaction";
+import propTypes from "prop-types";
 
-export default function SelectionPanel() {
+export default function SelectionPanel(props) {
+  const [showNewTrans, setShowNewTrans] = useState(false);
+
   function handleClick() {
-    console.log("click");
+    setShowNewTrans(~showNewTrans);
   }
 
   return (
@@ -19,8 +23,22 @@ export default function SelectionPanel() {
         </div>
       </div>
       <div id="panel_content">
-        <NewTransaction />
+        {showNewTrans ? (
+          <NewTransaction />
+        ) : (
+          <RecentTransaction
+            dateRange={props.dateRange}
+            setDateRange={props.setDateRange}
+            recent={props.recent}
+          />
+        )}
       </div>
     </div>
   );
 }
+
+SelectionPanel.propTypes = {
+  dateRange: propTypes.array.isRequired,
+  setDateRange: propTypes.func.isRequired,
+  recent: propTypes.array.isRequired,
+};

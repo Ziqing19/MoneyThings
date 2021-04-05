@@ -9,11 +9,14 @@ import * as utils from "./utils";
 export default function App() {
   const [user, setUser] = useState();
 
-  useEffect(() => {
+  function getUser() {
     utils.getUser().then((user) => {
+      console.log(user);
       setUser(user);
     });
-  }, []);
+  }
+
+  useEffect(getUser, []);
 
   return (
     <Router>

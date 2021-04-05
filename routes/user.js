@@ -1,10 +1,15 @@
 const express = require("express");
 const router = express.Router();
 
-const ObjectId = require("mongodb").ObjectID;
+const { ObjectId } = require("mongodb").ObjectID;
 const { getCollection } = require("../src/mongo");
 const routeUtils = require("../src/routeUtils");
 const bcrypt = require("bcrypt");
+
+router.use("/", (req, res, next) => {
+  console.log("Router: user");
+  next();
+});
 
 router.get("/get-user", async (req, res) => {
   if (req.session._id === undefined) {
@@ -13,7 +18,8 @@ router.get("/get-user", async (req, res) => {
       return res.sendStatus(204);
     }
     try {
-      const resFind = await getCollection("Users")
+      const collection = await getCollection("Users");
+      const resFind = await collection
         .find({
           _id: ObjectId(req.cookies._id),
         })
@@ -27,6 +33,7 @@ router.get("/get-user", async (req, res) => {
         req.session.profile_photo = user.profile_photo;
         const data = {
           username: user.username,
+          categories: user.categories,
           profile_photo: user.profile_photo,
         };
         res.send(data);
@@ -154,5 +161,39 @@ router.get("/logout", routeUtils.checkLogStatus, async (req, res) => {
   });
   res.sendStatus(200);
 });
+
+router.get("/get-categories", routeUtils.checkLogStatus, async (req, res) => {
+  try {
+    const resFind = await getCollection("Users").findOne(
+      { _id: req.session._id },
+      { _id: 0, categories: 1 }
+    );
+    res.send(resFind);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
+});
+
+router.post(
+  "/update-categories",
+  routeUtils.checkLogStatus,
+  async (req, res) => {
+    if (req.body.categories === undefined) {
+      return res.sendStatus(400);
+    }
+    try {
+      console.log(req.body.categories);
+      await getCollection("Users").updateOne(
+        { _id: ObjectId(req.session._id) },
+        { $set: { categories: req.body.categories } }
+      );
+      res.sendStatus(201);
+    } catch (err) {
+      console.log(err);
+      res.sendStatus(400);
+    }
+  }
+);
 
 module.exports = router;

@@ -15,6 +15,26 @@ export default function NewTransaction() {
     }
   }
 
+  // function getAll() {
+  //   fetch("/transaction/get-all")
+  //     .then((res) => {
+  //       return res.json();
+  //     })
+  //     .then((res) => {
+  //       let array = new Array(res.map((item) => item.category))[0];
+  //       const result = {};
+  //       for (let i = 0; i < array.length; i++) {
+  //         result[array[i]] = (result[array[i]] || 0) + 1;
+  //       }
+  //       Object.keys(result).map((key) => ({ [key]: result[key] }));
+  //       console.log(result);
+  //     });
+  // }
+
+  // function update() {
+  //   fetch("/transaction/update").then(getAll);
+  // }
+
   return (
     <div className="flex-container">
       <form onSubmit={handleSubmit}>
@@ -22,7 +42,7 @@ export default function NewTransaction() {
           <div className="col-3 border-end">Cancel</div>
           <div className="col-3 border-end">Income</div>
           <div className="col-3 border-end">Expense</div>
-          <div className="col-3">Save</div>
+          <button className="col-3">Save</button>
         </div>
         {/*TODO make category a multiple choice selection*/}
         <InputBox
@@ -50,13 +70,21 @@ export default function NewTransaction() {
           onChange={(evt) => setDate(evt.target.value)}
           required={true}
         />
-        <InputBox
-          label="Remark"
-          value={remark}
-          onChange={(evt) => setRemark(evt.target.value)}
-        />
-        <button className="btn btn-primary">Submit</button>
+        <div className="form-floating my-3">
+          <textarea
+            id="remark"
+            rows="5"
+            value={remark}
+            className="form-control"
+            placeholder="textarea"
+            onChange={(evt) => setRemark(evt.target.value)}
+            style={{ height: "auto" }}
+          />
+          <label htmlFor="remark">Remark</label>
+        </div>
       </form>
+      {/*<button onClick={getAll}>get all</button>*/}
+      {/*<button onClick={update}>update</button>*/}
     </div>
   );
 }

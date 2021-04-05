@@ -8,6 +8,7 @@ const mongo = require("./src/mongo");
 mongo.connect();
 
 const userRouter = require("./routes/user");
+const transactionRouter = require("./routes/transaction");
 const indexRouter = require("./routes/index");
 
 const app = express();
@@ -27,6 +28,7 @@ app.use(
 );
 
 app.use("/user", userRouter);
+app.use("/transaction", transactionRouter);
 app.use("/", indexRouter);
 
 app.use(express.static(path.join(__dirname, "frontend/build")));
