@@ -18,12 +18,15 @@ export default function Accordion(props) {
         <button
           className="accordion-button"
           data-bs-toggle="collapse"
-          data-bs-target={"#" + props.header}
+          data-bs-target={"#" + props.header.replace(/\s+/g, "")}
         >
           {props.header}
         </button>
       </h2>
-      <div id={props.header} className="accordion-collapse collapse">
+      <div
+        id={props.header.replace(/\s+/g, "")}
+        className="accordion-collapse collapse"
+      >
         <div className="accordion-body">
           {props.transactions.map((i, index) => (
             <Transaction
@@ -46,7 +49,7 @@ export default function Accordion(props) {
 
 Accordion.propTypes = {
   header: propTypes.string.isRequired,
-  transactions: propTypes.object.isRequired,
+  transactions: propTypes.array.isRequired,
   recent: propTypes.array.isRequired,
   setRecent: propTypes.func.isRequired,
 };

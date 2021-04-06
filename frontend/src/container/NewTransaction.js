@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import InputBox from "../shared/InputBox.js";
-// import "stylesheet/NewTransaction.css";
 import propTypes from "prop-types";
 import _ from "lodash";
 
@@ -8,8 +7,8 @@ export default function NewTransaction(props) {
   const [isIncome, setIsIncome] = useState(true);
   const [merchant, setMerchant] = useState("");
   const [amount, setAmount] = useState("");
-  const [categories, setCategories] = useState(props.user.categories.income);
-  const [category, setCategory] = useState(props.user.categories.income[0]);
+  const [categories, setCategories] = useState(props.user.categories.Income);
+  const [category, setCategory] = useState(props.user.categories.Income[0]);
   const [remark, setRemark] = useState("");
   const [date, setDate] = useState("");
 
@@ -55,7 +54,7 @@ export default function NewTransaction(props) {
   function notIsIncome() {
     setIsIncome(!isIncome);
     setCategories(
-      isIncome ? props.user.categories.expense : props.user.categories.income
+      isIncome ? props.user.categories.Expense : props.user.categories.Income
     );
   }
 
