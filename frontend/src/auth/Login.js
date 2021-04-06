@@ -29,7 +29,7 @@ export default function Login() {
       checked: checked,
     };
     console.log(data);
-    fetch("/user/login", {
+    fetch("/authentication/login", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

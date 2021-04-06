@@ -73,6 +73,7 @@ export default function RecentTransaction(props) {
           amount={i.amount}
           date={i.date}
           merchant={i.merchant}
+          type={i.type}
         />
       ))}
     </div>

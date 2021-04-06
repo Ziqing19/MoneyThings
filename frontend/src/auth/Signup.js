@@ -38,7 +38,7 @@ export default function Signup() {
     // setEmail("");
     // setPassword("");
     // setPasswordConfirm("");
-    fetch("/user/signup", {
+    fetch("/authentication/signup", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

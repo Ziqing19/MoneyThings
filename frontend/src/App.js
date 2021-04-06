@@ -1,34 +1,42 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Redirect,
+} from "react-router-dom";
 import Auth from "./auth/Auth.js";
 import NavigationComponent from "./shared/NavigationComponent.js";
 
 import Workspace from "./container/Workspace.js";
-import * as utils from "./utils";
 
 export default function App() {
   const [user, setUser] = useState();
 
-  function getUser() {
-    utils.getUser().then((user) => {
-      console.log(user);
+  useEffect(() => {
+    getUser().then((user) => {
       setUser(user);
     });
-  }
-
-  useEffect(getUser, []);
+  }, []);
 
   return (
     <Router>
       <NavigationComponent user={user} />
       <Switch>
         <Route path="/auth">
-          <Auth />
+          {user !== undefined ? <Redirect to="/" /> : <Auth />}
         </Route>
         <Route path="/">
-          <Workspace />
+          {user === undefined ? <Redirect to="/auth" /> : <Workspace />}
         </Route>
       </Switch>
     </Router>
   );
+}
+
+async function getUser() {
+  const resRaw = await fetch("/authentication/get-user");
+  if (resRaw.status !== 204) {
+    return await resRaw.json();
+  }
 }

@@ -7,6 +7,7 @@ const session = require("express-session");
 const mongo = require("./src/mongo");
 mongo.connect();
 
+const authRouter = require("./routes/authentication");
 const userRouter = require("./routes/user");
 const transactionRouter = require("./routes/transaction");
 const indexRouter = require("./routes/index");
@@ -27,6 +28,7 @@ app.use(
   })
 );
 
+app.use("/authentication", authRouter);
 app.use("/user", userRouter);
 app.use("/transaction", transactionRouter);
 app.use("/", indexRouter);

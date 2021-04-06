@@ -16,7 +16,7 @@ export default function Reset() {
       return evt.target.classList.add("was-validated");
     }
     setEmail("");
-    fetch("/user/reset", {
+    fetch("/authentication/reset", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

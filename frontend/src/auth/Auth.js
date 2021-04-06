@@ -15,6 +15,7 @@ export default function Auth() {
         <Route path="/auth/reset">
           <Reset />
         </Route>
+        {/*TODO move to user route*/}
         <Route path="/auth/new-password">
           <NewPassword />
         </Route>

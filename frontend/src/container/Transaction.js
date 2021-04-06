@@ -8,6 +8,7 @@ import propTypes from "prop-types";
  * @param props.merchant (required)
  * @param props.amount (required)
  * @param props.date (required) unix timestamp
+ * @param props.type (required) expense | income
  * @returns {JSX.Element}
  */
 export default function Transaction(props) {
@@ -18,11 +19,11 @@ export default function Transaction(props) {
 
   return (
     <div className="mb-3">
-      <div>New transaction</div>
       <ul>
         <li>{props.category}</li>
         <li>{props.merchant}</li>
         <li>{props.amount}</li>
+        <li>{props.type}</li>
         <li>{parseDate(props.date)}</li>
       </ul>
     </div>
@@ -34,4 +35,5 @@ Transaction.propTypes = {
   merchant: propTypes.string.isRequired,
   amount: propTypes.number.isRequired,
   date: propTypes.number.isRequired,
+  type: propTypes.string.isRequired,
 };

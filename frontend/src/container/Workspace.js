@@ -33,10 +33,10 @@ export default function Workspace() {
         return res.json();
       })
       .then((res) => {
+        console.log(res[0]);
         setRecent(res);
       })
       .catch((err) => {
-        console.log("here");
         alert(err);
       });
   }, [dateRange]);
