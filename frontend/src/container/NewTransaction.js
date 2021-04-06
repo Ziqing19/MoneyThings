@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import InputBox from "../shared/InputBox.js";
+// import "stylesheet/NewTransaction.css";
+import propTypes from "prop-types";
+import _ from "lodash";
 
-export default function NewTransaction() {
+export default function NewTransaction(props) {
+  const [isIncome, setIsIncome] = useState(true);
   const [merchant, setMerchant] = useState("");
   const [amount, setAmount] = useState("");
-  const [category, setCategory] = useState("");
+  const [categories, setCategories] = useState(props.user.categories.income);
+  const [category, setCategory] = useState(props.user.categories.income[0]);
   const [remark, setRemark] = useState("");
   const [date, setDate] = useState("");
 
@@ -13,44 +18,86 @@ export default function NewTransaction() {
     if (!evt.target.checkValidity()) {
       return evt.target.classList.add("was-validated");
     }
+    const data = {
+      type: isIncome ? "Income" : "Expense",
+      category: category,
+      merchant: merchant,
+      amount: amount,
+      date: new Date().getTime(),
+      remark: remark,
+    };
+    fetch("/transaction/new", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((resRaw) => {
+        console.log(resRaw);
+        if (!resRaw.ok) {
+          resRaw.text().then((res) => {
+            alert(res);
+          });
+        } else {
+          console.log("New transaction created");
+          const newDateRange = _.cloneDeep(props.dateRange);
+          newDateRange[1] = new Date();
+          props.setDateRange(newDateRange);
+          props.toggle();
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }
 
-  // function getAll() {
-  //   fetch("/transaction/get-all")
-  //     .then((res) => {
-  //       return res.json();
-  //     })
-  //     .then((res) => {
-  //       let array = new Array(res.map((item) => item.category))[0];
-  //       const result = {};
-  //       for (let i = 0; i < array.length; i++) {
-  //         result[array[i]] = (result[array[i]] || 0) + 1;
-  //       }
-  //       Object.keys(result).map((key) => ({ [key]: result[key] }));
-  //       console.log(result);
-  //     });
-  // }
-
-  // function update() {
-  //   fetch("/transaction/update").then(getAll);
-  // }
+  function notIsIncome() {
+    setIsIncome(!isIncome);
+    setCategories(
+      isIncome ? props.user.categories.expense : props.user.categories.income
+    );
+  }
 
   return (
     <div className="flex-container">
       <form onSubmit={handleSubmit}>
         <div className="row py-3 border-bottom text-center">
-          <div className="col-3 border-end">Cancel</div>
-          <div className="col-3 border-end">Income</div>
-          <div className="col-3 border-end">Expense</div>
+          <button className="col-3 border-end" onClick={props.toggle}>
+            Cancel
+          </button>
+          <div
+            className="col-3 border-end"
+            onClick={notIsIncome}
+            style={{ textDecoration: isIncome ? "underline" : "none" }}
+          >
+            Income
+          </div>
+          <div
+            className="col-3 border-end"
+            onClick={notIsIncome}
+            style={{ textDecoration: isIncome ? "none" : "underline" }}
+          >
+            Expense
+          </div>
           <button className="col-3">Save</button>
         </div>
-        {/*TODO make category a multiple choice selection*/}
-        <InputBox
-          label="Category"
-          value={category}
-          onChange={(evt) => setCategory(evt.target.value)}
-          required={true}
-        />
+        <div className="form-floating my-3">
+          <select className="form-select" id="select">
+            {categories.map((item, index) => (
+              <option
+                value={item}
+                key={"option-" + index}
+                onClick={() => {
+                  setCategory(item);
+                }}
+              >
+                {item}
+              </option>
+            ))}
+          </select>
+          <label htmlFor="select">Category</label>
+        </div>
         <InputBox
           label="Merchant name"
           value={merchant}
@@ -61,6 +108,7 @@ export default function NewTransaction() {
         <InputBox
           label="Amount"
           value={amount}
+          type="number"
           onChange={(evt) => setAmount(evt.target.value)}
           required={true}
         />
@@ -83,8 +131,13 @@ export default function NewTransaction() {
           <label htmlFor="remark">Remark</label>
         </div>
       </form>
-      {/*<button onClick={getAll}>get all</button>*/}
-      {/*<button onClick={update}>update</button>*/}
     </div>
   );
 }
+
+NewTransaction.propTypes = {
+  user: propTypes.object.isRequired,
+  toggle: propTypes.func.isRequired,
+  dateRange: propTypes.array.isRequired,
+  setDateRange: propTypes.func.isRequired,
+};

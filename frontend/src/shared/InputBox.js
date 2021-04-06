@@ -27,7 +27,7 @@ export default function InputBox(props) {
         placeholder="placeholder"
         required={props.required || false}
       />
-      <label htmlFor="input">{props.label}</label>
+      <label htmlFor={id}>{props.label}</label>
       <div
         className={
           "invalid-feedback" + (props.feedback === undefined ? " d-none" : "")

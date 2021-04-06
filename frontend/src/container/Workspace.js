@@ -7,6 +7,7 @@ import AllTime from "./AllTime.js";
 import Trends from "./Trends.js";
 import Budget from "./Budget.js";
 import SelectionPanel from "./SelectionPanel.js";
+import propTypes from "prop-types";
 
 /***
  * Workspace represents for the functional zone of the webpage.
@@ -15,7 +16,7 @@ import SelectionPanel from "./SelectionPanel.js";
  *
  * @returns {JSX.Element}
  */
-export default function Workspace() {
+export default function Workspace(props) {
   const [recent, setRecent] = useState([]);
   const [dateRange, setDateRange] = useState(getLastWeek());
 
@@ -33,7 +34,6 @@ export default function Workspace() {
         return res.json();
       })
       .then((res) => {
-        console.log(res[0]);
         setRecent(res);
       })
       .catch((err) => {
@@ -51,9 +51,11 @@ export default function Workspace() {
               <div className="row flex-container">
                 <div className="col-4 px-0">
                   <SelectionPanel
+                    user={props.user}
                     dateRange={dateRange}
                     setDateRange={setDateRange}
                     recent={recent}
+                    setRecent={setRecent}
                   />
                 </div>
                 <div className="col-8 px-0">
@@ -81,6 +83,10 @@ export default function Workspace() {
     </div>
   );
 }
+
+Workspace.propTypes = {
+  user: propTypes.object.isRequired,
+};
 
 function FunctionalNavbar() {
   return (

@@ -15,6 +15,7 @@ export default function App() {
 
   useEffect(() => {
     getUser().then((user) => {
+      console.log(user);
       setUser(user);
     });
   }, []);
@@ -27,7 +28,11 @@ export default function App() {
           {user !== undefined ? <Redirect to="/" /> : <Auth />}
         </Route>
         <Route path="/">
-          {user === undefined ? <Redirect to="/auth" /> : <Workspace />}
+          {user === undefined ? (
+            <Redirect to="/auth" />
+          ) : (
+            <Workspace user={user} />
+          )}
         </Route>
       </Switch>
     </Router>

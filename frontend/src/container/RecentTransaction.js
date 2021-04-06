@@ -69,11 +69,14 @@ export default function RecentTransaction(props) {
       {props.recent.slice(page * 5 - 5, page * 5).map((i, index) => (
         <Transaction
           key={index}
+          _id={i._id}
           category={i.category}
-          amount={i.amount}
+          amount={parseFloat(i.amount)}
           date={i.date}
           merchant={i.merchant}
           type={i.type}
+          recent={props.recent}
+          setRecent={props.setRecent}
         />
       ))}
     </div>
@@ -84,6 +87,7 @@ RecentTransaction.propTypes = {
   dateRange: propTypes.array.isRequired,
   setDateRange: propTypes.func.isRequired,
   recent: propTypes.array.isRequired,
+  setRecent: propTypes.func.isRequired,
 };
 
 function getToday() {

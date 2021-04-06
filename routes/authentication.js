@@ -112,6 +112,7 @@ router.get("/get-user", async (req, res) => {
         const user = resFind[0];
         req.session._id = user._id;
         req.session.username = user.username;
+        req.session.categories = user.categories;
         req.session.profile_photo = user.profile_photo;
         const data = {
           username: user.username,
@@ -127,6 +128,7 @@ router.get("/get-user", async (req, res) => {
   } else {
     const data = {
       username: req.session.username,
+      categories: req.session.categories,
       profile_photo: req.session.profile_photo,
     };
     res.send(data);

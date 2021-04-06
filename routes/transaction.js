@@ -66,6 +66,43 @@ router.post("/recent", async (req, res) => {
   }
 });
 
+router.post("/new", async (req, res) => {
+  if (
+    req.body.type === undefined ||
+    req.body.category === undefined ||
+    req.body.merchant === undefined ||
+    req.body.amount === undefined ||
+    req.body.date === undefined ||
+    req.body.remark === undefined
+  ) {
+    return res.sendStatus(400);
+  }
+  try {
+    req.body.user_id = req.session._id;
+    console.log(req.body);
+    const collection = await getCollection("Transactions");
+    await collection.insertOne(req.body);
+    res.sendStatus(201);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
+});
+
+router.delete("/delete", async (req, res) => {
+  if (req.body._id === undefined) {
+    return res.sendStatus(400);
+  }
+  try {
+    const collection = await getCollection("Transactions");
+    await collection.deleteOne({ _id: ObjectId(req.body._id) });
+    res.sendStatus(201);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
+});
+
 router.get("/cal-balance", async (req, res) => {
   try {
     const collection = await getCollection("Transactions");
