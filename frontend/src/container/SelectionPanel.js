@@ -28,12 +28,14 @@ export default function SelectionPanel(props) {
         {showNewTrans ? (
           <NewTransaction
             user={props.user}
+            setUser={props.setUser}
             toggle={toggleSelectionPanelContent}
             dateRange={props.dateRange}
             setDateRange={props.setDateRange}
           />
         ) : (
           <RecentTransaction
+            setUser={props.setUser}
             dateRange={props.dateRange}
             setDateRange={props.setDateRange}
             recent={props.recent}
@@ -47,6 +49,7 @@ export default function SelectionPanel(props) {
 
 SelectionPanel.propTypes = {
   user: propTypes.object.isRequired,
+  setUser: propTypes.func.isRequired,
   dateRange: propTypes.array.isRequired,
   setDateRange: propTypes.func.isRequired,
   recent: propTypes.array.isRequired,

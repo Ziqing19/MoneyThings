@@ -77,6 +77,7 @@ export default function RecentTransaction(props) {
           type={i.type}
           recent={props.recent}
           setRecent={props.setRecent}
+          setUser={props.setUser}
         />
       ))}
     </div>
@@ -84,6 +85,7 @@ export default function RecentTransaction(props) {
 }
 
 RecentTransaction.propTypes = {
+  setUser: propTypes.func.isRequired,
   dateRange: propTypes.array.isRequired,
   setDateRange: propTypes.func.isRequired,
   recent: propTypes.array.isRequired,

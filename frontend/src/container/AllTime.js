@@ -19,6 +19,7 @@ export default function AllTime(props) {
             transactions={dateGroup[key]}
             recent={props.recent}
             setRecent={props.setRecent}
+            setUser={props.setUser}
           />
         ))}
       </div>
@@ -38,6 +39,7 @@ export default function AllTime(props) {
             transactions={type[key]}
             recent={props.recent}
             setRecent={props.setRecent}
+            setUser={props.setUser}
           />
         ))}
       </div>
@@ -113,6 +115,7 @@ export default function AllTime(props) {
 
 AllTime.propTypes = {
   user: propTypes.object.isRequired,
+  setUser: propTypes.func.isRequired,
   recent: propTypes.array.isRequired,
   setRecent: propTypes.func.isRequired,
 };

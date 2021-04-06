@@ -33,17 +33,21 @@ export default function NewTransaction(props) {
       body: JSON.stringify(data),
     })
       .then((resRaw) => {
-        console.log(resRaw);
         if (!resRaw.ok) {
           resRaw.text().then((res) => {
             alert(res);
           });
         } else {
-          console.log("New transaction created");
           const newDateRange = _.cloneDeep(props.dateRange);
           newDateRange[1] = new Date();
           props.setDateRange(newDateRange);
           props.toggle();
+          const variation = parseFloat(isIncome ? amount : -amount);
+          props.setUser((prev) => ({
+            ...prev,
+            balance: prev.balance + variation,
+          }));
+          console.log("New transaction created");
         }
       })
       .catch((err) => {
@@ -137,6 +141,7 @@ export default function NewTransaction(props) {
 
 NewTransaction.propTypes = {
   user: propTypes.object.isRequired,
+  setUser: propTypes.func.isRequired,
   toggle: propTypes.func.isRequired,
   dateRange: propTypes.array.isRequired,
   setDateRange: propTypes.func.isRequired,
