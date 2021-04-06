@@ -45,7 +45,6 @@ router.post("/recent", async (req, res) => {
     return res.sendStatus(400);
   }
   try {
-    console.log(req.body);
     const from = req.body.dateRange[0];
     const to = req.body.dateRange[1];
     const collection = await getCollection("Transactions");
@@ -119,13 +118,12 @@ router.get("/cal-balance", async (req, res) => {
         balance += amount;
       }
     });
-    const user_collection = await getCollection("Users");
-    await user_collection.updateOne(
-      { _id: ObjectId(req.cookies._id) },
-      { $set: { balance: parseFloat(balance.toFixed(2)) } }
-    );
-    console.log("fin", balance.toFixed(2));
-    res.sendStatus(200);
+    // const user_collection = await getCollection("Users");
+    // await user_collection.updateOne(
+    //   { _id: ObjectId(req.cookies._id) },
+    //   { $set: { balance: parseFloat(balance.toFixed(2)) } }
+    // );
+    res.send({ balance: balance.toFixed(2) });
   } catch (err) {
     console.log(err);
     res.sendStatus(400);

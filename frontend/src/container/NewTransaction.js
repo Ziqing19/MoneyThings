@@ -83,15 +83,16 @@ export default function NewTransaction(props) {
           <button className="col-3">Save</button>
         </div>
         <div className="form-floating my-3">
-          <select className="form-select" id="select">
+          <select
+            className="form-select"
+            id="select"
+            value={category}
+            onChange={(evt) => {
+              setCategory(evt.target.value);
+            }}
+          >
             {categories.map((item, index) => (
-              <option
-                value={item}
-                key={"option-" + index}
-                onClick={() => {
-                  setCategory(item);
-                }}
-              >
+              <option value={item} key={"option-" + index}>
                 {item}
               </option>
             ))}

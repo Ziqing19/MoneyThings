@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import InputBox from "../shared/InputBox.js";
 import { Link } from "react-router-dom";
-import "./Auth.css";
 
 export default function Signup() {
   const [email, setEmail] = useState("");

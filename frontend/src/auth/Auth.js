@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
+import "./Auth.css";
 import Login from "./Login.js";
 import Signup from "./Signup.js";
 import Reset from "./Reset.js";

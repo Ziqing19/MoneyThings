@@ -94,44 +94,30 @@ router.post("/reset", async (req, res) => {
 });
 
 router.get("/get-user", async (req, res) => {
-  if (req.session._id === undefined) {
+  if (req.session.user === undefined) {
     // once the browser has the cookie, the log status stays valid
     if (req.cookies._id === undefined) {
       return res.sendStatus(204);
     }
     try {
       const collection = await getCollection("Users");
-      const resFind = await collection
-        .find({
-          _id: ObjectId(req.cookies._id),
-        })
-        .toArray();
-      if (resFind.length === 0) {
+      const user = await collection.findOne(
+        { _id: ObjectId(req.cookies._id) },
+        { projection: { _id: 0, password: 0 } }
+      );
+      if (user === null) {
         res.sendStatus(204);
       } else {
-        const user = resFind[0];
-        req.session._id = user._id;
-        req.session.username = user.username;
-        req.session.categories = user.categories;
-        req.session.profile_photo = user.profile_photo;
-        const data = {
-          username: user.username,
-          categories: user.categories,
-          profile_photo: user.profile_photo,
-        };
-        res.send(data);
+        req.session._id = req.cookies._id;
+        req.session.user = user;
+        res.send(user);
       }
     } catch (err) {
       console.log("Error", err);
       res.sendStatus(400);
     }
   } else {
-    const data = {
-      username: req.session.username,
-      categories: req.session.categories,
-      profile_photo: req.session.profile_photo,
-    };
-    res.send(data);
+    res.send(req.session.user);
   }
 });
 

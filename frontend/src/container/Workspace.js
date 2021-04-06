@@ -60,7 +60,11 @@ export default function Workspace(props) {
                 </div>
                 <div className="col-8 px-0">
                   <Route path="/all-time">
-                    <AllTime />
+                    <AllTime
+                      user={props.user}
+                      recent={recent}
+                      setRecent={setRecent}
+                    />
                   </Route>
                   <Route path="/trends">
                     <Trends />
