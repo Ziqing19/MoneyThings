@@ -31,7 +31,7 @@ export default function NavigationComponent(props) {
           className="collapse navbar-collapse justify-content-end"
           id="navbarScroll"
         >
-          <ul className="navbar-nav my-2 my-lg-0 navbar-nav-scroll">
+          <ul className="navbar-nav  my-2 my-lg-0 navbar-nav-scroll">
             <li className="nav-item dropdown d-flex">
               <div
                 className="nav-link dropdown-toggle"
