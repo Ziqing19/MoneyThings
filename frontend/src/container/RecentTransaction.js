@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Transaction from "./Transaction";
 import { useRouteMatch } from "react-router-dom";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
@@ -58,10 +58,23 @@ export default function RecentTransaction(props) {
     );
   }
 
-  function handleDateChange(evt) {
-    setDate(evt);
-    props.setDateRange(getMonthRange(evt));
+  function handleDateChange(date) {
+    setDate(date);
+    setPage(1);
+    console.log("get month", getMonthRange(date));
+    props.setDateRange(getMonthRange(date));
   }
+
+  function handleDateRangeChange(dateRange) {
+    setPage(1);
+    props.setDateRange(dateRange);
+  }
+
+  useEffect(() => {
+    if (!match) {
+      handleDateChange(new Date());
+    }
+  }, [match === null]);
 
   return (
     <div className="flex-container">
@@ -69,7 +82,7 @@ export default function RecentTransaction(props) {
         <div>
           {match ? (
             <DateRangePicker
-              onChange={props.setDateRange}
+              onChange={handleDateRangeChange}
               value={props.dateRange}
               clearIcon={null}
               minDate={new Date(0)}
@@ -155,8 +168,12 @@ function getMonthRange(start_date) {
   const year = start_date.getFullYear();
   const month = start_date.getMonth();
   const end_date = new Date(year, month + 1, 0);
+  start_date.setDate(1);
+  start_date.setHours(0);
+  start_date.setMinutes(0);
+  start_date.setSeconds(0);
   end_date.setHours(23);
   end_date.setMinutes(59);
   end_date.setSeconds(59);
-  return [start_date, new Date(end_date)];
+  return [start_date, end_date];
 }

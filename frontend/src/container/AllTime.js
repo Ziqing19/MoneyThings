@@ -1,22 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import propTypes from "prop-types";
 import Accordion from "./Accordion";
 
 export default function AllTime(props) {
-  const [income, setIncome] = useState({});
-  const [expense, setExpense] = useState({});
-  const [dateGroup, setDateGroup] = useState({});
   const [isGroupByDate, setIsGroupByDate] = useState(true);
 
   function groupByDate() {
-    if (dateGroup.length === 0) return null;
+    if (props.dateGroup.length === 0) return null;
     return (
       <div className="mb-3">
-        {Object.keys(dateGroup).map((key) => (
+        {Object.keys(props.dateGroup).map((key) => (
           <Accordion
             header={key}
             key={"date-accordion-" + key}
-            transactions={dateGroup[key]}
+            transactions={props.dateGroup[key]}
             recent={props.recent}
             setRecent={props.setRecent}
             setUser={props.setUser}
@@ -46,38 +43,6 @@ export default function AllTime(props) {
     );
   }
 
-  useEffect(() => {
-    setDateGroup({});
-    const dateArray = [
-      ...new Set(
-        props.recent.map((item) => new Date(item.date).toDateString())
-      ),
-    ];
-    for (let date of dateArray) {
-      const array = props.recent.filter(
-        (item) => new Date(item.date).toDateString() === date
-      );
-      setDateGroup((prev) => ({ ...prev, [date]: array }));
-    }
-    // console.log("dateGroup", dateGroup);
-  }, [props.recent]);
-
-  useEffect(() => {
-    setIncome({});
-    setExpense({});
-    for (let category of props.user.categories["Income"]) {
-      const array = props.recent.filter((item) => item.category === category);
-      if (array.length === 0) continue;
-      setIncome((prev) => ({ ...prev, [category]: array }));
-    }
-    for (let category of props.user.categories["Expense"]) {
-      const array = props.recent.filter((item) => item.category === category);
-      if (array.length === 0) continue;
-      setExpense((prev) => ({ ...prev, [category]: array }));
-    }
-    // console.log(income, expense);
-  }, [props.recent, props.user.categories]);
-
   return (
     <div className="position-relative" style={{ height: "calc(100vh - 6rem)" }}>
       <div style={{ maxHeight: "100%", overflow: "auto" }}>
@@ -104,8 +69,8 @@ export default function AllTime(props) {
           <div>{groupByDate()}</div>
         ) : (
           <div>
-            {groupByCategory(income, "Income")}
-            {groupByCategory(expense, "Expense")}
+            {groupByCategory(props.income, "Income")}
+            {groupByCategory(props.expense, "Expense")}
           </div>
         )}
       </div>
@@ -118,4 +83,7 @@ AllTime.propTypes = {
   setUser: propTypes.func.isRequired,
   recent: propTypes.array.isRequired,
   setRecent: propTypes.func.isRequired,
+  income: propTypes.object.isRequired,
+  expense: propTypes.object.isRequired,
+  dateGroup: propTypes.object.isRequired,
 };

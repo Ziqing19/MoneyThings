@@ -19,6 +19,9 @@ import propTypes from "prop-types";
 export default function Workspace(props) {
   const [recent, setRecent] = useState([]);
   const [dateRange, setDateRange] = useState(getLastWeek());
+  const [income, setIncome] = useState({});
+  const [expense, setExpense] = useState({});
+  const [dateGroup, setDateGroup] = useState({});
 
   useEffect(() => {
     fetch("/transaction/recent", {
@@ -40,6 +43,36 @@ export default function Workspace(props) {
         alert(err);
       });
   }, [dateRange]);
+
+  useEffect(() => {
+    setDateGroup({});
+    const dateArray = [
+      ...new Set(recent.map((item) => new Date(item.date).toDateString())),
+    ];
+    for (let date of dateArray) {
+      const array = recent.filter(
+        (item) => new Date(item.date).toDateString() === date
+      );
+      setDateGroup((prev) => ({ ...prev, [date]: array }));
+    }
+    // console.log("dateGroup", dateGroup);
+  }, [recent]);
+
+  useEffect(() => {
+    setIncome({});
+    setExpense({});
+    for (let category of props.user.categories["Income"]) {
+      const array = recent.filter((item) => item.category === category);
+      if (array.length === 0) continue;
+      setIncome((prev) => ({ ...prev, [category]: array }));
+    }
+    for (let category of props.user.categories["Expense"]) {
+      const array = recent.filter((item) => item.category === category);
+      if (array.length === 0) continue;
+      setExpense((prev) => ({ ...prev, [category]: array }));
+    }
+    // console.log(income, expense);
+  }, [recent, props.user.categories]);
 
   return (
     <div className="flex-grow-1 d-flex flex-column">
@@ -66,10 +99,17 @@ export default function Workspace(props) {
                       setUser={props.setUser}
                       recent={recent}
                       setRecent={setRecent}
+                      income={income}
+                      expense={expense}
+                      dateGroup={dateGroup}
                     />
                   </Route>
                   <Route path="/trends">
-                    <Trends />
+                    <Trends
+                      income={income}
+                      expense={expense}
+                      dateGroup={dateGroup}
+                    />
                   </Route>
                   <Route path="/budget">
                     <Budget />
