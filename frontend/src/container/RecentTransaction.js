@@ -1,11 +1,15 @@
 import React, { useState } from "react";
 import Transaction from "./Transaction";
+import { useRouteMatch } from "react-router-dom";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
+import DatePicker from "react-date-picker";
 import propTypes from "prop-types";
 
 export default function RecentTransaction(props) {
   const [page, setPage] = useState(1);
+  const [date, setDate] = useState(new Date());
   const totalPages = Math.ceil(props.recent.length / 5);
+  const match = useRouteMatch("/all-time");
 
   function prevPage() {
     if (page > 1) {
@@ -19,13 +23,9 @@ export default function RecentTransaction(props) {
     }
   }
 
-  return (
-    <div className="flex-container">
-      <div className="py-3">
-        <DateRangePicker
-          onChange={props.setDateRange}
-          value={props.dateRange}
-        />
+  function AllTimeShortcuts() {
+    return (
+      <div>
         <button
           onClick={() => {
             props.setDateRange(getToday());
@@ -55,6 +55,39 @@ export default function RecentTransaction(props) {
           Last Year
         </button>
       </div>
+    );
+  }
+
+  function handleDateChange(evt) {
+    setDate(evt);
+    props.setDateRange(getMonthRange(evt));
+  }
+
+  return (
+    <div className="flex-container">
+      <div className="py-3">
+        <div>
+          {match ? (
+            <DateRangePicker
+              onChange={props.setDateRange}
+              value={props.dateRange}
+              clearIcon={null}
+              minDate={new Date(0)}
+              maxDate={new Date()}
+            />
+          ) : (
+            <DatePicker
+              onChange={handleDateChange}
+              value={date}
+              clearIcon={null}
+              maxDetail="year"
+              minDate={new Date(0)}
+              maxDate={new Date()}
+            />
+          )}
+        </div>
+        <div>{match ? AllTimeShortcuts() : null}</div>
+      </div>
       <div className="py-3 row">
         <button className="col" onClick={prevPage}>
           Prev
@@ -68,7 +101,7 @@ export default function RecentTransaction(props) {
       </div>
       {props.recent.slice(page * 5 - 5, page * 5).map((i, index) => (
         <Transaction
-          key={index}
+          key={"RecentTransaction-" + index}
           _id={i._id}
           category={i.category}
           amount={parseFloat(i.amount)}
@@ -113,7 +146,17 @@ function getLastMonth() {
 }
 
 function getLastYear() {
-  let date = new Date();
+  const date = new Date();
   date.setFullYear(date.getFullYear() - 1);
   return [date, new Date()];
+}
+
+function getMonthRange(start_date) {
+  const year = start_date.getFullYear();
+  const month = start_date.getMonth();
+  const end_date = new Date(year, month + 1, 0);
+  end_date.setHours(23);
+  end_date.setMinutes(59);
+  end_date.setSeconds(59);
+  return [start_date, new Date(end_date)];
 }
