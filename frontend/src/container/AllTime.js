@@ -15,7 +15,7 @@ export default function AllTime(props) {
         {Object.keys(dateGroup).map((key) => (
           <Accordion
             header={key}
-            key={"accordion-" + key}
+            key={"date-accordion-" + key}
             transactions={dateGroup[key]}
             recent={props.recent}
             setRecent={props.setRecent}
@@ -35,7 +35,7 @@ export default function AllTime(props) {
         {Object.keys(type).map((key) => (
           <Accordion
             header={key}
-            key={"accordion-" + key}
+            key={"category-accordion-" + key}
             transactions={type[key]}
             recent={props.recent}
             setRecent={props.setRecent}
@@ -76,7 +76,7 @@ export default function AllTime(props) {
       setExpense((prev) => ({ ...prev, [category]: array }));
     }
     // console.log(income, expense);
-  }, [props.recent]);
+  }, [props.recent, props.user.categories]);
 
   return (
     <div className="position-relative" style={{ height: "calc(100vh - 6rem)" }}>

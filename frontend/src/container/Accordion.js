@@ -30,7 +30,7 @@ export default function Accordion(props) {
         <div className="accordion-body">
           {props.transactions.map((i, index) => (
             <Transaction
-              key={index}
+              key={"Accordion-" + index}
               _id={i._id}
               category={i.category}
               amount={parseFloat(i.amount)}
