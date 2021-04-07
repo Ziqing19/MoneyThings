@@ -31,7 +31,7 @@ export default function App() {
           {user === undefined ? (
             <Redirect to="/auth" />
           ) : (
-            <Workspace user={user} />
+            <Workspace user={user} setUser={setUser} />
           )}
         </Route>
       </Switch>

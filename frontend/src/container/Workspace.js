@@ -52,6 +52,7 @@ export default function Workspace(props) {
                 <div className="col-4 px-0">
                   <SelectionPanel
                     user={props.user}
+                    setUser={props.setUser}
                     dateRange={dateRange}
                     setDateRange={setDateRange}
                     recent={recent}
@@ -62,6 +63,7 @@ export default function Workspace(props) {
                   <Route path="/all-time">
                     <AllTime
                       user={props.user}
+                      setUser={props.setUser}
                       recent={recent}
                       setRecent={setRecent}
                     />
@@ -90,6 +92,7 @@ export default function Workspace(props) {
 
 Workspace.propTypes = {
   user: propTypes.object.isRequired,
+  setUser: propTypes.func.isRequired,
 };
 
 function FunctionalNavbar() {

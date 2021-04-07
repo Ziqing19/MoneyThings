@@ -78,9 +78,24 @@ router.post("/new", async (req, res) => {
   }
   try {
     req.body.user_id = req.session._id;
-    console.log(req.body);
     const collection = await getCollection("Transactions");
     await collection.insertOne(req.body);
+    const userCollection = await getCollection("Users");
+    const user = await userCollection.findOne({
+      _id: ObjectId(req.session._id),
+    });
+    if (user === null) {
+      return res.sendStatus(400);
+    }
+    const new_balance =
+      user.balance +
+      parseFloat(
+        req.body.type === "Income" ? req.body.amount : -req.body.amount
+      );
+    await userCollection.updateOne(
+      { _id: ObjectId(req.session._id) },
+      { $set: { balance: new_balance } }
+    );
     res.sendStatus(201);
   } catch (err) {
     console.log(err);
@@ -94,7 +109,29 @@ router.delete("/delete", async (req, res) => {
   }
   try {
     const collection = await getCollection("Transactions");
+    const transaction = await collection.findOne({
+      _id: ObjectId(req.body._id),
+    });
+    if (transaction === null) {
+      return res.sendStatus(400);
+    }
     await collection.deleteOne({ _id: ObjectId(req.body._id) });
+    const userCollection = await getCollection("Users");
+    const user = await userCollection.findOne({
+      _id: ObjectId(req.session._id),
+    });
+    if (user === null) {
+      return res.sendStatus(400);
+    }
+    const new_balance =
+      user.balance +
+      parseFloat(
+        transaction.type === "Income" ? -transaction.amount : transaction.amount
+      );
+    await userCollection.updateOne(
+      { _id: ObjectId(req.session._id) },
+      { $set: { balance: new_balance } }
+    );
     res.sendStatus(201);
   } catch (err) {
     console.log(err);
