@@ -1,19 +1,15 @@
 const { MongoClient } = require("mongodb");
 const url = process.env.MONGO_URL;
 
-let client,
-  db,
-  connected = false;
+let client, db;
 
-function connect() {
+async function connect() {
   try {
     client = new MongoClient(url, { useUnifiedTopology: true });
     console.log("Connecting to the database.");
-    client.connect().then((client) => {
-      console.log("Connected.");
-      connected = true;
-      db = client.db("MoneyThings");
-    });
+    await client.connect();
+    console.log("Connected.");
+    db = client.db("MoneyThings");
   } catch (e) {
     client.close().catch(console.log);
     console.log("Error ", e);
@@ -22,15 +18,7 @@ function connect() {
 }
 
 function getCollection(collectionName) {
-  return new Promise((resolve) => {
-    if (connected) {
-      resolve(db.collection(collectionName));
-    } else {
-      setTimeout(() => {
-        resolve(db.collection(collectionName));
-      }, 5000);
-    }
-  }).then((res) => res);
+  return db.collection(collectionName);
 }
 
 module.exports = {

@@ -6,9 +6,6 @@ const session = require("express-session");
 
 require("dotenv").config();
 
-const mongo = require("./src/mongo");
-mongo.connect();
-
 const authRouter = require("./routes/authentication");
 const userRouter = require("./routes/user");
 const transactionRouter = require("./routes/transaction");
