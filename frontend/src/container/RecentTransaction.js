@@ -61,7 +61,6 @@ export default function RecentTransaction(props) {
   function handleDateChange(date) {
     setDate(date);
     setPage(1);
-    console.log("get month", getMonthRange(date));
     props.setDateRange(getMonthRange(date));
   }
 
@@ -74,6 +73,7 @@ export default function RecentTransaction(props) {
     if (!match) {
       handleDateChange(new Date());
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match === null]);
 
   return (

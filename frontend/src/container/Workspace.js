@@ -55,7 +55,7 @@ export default function Workspace(props) {
       );
       setDateGroup((prev) => ({ ...prev, [date]: array }));
     }
-    // console.log("dateGroup", dateGroup);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [recent]);
 
   useEffect(() => {

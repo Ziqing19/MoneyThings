@@ -1,5 +1,3 @@
-// install (please make sure versions match peerDependencies)
-// yarn add @nivo/core @nivo/pie
 import React from "react";
 import { ResponsivePie } from "@nivo/pie";
 import propTypes from "prop-types";
