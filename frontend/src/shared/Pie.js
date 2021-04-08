@@ -15,6 +15,7 @@ export default function MyPie(props) {
     <ResponsivePie
       data={props.data}
       margin={{ top: 40, right: 80, bottom: 80, left: 80 }}
+      valueFormat=" >-.2p"
       innerRadius={0.5}
       padAngle={0.7}
       cornerRadius={3}

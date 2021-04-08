@@ -9,6 +9,12 @@ export default function Trends(props) {
     if (Object.keys(type).length === 0) return [];
     console.log(type);
     const data = [];
+    let totalExpense = 0;
+    Object.keys(type).map((item) => {
+      type[item].map((item) => {
+        totalExpense += item.amount;
+      });
+    });
     Object.keys(type).map((item) => {
       const object = {};
       const r = (Math.random() * 255).toFixed(0);
@@ -18,12 +24,14 @@ export default function Trends(props) {
       type[item].map((item) => {
         value += item.amount;
       });
-      object["value"] = value.toFixed(2);
+
+      object["value"] = (value / totalExpense).toFixed(2);
       object["id"] = item;
       object["label"] = item;
       object["color"] = `rgb(${r}, ${g}, ${b})`;
       data.push(object);
     });
+
     return data;
   }
 

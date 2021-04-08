@@ -71,7 +71,7 @@ export default function Workspace(props) {
       if (array.length === 0) continue;
       setExpense((prev) => ({ ...prev, [category]: array }));
     }
-    // console.log(income, expense);
+    // console.log(expense);
   }, [recent, props.user.categories]);
 
   return (
@@ -112,7 +112,14 @@ export default function Workspace(props) {
                     />
                   </Route>
                   <Route path="/budget">
-                    <Budget />
+                    <Budget
+                      expense={expense}
+                      dateGroup={dateGroup}
+                      recent={recent}
+                      user={props.user}
+                      setUser={props.setUser}
+                      setRecent={setRecent}
+                    />
                   </Route>
                 </div>
               </div>
