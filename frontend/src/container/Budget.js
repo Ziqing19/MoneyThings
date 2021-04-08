@@ -1,13 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 import propTypes from "prop-types";
 import ProgressBar from "react-bootstrap/ProgressBar";
+import SetBudget from "./SetBudget.js";
 
 export default function Budget(props) {
-  function setBudget() {}
+  const [showBudgetPanel, setBudgetPanel] = useState(false);
   const currentExpenses = props.expense;
   const budget = 500;
   const barData = [];
-  // console.log(currentExpenses);
+
+  function toggleBudgetPanel() {
+    setBudgetPanel(!showBudgetPanel);
+  }
+
   Object.keys(currentExpenses).map((item) => {
     let totalExpense = 0;
     currentExpenses[item].map((item) => {
@@ -28,19 +33,15 @@ export default function Budget(props) {
     if (ratio < 25) {
       return "info";
     }
-
     if (ratio < 50) {
       return "success";
     }
-
     if (ratio < 75) {
       return "";
     }
-
     if (ratio < 100) {
       return "warning";
     }
-
     return "danger";
   }
 
@@ -77,11 +78,30 @@ export default function Budget(props) {
           );
         })}
       </div>
-      <div>
-        <button onClick={setBudget}>
-          <i className="fas fa-plus fa-2x" />
-        </button>
-        Add expense budget
+      <div
+        className="setBudgetButton flex-container"
+        style={{ padding: "5px", width: "70%", margin: "0 auto" }}
+      >
+        <div className="text-center border-bottom py-3 position-relative">
+          Add Expense Budget
+          {showBudgetPanel ? null : (
+            <div
+              className="position-absolute top-50 translate-middle-y new-btn"
+              onClick={toggleBudgetPanel}
+            >
+              <i className="fas fa-plus fa-2x" />
+            </div>
+          )}
+        </div>
+        <div id="set_budget_panel">
+          {showBudgetPanel ? (
+            <SetBudget
+              user={props.user}
+              setUser={props.setUser}
+              toggle={toggleBudgetPanel}
+            />
+          ) : null}
+        </div>
       </div>
     </div>
   );
@@ -90,4 +110,6 @@ export default function Budget(props) {
 Budget.propTypes = {
   expense: propTypes.object.isRequired,
   dateGroup: propTypes.object.isRequired,
+  user: propTypes.object.isRequired,
+  setUser: propTypes.func.isRequired,
 };
