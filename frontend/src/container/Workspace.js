@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Switch, Route, Link } from "react-router-dom";
 import "./stylesheet/Workspace.css";
 import Overview from "./Overview.js";
-import Account from "./Account.js";
+import Account from "../account/Account.js";
 import AllTime from "./AllTime.js";
 import Trends from "./Trends.js";
 import Budget from "./Budget.js";

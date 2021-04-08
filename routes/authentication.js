@@ -28,7 +28,7 @@ router.post("/login", async (req, res) => {
       if (match) {
         req.session._id = user._id;
         req.session.username = user.username;
-        req.session.profile_photo = user.profile_photo;
+        req.session.avatar = user.avatar;
         if (req.body.checked) {
           res.cookie("_id", user._id, {
             maxAge: 1000 * 60 * 60 * 24 * 7,

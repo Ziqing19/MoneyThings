@@ -68,4 +68,34 @@ router.post("/update-categories", async (req, res) => {
   }
 });
 
+router.post("/update-profile", async (req, res) => {
+  if (
+    req.body.username === undefined ||
+    req.body.avatar === undefined ||
+    req.body.biography === undefined
+  ) {
+    return res.sendStatus(400);
+  }
+  try {
+    const data = {
+      username: req.body.username,
+      avatar: req.body.avatar,
+      biography: req.body.biography,
+    };
+    const resUpdate = await getCollection("Users").updateOne(
+      { _id: ObjectId(req.session._id) },
+      { $set: data }
+    );
+    console.log(resUpdate);
+    req.session.user = await getCollection("Users").findOne(
+      { _id: ObjectId(req.cookies._id) },
+      { projection: { _id: 0, password: 0 } }
+    );
+    res.sendStatus(201);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
+});
+
 module.exports = router;

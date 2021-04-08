@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useEffect, useRef } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import logo from "../image/MoneyEmoji.png";
+import logo from "../images/MoneyEmoji.png";
 
 export default function NavigationComponent(props) {
+  const avatar = useRef("../images/avatar_thumbnail/0.png");
+
   async function logout() {
     document.cookie = "_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     const resRaw = await fetch("/user/logout");
@@ -13,6 +15,12 @@ export default function NavigationComponent(props) {
     }
     window.location = "/auth/login";
   }
+
+  useEffect(() => {
+    if (props.user !== undefined) {
+      avatar.current = `../images/avatar_thumbnail/${props.user.avatar}.png`;
+    }
+  }, [props]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
@@ -37,13 +45,21 @@ export default function NavigationComponent(props) {
             <ul className="navbar-nav my-2 my-lg-0 navbar-nav-scroll">
               <li className="nav-item dropdown d-flex">
                 <div
-                  className="nav-link dropdown-toggle"
+                  className="nav-link dropdown-toggle me-2"
                   id="navbarScrollingDropdown"
                   role="button"
                   data-bs-toggle="dropdown"
                   aria-expanded="false"
                 >
                   Welcome, {props.user.username}
+                </div>
+                <div>
+                  <img
+                    src={avatar.current}
+                    alt="avatar_thumbnail"
+                    width="40"
+                    height="40"
+                  />
                 </div>
                 <ul
                   className="dropdown-menu"

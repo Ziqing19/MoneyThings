@@ -1,6 +1,7 @@
 import React from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import NewPassword from "../auth/NewPassword";
+import Profile from "./Profile";
 import propTypes from "prop-types";
 
 export default function Account(props) {
@@ -52,7 +53,9 @@ export default function Account(props) {
               </div>
             </div>
           </Route>
-          <Route path="/account">profile</Route>
+          <Route path="/account">
+            <Profile user={props.user} setUser={props.setUser} />
+          </Route>
         </Switch>
       </div>
     </div>
