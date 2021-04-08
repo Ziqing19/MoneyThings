@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import InputBox from "../shared/InputBox.js";
-import { Link } from "react-router-dom";
 
 export default function NewPassword() {
   const [password, setPassword] = useState("");
@@ -85,11 +84,6 @@ export default function NewPassword() {
         </label>
       </div>
       <button className="mb-3 btn btn-primary text-center">Submit</button>
-      <div className="mb-2 d-flex justify-content-end">
-        <Link className="text-end d-block" to="/auth/login">
-          Log in
-        </Link>
-      </div>
     </form>
   );
 }
