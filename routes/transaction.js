@@ -151,7 +151,7 @@ router.get("/cal-balance", async (req, res) => {
     let balance = 0;
     await cursor.forEach((item) => {
       const amount = item.amount;
-      if (item.type === "expense") {
+      if (item.type === "Expense") {
         balance -= amount;
       } else {
         balance += amount;
