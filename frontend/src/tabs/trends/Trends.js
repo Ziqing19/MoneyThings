@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import MyPie from "../shared/Pie";
-import MyLineChart from "../shared/LineChart";
+import MyPie from "../../shared/Pie";
+import MyLineChart from "../../shared/LineChart";
 import propTypes from "prop-types";
 
 export default function Trends(props) {

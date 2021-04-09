@@ -1,6 +1,6 @@
 import React from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
-import NewPassword from "../auth/NewPassword";
+import NewPassword from "./NewPassword";
 import Profile from "./Profile";
 import Categories from "./Categories";
 import propTypes from "prop-types";

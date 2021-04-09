@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route, Link } from "react-router-dom";
-import "./stylesheet/Workspace.css";
-import Overview from "./Overview.js";
-import Account from "../account/Account.js";
-import AllTime from "./AllTime.js";
-import Trends from "./Trends.js";
-import Budget from "./Budget.js";
-import SelectionPanel from "./SelectionPanel.js";
+import "./stylesheets/Workspace.css";
+import Overview from "./tabs/overview/Overview.js";
+import Account from "./tabs/account/Account.js";
+import AllTime from "./tabs/alltime/AllTime.js";
+import Trends from "./tabs/trends/Trends.js";
+import Budget from "./tabs/budget/Budget.js";
+import SelectionPanel from "./tabs/dateRangeSelection/SelectionPanel.js";
 import propTypes from "prop-types";
 
 /***

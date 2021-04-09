@@ -6,9 +6,9 @@ import {
   Redirect,
 } from "react-router-dom";
 import Auth from "./auth/Auth.js";
-import NavigationComponent from "./shared/NavigationComponent.js";
+import NavigationComponent from "./NavigationComponent.js";
 
-import Workspace from "./container/Workspace.js";
+import Workspace from "./Workspace.js";
 
 export default function App() {
   const [user, setUser] = useState();

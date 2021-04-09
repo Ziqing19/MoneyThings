@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import propTypes from "prop-types";
-import Modal from "../shared/Modal";
-import InputBox from "../shared/InputBox";
+import Modal from "../../shared/Modal";
+import InputBox from "../../shared/InputBox";
 
 export default function Profile(props) {
   const [avatarIndex, setAvatarIndex] = useState(0);

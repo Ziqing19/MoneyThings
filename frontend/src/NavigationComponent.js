@@ -1,18 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import logo from "../images/MoneyEmoji.png";
+import logo from "./images/MoneyEmoji.png";
 
 export default function NavigationComponent(props) {
   const [avatar, setAvatar] = useState("");
 
   async function logout() {
-    document.cookie = "_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     const resRaw = await fetch("/user/logout");
     if (!resRaw.ok) {
       const res = await resRaw.text();
       alert(res);
     }
+    document.cookie = "_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     window.location = "/auth/login";
   }
 

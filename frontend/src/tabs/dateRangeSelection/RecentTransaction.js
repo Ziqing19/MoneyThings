@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Transaction from "./Transaction";
+import Transaction from "../../shared/Transaction";
 import { useRouteMatch } from "react-router-dom";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import DatePicker from "react-date-picker";

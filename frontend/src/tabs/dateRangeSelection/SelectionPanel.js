@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import "./stylesheet/SelectionPanel.css";
+import "../../stylesheets/SelectionPanel.css";
 import NewTransaction from "./NewTransaction";
 import RecentTransaction from "./RecentTransaction";
 import propTypes from "prop-types";

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputBox from "../shared/InputBox.js";
+import InputBox from "../../shared/InputBox.js";
 
 export default function NewPassword() {
   const [password, setPassword] = useState("");

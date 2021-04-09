@@ -1,6 +1,6 @@
 import React from "react";
 import propTypes from "prop-types";
-import Transaction from "./Transaction";
+import Transaction from "../../shared/Transaction";
 
 /**
  * It represents a group of transactions.
