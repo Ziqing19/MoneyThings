@@ -4,7 +4,10 @@ import Transaction from "../../../shared/Transaction";
 
 export default function RecentModule(props) {
   return (
-    <div className="flex-container border d-flex flex-column">
+    <div
+      className="flex-container border d-flex flex-column"
+      style={{ overflowX: "hidden" }}
+    >
       <div className="border-bottom py-2 px-3 fw-light">Recent</div>
       <div className="d-flex flex-grow-1" style={{ width: "120%" }}>
         <div
@@ -36,6 +39,5 @@ export default function RecentModule(props) {
 }
 
 RecentModule.propTypes = {
-  user: propTypes.object.isRequired,
   recent: propTypes.array.isRequired,
 };

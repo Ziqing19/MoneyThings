@@ -11,6 +11,8 @@ export default function MyLineChart(props) {
     legendPosition: "middle",
   };
 
+  const interval = props.interval === undefined ? 2 : props.interval;
+
   const legendConfig = [
     {
       anchor: "bottom",
@@ -61,7 +63,7 @@ export default function MyLineChart(props) {
         format: "%b %d",
         tickSize: 10,
         tickPadding: 15,
-        tickValues: "every 2 days",
+        tickValues: `every ${interval} days`,
       }}
       yFormat=" >-.2f"
       axisTop={null}
@@ -87,4 +89,5 @@ export default function MyLineChart(props) {
 MyLineChart.propTypes = {
   data: propTypes.array.isRequired,
   isPrimaryGraph: propTypes.bool.isRequired,
+  interval: propTypes.number,
 };

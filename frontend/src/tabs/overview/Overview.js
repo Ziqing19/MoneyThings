@@ -17,7 +17,7 @@ export default function Overview(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        dateRange: [getThisMonth()[0].getTime(), getThisMonth()[1].getTime()],
+        dateRange: [getLastMonth()[0].getTime(), getLastMonth()[1].getTime()],
       }),
     })
       .then((res) => {
@@ -38,13 +38,13 @@ export default function Overview(props) {
           <ProfileModule {...props} />
         </div>
         <div className="col-6 p-3 module">
-          <RecentModule {...props} recent={recent} />
+          <RecentModule recent={recent} />
         </div>
         <div className="col-6 p-3 module">
-          <ChartModule {...props} />
+          <ChartModule recent={recent} />
         </div>
         <div className="col-6 p-3 module">
-          <BudgetModule {...props} />
+          <BudgetModule {...props} recent={recent} />
         </div>
       </div>
     </div>
@@ -55,13 +55,10 @@ Overview.propTypes = {
   user: propTypes.object.isRequired,
 };
 
-function getThisMonth() {
+function getLastMonth() {
   const end_date = new Date();
   const start_date = new Date();
-  start_date.setDate(1);
-  start_date.setHours(0);
-  start_date.setMinutes(0);
-  start_date.setSeconds(0);
+  start_date.setMonth(start_date.getMonth() - 1);
   return [start_date, end_date];
 }
 
