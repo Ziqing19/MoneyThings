@@ -18,7 +18,7 @@ import propTypes from "prop-types";
  */
 export default function Workspace(props) {
   const [recent, setRecent] = useState([]);
-  const [dateRange, setDateRange] = useState(getLastWeek());
+  const [dateRange, setDateRange] = useState(getThisMonth());
   const [income, setIncome] = useState({});
   const [expense, setExpense] = useState({});
   const [dateGroup, setDateGroup] = useState({});
@@ -164,8 +164,12 @@ function FunctionalNavbar() {
   );
 }
 
-function getLastWeek() {
-  const date = new Date();
-  date.setDate(date.getDate() - 7);
-  return [date, new Date()];
+function getThisMonth() {
+  const end_date = new Date();
+  const start_date = new Date();
+  start_date.setDate(1);
+  start_date.setHours(0);
+  start_date.setMinutes(0);
+  start_date.setSeconds(0);
+  return [start_date, end_date];
 }

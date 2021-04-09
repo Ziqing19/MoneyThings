@@ -53,12 +53,14 @@ export default function Transaction(props) {
 
   return (
     <div className="mb-3 position-relative">
-      <button
-        type="button"
-        className="btn-close position-absolute end-0 translate-middle-x"
-        aria-label="Close"
-        onClick={deleteTransaction}
-      />
+      {props.refreshPage !== undefined ? (
+        <button
+          type="button"
+          className="btn-close position-absolute end-0 translate-middle-x"
+          aria-label="Close"
+          onClick={deleteTransaction}
+        />
+      ) : null}
       <ul>
         <li>{props.category}</li>
         <li>{props.merchant}</li>
@@ -78,6 +80,6 @@ Transaction.propTypes = {
   date: propTypes.number.isRequired,
   type: propTypes.string.isRequired,
   recent: propTypes.array.isRequired,
-  setRecent: propTypes.func.isRequired,
-  refreshPage: propTypes.func.isRequired,
+  setRecent: propTypes.func,
+  refreshPage: propTypes.func,
 };
