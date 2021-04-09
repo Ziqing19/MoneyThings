@@ -24,6 +24,7 @@ export default function Workspace(props) {
   const [dateGroup, setDateGroup] = useState({});
 
   useEffect(() => {
+    console.log("workspace", props.user);
     fetch("/transaction/recent", {
       method: "POST",
       headers: {
@@ -128,7 +129,7 @@ export default function Workspace(props) {
             <Account {...props} />
           </Route>
           <Route path="/">
-            <Overview />
+            <Overview {...props} />
           </Route>
         </Switch>
       </div>

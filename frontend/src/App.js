@@ -15,11 +15,14 @@ export default function App() {
   const [flag, refreshPage] = useState(true);
 
   useEffect(() => {
+    console.log("useEffect");
     getUser().then((user) => {
       setUser(user);
       console.log(user);
     });
   }, [flag]);
+
+  console.log("render user", user);
 
   return (
     <Router>
