@@ -63,7 +63,7 @@ export default function Profile(props) {
           data-bs-target="#avatar_modal"
         />
         <div>
-          <div style={{ opacity: "70%" }}>Username:</div>
+          <div className="fw-light">Username:</div>
           <h1
             className="mb-0"
             data-bs-toggle="modal"
@@ -75,7 +75,7 @@ export default function Profile(props) {
       </div>
       <div className="d-flex justify-content-center ms-5 mb-5">
         <div className="justify-content-start ms-5">
-          <div style={{ opacity: "70%" }}>Biography:</div>
+          <div className="fw-light">Biography:</div>
           <h2
             className="mb-5"
             data-bs-toggle="modal"
@@ -85,8 +85,8 @@ export default function Profile(props) {
           </h2>
         </div>
       </div>
-      <div className="d-flex justify-content-center">
-        <button className="btn btn-primary" onClick={handleSubmit}>
+      <div className="d-flex justify-content-end">
+        <button className="btn btn-outline-secondary" onClick={handleSubmit}>
           Apply Changes
         </button>
       </div>

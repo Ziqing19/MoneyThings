@@ -1,10 +1,10 @@
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import logo from "../images/MoneyEmoji.png";
 
 export default function NavigationComponent(props) {
-  const avatar = useRef("../images/avatar_thumbnail/0.png");
+  const [avatar, setAvatar] = useState("");
 
   async function logout() {
     document.cookie = "_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
@@ -17,10 +17,10 @@ export default function NavigationComponent(props) {
   }
 
   useEffect(() => {
-    if (props.user !== undefined) {
-      avatar.current = `../images/avatar_thumbnail/${props.user.avatar}.png`;
+    if (props.user) {
+      setAvatar(`../images/avatar_thumbnail/${props.user.avatar}.png`);
     }
-  }, [props]);
+  }, [props.user]);
 
   return (
     <nav className="navbar navbar-expand-lg navbar-light bg-light px-3">
@@ -55,7 +55,7 @@ export default function NavigationComponent(props) {
                 </div>
                 <div>
                   <img
-                    src={avatar.current}
+                    src={avatar}
                     alt="avatar_thumbnail"
                     width="40"
                     height="40"

@@ -71,7 +71,9 @@ export default function RecentTransaction(props) {
 
   useEffect(() => {
     if (!match) {
-      handleDateChange(new Date());
+      setDate(new Date());
+      setPage(1);
+      props.setDateRange(getLastMonth(new Date()));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match === null]);

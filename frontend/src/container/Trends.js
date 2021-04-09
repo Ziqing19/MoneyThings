@@ -147,6 +147,3 @@ Trends.propTypes = {
   expense: propTypes.object.isRequired,
   dateGroup: propTypes.object.isRequired,
 };
-
-// const color = "rgb(215,119,103)";
-// const color = "rgb(220,192,163)";

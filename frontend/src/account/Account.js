@@ -2,6 +2,7 @@ import React from "react";
 import { Switch, Route, useHistory } from "react-router-dom";
 import NewPassword from "../auth/NewPassword";
 import Profile from "./Profile";
+import Categories from "./Categories";
 import propTypes from "prop-types";
 
 export default function Account(props) {
@@ -45,7 +46,9 @@ export default function Account(props) {
       </div>
       <div className="col-9 px-0">
         <Switch>
-          <Route path="/account/categories">categories</Route>
+          <Route path="/account/categories">
+            <Categories user={props.user} />
+          </Route>
           <Route path="/account/new-password">
             <div className="position-relative">
               <div className="position-absolute top-50 start-50 translate-middle">
