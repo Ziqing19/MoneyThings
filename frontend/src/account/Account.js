@@ -47,7 +47,7 @@ export default function Account(props) {
       <div className="col-9 px-0">
         <Switch>
           <Route path="/account/categories">
-            <Categories user={props.user} />
+            <Categories {...props} />
           </Route>
           <Route path="/account/new-password">
             <div className="position-relative">
@@ -57,7 +57,7 @@ export default function Account(props) {
             </div>
           </Route>
           <Route path="/account">
-            <Profile user={props.user} setUser={props.setUser} />
+            <Profile {...props} />
           </Route>
         </Switch>
       </div>
@@ -67,5 +67,5 @@ export default function Account(props) {
 
 Account.propTypes = {
   user: propTypes.object.isRequired,
-  setUser: propTypes.func.isRequired,
+  refreshPage: propTypes.func.isRequired,
 };

@@ -39,7 +39,7 @@ export default function Accordion(props) {
               type={i.type}
               recent={props.recent}
               setRecent={props.setRecent}
-              setUser={props.setUser}
+              refreshPage={props.refreshPage}
             />
           ))}
         </div>
@@ -53,5 +53,5 @@ Accordion.propTypes = {
   transactions: propTypes.array.isRequired,
   recent: propTypes.array.isRequired,
   setRecent: propTypes.func.isRequired,
-  setUser: propTypes.func.isRequired,
+  refreshPage: propTypes.func.isRequired,
 };

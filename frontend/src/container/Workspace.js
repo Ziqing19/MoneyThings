@@ -84,7 +84,7 @@ export default function Workspace(props) {
               <div className="col-4 px-0">
                 <SelectionPanel
                   user={props.user}
-                  setUser={props.setUser}
+                  refreshPage={props.refreshPage}
                   dateRange={dateRange}
                   setDateRange={setDateRange}
                   recent={recent}
@@ -96,6 +96,7 @@ export default function Workspace(props) {
                   <AllTime
                     user={props.user}
                     setUser={props.setUser}
+                    refreshPage={props.refreshPage}
                     recent={recent}
                     setRecent={setRecent}
                     income={income}
@@ -124,7 +125,7 @@ export default function Workspace(props) {
             </div>
           </Route>
           <Route path="/account">
-            <Account user={props.user} setUser={props.setUser} />
+            <Account {...props} />
           </Route>
           <Route path="/">
             <Overview />
@@ -138,6 +139,7 @@ export default function Workspace(props) {
 Workspace.propTypes = {
   user: propTypes.object.isRequired,
   setUser: propTypes.func.isRequired,
+  refreshPage: propTypes.func.isRequired,
 };
 
 function FunctionalNavbar() {

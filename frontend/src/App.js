@@ -12,13 +12,14 @@ import Workspace from "./container/Workspace.js";
 
 export default function App() {
   const [user, setUser] = useState();
+  const [flag, refreshPage] = useState(true);
 
   useEffect(() => {
     getUser().then((user) => {
-      console.log(user);
       setUser(user);
+      console.log(user);
     });
-  }, []);
+  }, [flag]);
 
   return (
     <Router>
@@ -31,7 +32,11 @@ export default function App() {
           {user === undefined ? (
             <Redirect to="/auth" />
           ) : (
-            <Workspace user={user} setUser={setUser} />
+            <Workspace
+              user={user}
+              refreshPage={refreshPage}
+              setUser={setUser}
+            />
           )}
         </Route>
       </Switch>

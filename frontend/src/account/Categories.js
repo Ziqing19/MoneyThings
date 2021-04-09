@@ -11,8 +11,69 @@ export default function Categories(props) {
   useEffect(() => {
     if (props.user) {
       setCategories(props.user.categories);
+      setIncomeCategory(props.user.categories["Income"][0]);
+      setExpenseCategory(props.user.categories["Expense"][0]);
     }
   }, [props.user]);
+
+  function handleDeleteCategory(type, category) {
+    const data = {
+      type: type,
+      category: category,
+    };
+    fetch("/user/delete-category", {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((resRaw) => {
+        console.log(resRaw);
+        if (!resRaw.ok) {
+          resRaw.text().then((res) => {
+            alert(res);
+          });
+        } else {
+          console.log("Category deleted");
+          props.refreshPage((prev) => !prev);
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
+
+  function handleCreateCategory(type, category) {
+    if (category.length === 0) {
+      return alert("Category name cannot be empty");
+    }
+    const data = {
+      type: type,
+      category: category,
+    };
+    fetch("/user/create-category", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((resRaw) => {
+        console.log(resRaw);
+        if (!resRaw.ok) {
+          resRaw.text().then((res) => {
+            alert(res);
+          });
+        } else {
+          console.log("New category created");
+          props.refreshPage((prev) => !prev);
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  }
 
   return (
     <div className="flex-container d-flex">
@@ -40,7 +101,15 @@ export default function Categories(props) {
                   </option>
                 ))}
               </select>
-              <button className="btn btn-danger">Delete</button>
+              <button
+                className="btn btn-danger"
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  handleDeleteCategory("Income", incomeCategory);
+                }}
+              >
+                Delete
+              </button>
             </form>
           </div>
           <div className="col-2" />
@@ -63,7 +132,15 @@ export default function Categories(props) {
                   </option>
                 ))}
               </select>
-              <button className="btn btn-danger">Delete</button>
+              <button
+                className="btn btn-danger"
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  handleDeleteCategory("Expense", expenseCategory);
+                }}
+              >
+                Delete
+              </button>
             </form>
           </div>
         </div>
@@ -94,7 +171,15 @@ export default function Categories(props) {
                   setCreateCategory(evt.target.value);
                 }}
               />
-              <button className="btn btn-outline-secondary">Create</button>
+              <button
+                className="btn btn-outline-secondary"
+                onClick={(evt) => {
+                  evt.preventDefault();
+                  handleCreateCategory(createType, createCategory);
+                }}
+              >
+                Create
+              </button>
             </form>
           </div>
         </div>
@@ -105,4 +190,5 @@ export default function Categories(props) {
 
 Categories.propTypes = {
   user: propTypes.object.isRequired,
+  refreshPage: propTypes.func.isRequired,
 };

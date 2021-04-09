@@ -41,13 +41,7 @@ export default function Transaction(props) {
               }
             }
             props.setRecent(array);
-            const variation = parseFloat(
-              props.type === "Income" ? -props.amount : props.amount
-            );
-            props.setUser((prev) => ({
-              ...prev,
-              balance: prev.balance + variation,
-            }));
+            props.refreshPage((prev) => !prev);
             console.log("Transaction deleted");
           }
         })
@@ -85,5 +79,5 @@ Transaction.propTypes = {
   type: propTypes.string.isRequired,
   recent: propTypes.array.isRequired,
   setRecent: propTypes.func.isRequired,
-  setUser: propTypes.func.isRequired,
+  refreshPage: propTypes.func.isRequired,
 };

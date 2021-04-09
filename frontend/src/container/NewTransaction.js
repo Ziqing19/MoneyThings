@@ -42,11 +42,7 @@ export default function NewTransaction(props) {
           newDateRange[1] = new Date();
           props.setDateRange(newDateRange);
           props.toggle();
-          const variation = parseFloat(isIncome ? amount : -amount);
-          props.setUser((prev) => ({
-            ...prev,
-            balance: prev.balance + variation,
-          }));
+          props.refreshPage((prev) => !prev);
           console.log("New transaction created");
         }
       })
@@ -141,7 +137,7 @@ export default function NewTransaction(props) {
 
 NewTransaction.propTypes = {
   user: propTypes.object.isRequired,
-  setUser: propTypes.func.isRequired,
+  refreshPage: propTypes.func.isRequired,
   toggle: propTypes.func.isRequired,
   dateRange: propTypes.array.isRequired,
   setDateRange: propTypes.func.isRequired,

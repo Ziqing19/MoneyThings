@@ -41,8 +41,8 @@ export default function Profile(props) {
             alert(res);
           });
         } else {
-          alert("Profile updated");
-          window.location = "/";
+          console.log("Profile updated");
+          props.refreshPage((prev) => !prev);
         }
       })
       .catch((err) => {
@@ -111,7 +111,7 @@ export default function Profile(props) {
 
 Profile.propTypes = {
   user: propTypes.object.isRequired,
-  setUser: propTypes.func.isRequired,
+  refreshPage: propTypes.func.isRequired,
 };
 
 function UpdateAvatar({ dataHandler }) {
