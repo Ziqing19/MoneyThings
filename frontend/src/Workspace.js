@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
-import "./stylesheet/Workspace.css";
-import Overview from "./Overview.js";
-import Profile from "./Profile.js";
-import AllTime from "./AllTime.js";
-import Trends from "./Trends.js";
-import Budget from "./Budget.js";
-import SelectionPanel from "./SelectionPanel.js";
+import { Switch, Route, Link } from "react-router-dom";
+import "./stylesheets/Workspace.css";
+import Overview from "./tabs/overview/Overview.js";
+import Account from "./tabs/account/Account.js";
+import AllTime from "./tabs/alltime/AllTime.js";
+import Trends from "./tabs/trends/Trends.js";
+import Budget from "./tabs/budget/Budget.js";
+import SelectionPanel from "./tabs/dateRangeSelection/SelectionPanel.js";
 import propTypes from "prop-types";
 
 /***
@@ -18,12 +18,13 @@ import propTypes from "prop-types";
  */
 export default function Workspace(props) {
   const [recent, setRecent] = useState([]);
-  const [dateRange, setDateRange] = useState(getLastWeek());
+  const [dateRange, setDateRange] = useState(getThisMonth());
   const [income, setIncome] = useState({});
   const [expense, setExpense] = useState({});
   const [dateGroup, setDateGroup] = useState({});
 
   useEffect(() => {
+    console.log("workspace", props.user);
     fetch("/transaction/recent", {
       method: "POST",
       headers: {
@@ -71,68 +72,67 @@ export default function Workspace(props) {
       if (array.length === 0) continue;
       setExpense((prev) => ({ ...prev, [category]: array }));
     }
-    // console.log(expense);
+    // console.log(income, expense);
   }, [recent, props.user.categories]);
 
   return (
     <div className="flex-grow-1 d-flex flex-column">
-      <Router>
-        <FunctionalNavbar />
-        <div className="flex-grow-1">
-          <Switch>
-            <Route path={["/all-time", "/trends", "/budget"]}>
-              <div className="row flex-container">
-                <div className="col-4 px-0">
-                  <SelectionPanel
+      <FunctionalNavbar />
+      <div className="flex-grow-1">
+        <Switch>
+          <Route path={["/all-time", "/trends", "/budget"]}>
+            <div className="row flex-container">
+              <div className="col-4 px-0">
+                <SelectionPanel
+                  user={props.user}
+                  refreshPage={props.refreshPage}
+                  dateRange={dateRange}
+                  setDateRange={setDateRange}
+                  recent={recent}
+                  setRecent={setRecent}
+                />
+              </div>
+              <div className="col-8 px-0">
+                <Route path="/all-time">
+                  <AllTime
                     user={props.user}
                     setUser={props.setUser}
-                    dateRange={dateRange}
-                    setDateRange={setDateRange}
+                    refreshPage={props.refreshPage}
                     recent={recent}
                     setRecent={setRecent}
+                    income={income}
+                    expense={expense}
+                    dateGroup={dateGroup}
                   />
-                </div>
-                <div className="col-8 px-0">
-                  <Route path="/all-time">
-                    <AllTime
-                      user={props.user}
-                      setUser={props.setUser}
-                      recent={recent}
-                      setRecent={setRecent}
-                      income={income}
-                      expense={expense}
-                      dateGroup={dateGroup}
-                    />
-                  </Route>
-                  <Route path="/trends">
-                    <Trends
-                      income={income}
-                      expense={expense}
-                      dateGroup={dateGroup}
-                    />
-                  </Route>
-                  <Route path="/budget">
-                    <Budget
-                      expense={expense}
-                      dateGroup={dateGroup}
-                      recent={recent}
-                      user={props.user}
-                      setUser={props.setUser}
-                      setRecent={setRecent}
-                    />
-                  </Route>
-                </div>
+                </Route>
+                <Route path="/trends">
+                  <Trends
+                    income={income}
+                    expense={expense}
+                    dateGroup={dateGroup}
+                  />
+                </Route>
+                <Route path="/budget">
+                  <Budget
+                    expense={expense}
+                    dateGroup={dateGroup}
+                    recent={recent}
+                    user={props.user}
+                    setUser={props.setUser}
+                    setRecent={setRecent}
+                  />
+                </Route>
               </div>
-            </Route>
-            <Route path="/profile">
-              <Profile />
-            </Route>
-            <Route path="/">
-              <Overview />
-            </Route>
-          </Switch>
-        </div>
-      </Router>
+            </div>
+          </Route>
+          <Route path="/account">
+            <Account {...props} />
+          </Route>
+          <Route path="/">
+            <Overview {...props} />
+          </Route>
+        </Switch>
+      </div>
     </div>
   );
 }
@@ -140,6 +140,7 @@ export default function Workspace(props) {
 Workspace.propTypes = {
   user: propTypes.object.isRequired,
   setUser: propTypes.func.isRequired,
+  refreshPage: propTypes.func.isRequired,
 };
 
 function FunctionalNavbar() {
@@ -163,8 +164,12 @@ function FunctionalNavbar() {
   );
 }
 
-function getLastWeek() {
-  const date = new Date();
-  date.setDate(date.getDate() - 7);
-  return [date, new Date()];
+function getThisMonth() {
+  const end_date = new Date();
+  const start_date = new Date();
+  start_date.setDate(1);
+  start_date.setHours(0);
+  start_date.setMinutes(0);
+  start_date.setSeconds(0);
+  return [start_date, end_date];
 }

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import InputBox from "../shared/InputBox.js";
+import InputBox from "../../shared/InputBox.js";
 import propTypes from "prop-types";
 
 export default function SetBudget(props) {

@@ -4,17 +4,28 @@
 
 ```
 root
-├─ bin                      // express entry
-├─ frontend                 // react project root
-│  ├─ build                 // react app bundle
-│  ├─ public                // static files
-│  │  └─ favicon            // website favicon
-│  └─ src                   // react src
-│      ├─ auth              // auth route
-│      ├─ common            // common components shared by diffrent routes
-│      └─ image             // static images
-├─ routes                   // express routes
-└─ src                      // backend src
+├─bin                             // express entry
+├─frontend                        // react project root
+│  ├─build                        // react app bundle
+│  ├─public                       // static files
+│  │  ├─favicon
+│  │  └─images
+│  │      ├─avatar
+│  │      └─avatar_thumbnail
+│  └─src                          // react src
+│      ├─auth                     // auth related components
+│      ├─images
+│      ├─shared
+│      ├─stylesheets
+│      └─tabs                     // different functional tabs
+│          ├─account
+│          ├─alltime
+│          ├─budget
+│          ├─dateRangeSelection
+│          ├─overview
+│          └─trends
+├─routes                          // express routers
+└─src                             // backend src
 ```
 
 ## Hierarchy (Routes)

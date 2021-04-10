@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import Transaction from "./Transaction";
+import Transaction from "../../shared/Transaction";
 import { useRouteMatch } from "react-router-dom";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import DatePicker from "react-date-picker";
@@ -71,7 +71,9 @@ export default function RecentTransaction(props) {
 
   useEffect(() => {
     if (!match) {
-      handleDateChange(new Date());
+      setDate(new Date());
+      setPage(1);
+      props.setDateRange(getLastMonth(new Date()));
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match === null]);
@@ -123,7 +125,7 @@ export default function RecentTransaction(props) {
           type={i.type}
           recent={props.recent}
           setRecent={props.setRecent}
-          setUser={props.setUser}
+          refreshPage={props.refreshPage}
         />
       ))}
     </div>
@@ -131,7 +133,7 @@ export default function RecentTransaction(props) {
 }
 
 RecentTransaction.propTypes = {
-  setUser: propTypes.func.isRequired,
+  refreshPage: propTypes.func.isRequired,
   dateRange: propTypes.array.isRequired,
   setDateRange: propTypes.func.isRequired,
   recent: propTypes.array.isRequired,

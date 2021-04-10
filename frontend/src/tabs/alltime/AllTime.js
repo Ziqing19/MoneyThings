@@ -16,7 +16,7 @@ export default function AllTime(props) {
             transactions={props.dateGroup[key]}
             recent={props.recent}
             setRecent={props.setRecent}
-            setUser={props.setUser}
+            refreshPage={props.refreshPage}
           />
         ))}
       </div>
@@ -36,7 +36,7 @@ export default function AllTime(props) {
             transactions={type[key]}
             recent={props.recent}
             setRecent={props.setRecent}
-            setUser={props.setUser}
+            refreshPage={props.refreshPage}
           />
         ))}
       </div>
@@ -47,7 +47,7 @@ export default function AllTime(props) {
     <div className="position-relative" style={{ height: "calc(100vh - 6rem)" }}>
       <div style={{ maxHeight: "100%", overflow: "auto" }}>
         <div className="text-end border-bottom py-3 pe-5">
-          Current Balance: {props.user.balance}
+          Current Balance: {parseFloat(props.user.balance).toFixed(2)}
         </div>
         <div>
           <button
@@ -80,7 +80,7 @@ export default function AllTime(props) {
 
 AllTime.propTypes = {
   user: propTypes.object.isRequired,
-  setUser: propTypes.func.isRequired,
+  refreshPage: propTypes.func.isRequired,
   recent: propTypes.array.isRequired,
   setRecent: propTypes.func.isRequired,
   income: propTypes.object.isRequired,

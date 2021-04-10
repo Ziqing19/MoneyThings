@@ -6,19 +6,23 @@ import {
   Redirect,
 } from "react-router-dom";
 import Auth from "./auth/Auth.js";
-import NavigationComponent from "./shared/NavigationComponent.js";
+import NavigationComponent from "./NavigationComponent.js";
 
-import Workspace from "./container/Workspace.js";
+import Workspace from "./Workspace.js";
 
 export default function App() {
   const [user, setUser] = useState();
+  const [flag, refreshPage] = useState(true);
 
   useEffect(() => {
+    console.log("useEffect");
     getUser().then((user) => {
-      console.log(user);
       setUser(user);
+      console.log(user);
     });
-  }, []);
+  }, [flag]);
+
+  console.log("render user", user);
 
   return (
     <Router>
@@ -31,7 +35,11 @@ export default function App() {
           {user === undefined ? (
             <Redirect to="/auth" />
           ) : (
-            <Workspace user={user} setUser={setUser} />
+            <Workspace
+              user={user}
+              refreshPage={refreshPage}
+              setUser={setUser}
+            />
           )}
         </Route>
       </Switch>

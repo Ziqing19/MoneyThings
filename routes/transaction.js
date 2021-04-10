@@ -96,6 +96,7 @@ router.post("/new", async (req, res) => {
       { _id: ObjectId(req.session._id) },
       { $set: { balance: new_balance } }
     );
+    req.session.user.balance = new_balance;
     res.sendStatus(201);
   } catch (err) {
     console.log(err);
@@ -132,6 +133,7 @@ router.delete("/delete", async (req, res) => {
       { _id: ObjectId(req.session._id) },
       { $set: { balance: new_balance } }
     );
+    req.session.user.balance = new_balance;
     res.sendStatus(201);
   } catch (err) {
     console.log(err);
@@ -149,7 +151,7 @@ router.get("/cal-balance", async (req, res) => {
     let balance = 0;
     await cursor.forEach((item) => {
       const amount = item.amount;
-      if (item.type === "expense") {
+      if (item.type === "Expense") {
         balance -= amount;
       } else {
         balance += amount;

@@ -86,11 +86,6 @@ export default function Login() {
           Sign up
         </Link>
       </div>
-      <div className="mb-2 d-flex justify-content-end">
-        <Link className="text-end d-block" to="/auth/new-password">
-          New Password(temp)
-        </Link>
-      </div>
     </form>
   );
 }
