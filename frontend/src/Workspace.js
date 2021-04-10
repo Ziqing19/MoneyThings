@@ -115,11 +115,10 @@ export default function Workspace(props) {
                 <Route path="/budget">
                   <Budget
                     expense={expense}
-                    dateGroup={dateGroup}
-                    recent={recent}
+                    dateRange={dateRange}
                     user={props.user}
+                    dateGroup={dateGroup}
                     setUser={props.setUser}
-                    setRecent={setRecent}
                   />
                 </Route>
               </div>

@@ -59,6 +59,7 @@ export default function RecentTransaction(props) {
   }
 
   function handleDateChange(date) {
+    console.log("Data change to", getMonthRange(date));
     setDate(date);
     setPage(1);
     props.setDateRange(getMonthRange(date));

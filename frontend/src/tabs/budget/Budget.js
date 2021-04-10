@@ -5,20 +5,22 @@ import SetBudget from "./SetBudget.js";
 
 export default function Budget(props) {
   const [showBudgetPanel, setBudgetPanel] = useState(false);
-  const currentExpenses = props.expense;
   const [barData, setBarData] = useState([]);
   const [budget, setBudget] = useState({ category: "", amount: 0 });
+  //const [budgets, setBudgets] = useState({});
 
+  console.log("currentExpense update?:", props.expense);
+  console.log(Object.keys(props.expense));
   useEffect(() => {
     const fetchBudget = async () => {
       const resRaw = await fetch("/user/get-budget");
       const budgets = (await resRaw.json()).budget;
       setBarData([]);
-      console.log(barData);
-      Object.keys(currentExpenses).map((item) => {
+      console.log("empty barData", barData);
+      Object.keys(props.expense).map((item) => {
         if (item in budgets) {
           let totalExpense = 0;
-          currentExpenses[item].map((item) => {
+          props.expense[item].map((item) => {
             totalExpense += item.amount;
           });
           const object = {};
@@ -33,15 +35,16 @@ export default function Budget(props) {
       });
 
       setBarData(barData);
+      console.log("updated barData", barData);
     };
     fetchBudget();
-  }, [budget]);
+  }, [budget, props.dateGroup]);
 
   function toggleBudgetPanel() {
     setBudgetPanel(!showBudgetPanel);
   }
 
-  console.log(barData);
+  //console.log(barData);
 
   function getVariant(ratio) {
     if (ratio < 25) {
@@ -65,10 +68,10 @@ export default function Budget(props) {
       style={{ height: "80vh", overflowY: "scroll" }}
     >
       <div className="ProgessBar flex-column align-items-center .ml-1">
-        {barData.map((item) => {
+        {barData.map((item, index) => {
           return (
             <div
-              key={item.category}
+              key={item.category + index}
               style={{ padding: "5px", width: "70%", margin: "0 auto" }}
             >
               {item.category}
