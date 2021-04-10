@@ -7,7 +7,19 @@ export default function SetBudget(props) {
   const [categories] = useState(props.user.categories.Expense);
   const [category, setCategory] = useState(props.user.categories.Expense[0]);
 
-  function handleSubmit() {}
+  function handleSubmit(evt) {
+    evt.preventDefault();
+    if (!evt.target.checkValidity()) {
+      return evt.target.classList.add("was-validated");
+    }
+
+    const data = {
+      category: category,
+      amount: amount,
+    };
+    console.log(data);
+    fetch("");
+  }
 
   return (
     <div className="flex-container">

@@ -68,4 +68,40 @@ router.post("/update-categories", async (req, res) => {
   }
 });
 
+router.post("/update-budget", async (req, res) => {
+  if (req.body.budget.amount === 0) {
+    return res.sendStatus(400);
+  }
+  try {
+    const collection = await getCollection("Users");
+    const resFind = await collection.updateOne(
+      { _id: ObjectId(req.session._id) },
+      {
+        $set: {
+          budget: { [req.body.budget.category]: req.body.budget.amount },
+        },
+      }
+    );
+    console.log(resFind);
+    res.sendStatus(201);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
+});
+
+router.get("/get-budget", async (req, res) => {
+  try {
+    const collection = await getCollection("Users");
+    const resFind = await collection.findOne(
+      { _id: req.session._id },
+      { _id: 0, categories: 1 }
+    );
+    res.send(resFind);
+  } catch (err) {
+    console.log(err);
+    res.sendStatus(400);
+  }
+});
+
 module.exports = router;
