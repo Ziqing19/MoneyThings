@@ -22,7 +22,8 @@
     "express-session": "^1.17.1",
     "mongodb": "^3.6.5",
     "morgan": "~1.9.1",
-    "react-bootstrap": "^1.5.2"
+    "react-bootstrap": "^1.5.2",
+    "react-datepicker": "^3.7.0"
   },
   "devDependencies": {
     "eslint": "^7.23.0",

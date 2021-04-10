@@ -4,6 +4,7 @@ import { useRouteMatch } from "react-router-dom";
 import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import DatePicker from "react-date-picker";
 import propTypes from "prop-types";
+import "react-datepicker/dist/react-datepicker.css";
 
 export default function RecentTransaction(props) {
   const [page, setPage] = useState(1);
@@ -99,19 +100,24 @@ export default function RecentTransaction(props) {
               maxDetail="year"
               minDate={new Date(0)}
               maxDate={new Date()}
+              format="dd-MM-yy"
             />
           )}
         </div>
         <div>{match ? AllTimeShortcuts() : null}</div>
       </div>
-      <div className="py-3 row">
-        <button className="col" onClick={prevPage}>
+      <div
+        className="row btn-group d-flex justify-content-center"
+        role="group"
+        aria-label="page navigation buttoon"
+      >
+        <button className="col-3 btn btn-secondary" onClick={prevPage}>
           Prev
         </button>
-        <div className="col text-center">
+        <div className="col-6 text-center">
           Page {page}/{totalPages}
         </div>
-        <button className="col" onClick={nextPage}>
+        <button className="col-3 btn btn-secondary" onClick={nextPage}>
           Next
         </button>
       </div>

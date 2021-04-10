@@ -56,7 +56,7 @@ export default function Transaction(props) {
       {props.refreshPage !== undefined ? (
         <button
           type="button"
-          className="btn-close position-absolute end-0 translate-middle-x"
+          className="btn-close btn-warning position-absolute end-0 translate-middle-x"
           aria-label="Close"
           onClick={deleteTransaction}
         />
