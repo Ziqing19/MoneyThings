@@ -12,13 +12,31 @@ export default function SetBudget(props) {
     if (!evt.target.checkValidity()) {
       return evt.target.classList.add("was-validated");
     }
-
     const data = {
       category: category,
-      amount: amount,
+      amount: parseFloat(amount),
     };
-    console.log(data);
-    fetch("");
+    fetch("/user/update-budget", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    })
+      .then((resRaw) => {
+        if (!resRaw.ok) {
+          resRaw.text().then((res) => {
+            alert(res);
+          });
+        } else {
+          props.toggle();
+          props.setBudget(data);
+          console.log("New budget created");
+        }
+      })
+      .catch((err) => {
+        alert(err);
+      });
   }
 
   return (
@@ -29,7 +47,14 @@ export default function SetBudget(props) {
             Cancel
           </button>
           <div className="col-6"></div>
-          <button className="col-3">Save</button>
+          <button
+            className="col-3"
+            onClick={(evt) => {
+              handleSubmit(evt);
+            }}
+          >
+            Save
+          </button>
         </div>
       </form>
 
@@ -66,4 +91,5 @@ SetBudget.propTypes = {
   user: propTypes.object.isRequired,
   setUser: propTypes.func.isRequired,
   toggle: propTypes.func.isRequired,
+  setBudget: propTypes.func.isRequired,
 };

@@ -43,6 +43,7 @@ router.get("/get-categories", async (req, res) => {
       { _id: req.session._id },
       { _id: 0, categories: 1 }
     );
+    console.log("=========", resFind);
     res.send(resFind);
   } catch (err) {
     console.log(err);
@@ -138,21 +139,25 @@ router.delete("/delete-category", async (req, res) => {
 });
 
 router.post("/update-budget", async (req, res) => {
-  if (req.body.budget.amount === 0) {
+  if (!req.body.amount || req.body.amount === 0) {
     return res.sendStatus(400);
   }
   try {
     const collection = await getCollection("Users");
+    const category = "budget." + req.body.category;
     const resFind = await collection.updateOne(
       { _id: ObjectId(req.session._id) },
       {
         $set: {
-          budget: { [req.body.budget.category]: req.body.budget.amount },
+          [category]: req.body.amount,
         },
+      },
+      {
+        upsert: true,
       }
     );
-    console.log(resFind);
-    res.sendStatus(201);
+    console.log("update-budget:", resFind.result);
+    res.sendStatus(200);
   } catch (err) {
     console.log(err);
     res.sendStatus(400);
@@ -162,10 +167,17 @@ router.post("/update-budget", async (req, res) => {
 router.get("/get-budget", async (req, res) => {
   try {
     const collection = await getCollection("Users");
+    console.log(req.session._id);
     const resFind = await collection.findOne(
-      { _id: req.session._id },
-      { _id: 0, categories: 1 }
+      { _id: ObjectId(req.session._id) },
+      {
+        projection: {
+          _id: 0,
+          budget: 1,
+        },
+      }
     );
+    console.log(resFind);
     res.send(resFind);
   } catch (err) {
     console.log(err);

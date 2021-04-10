@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import propTypes from "prop-types";
 import ProgressBar from "react-bootstrap/ProgressBar";
 import SetBudget from "./SetBudget.js";
@@ -6,28 +6,39 @@ import SetBudget from "./SetBudget.js";
 export default function Budget(props) {
   const [showBudgetPanel, setBudgetPanel] = useState(false);
   const currentExpenses = props.expense;
-  const budget = 500;
   const barData = [];
+  const [budget, setBudget] = useState({});
+
+  useEffect(() => {
+    const fetchBudget = async () => {
+      const resRaw = await fetch("/user/get-budget");
+      const budgets = (await resRaw.json()).budget;
+
+      console.log("Got Budgets", budgets);
+      Object.keys(currentExpenses).map((item) => {
+        if (item in budgets) {
+          let totalExpense = 0;
+          currentExpenses[item].map((item) => {
+            totalExpense += item.amount;
+          });
+
+          const object = {};
+          const ratio = ((totalExpense / budget) * 100).toFixed(2);
+          object["amount"] = totalExpense;
+          object["ratio"] = ratio;
+          object["budget"] = budget;
+          object["category"] = item;
+          object["left"] = budget - totalExpense;
+          barData.push(object);
+        }
+      });
+    };
+    fetchBudget();
+  }, [budget]);
 
   function toggleBudgetPanel() {
     setBudgetPanel(!showBudgetPanel);
   }
-
-  Object.keys(currentExpenses).map((item) => {
-    let totalExpense = 0;
-    currentExpenses[item].map((item) => {
-      totalExpense += item.amount;
-    });
-
-    const object = {};
-    const ratio = ((totalExpense / budget) * 100).toFixed(2);
-    object["amount"] = totalExpense;
-    object["ratio"] = ratio;
-    object["budget"] = budget;
-    object["category"] = item;
-    object["left"] = budget - totalExpense;
-    barData.push(object);
-  });
 
   function getVariant(ratio) {
     if (ratio < 25) {
@@ -44,10 +55,6 @@ export default function Budget(props) {
     }
     return "danger";
   }
-
-  barData.forEach((item, index) => {
-    console.log(item, index);
-  });
 
   return (
     <div
@@ -99,6 +106,7 @@ export default function Budget(props) {
               user={props.user}
               setUser={props.setUser}
               toggle={toggleBudgetPanel}
+              setBudget={setBudget}
             />
           ) : null}
         </div>
