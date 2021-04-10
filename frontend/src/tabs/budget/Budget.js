@@ -6,32 +6,33 @@ import SetBudget from "./SetBudget.js";
 export default function Budget(props) {
   const [showBudgetPanel, setBudgetPanel] = useState(false);
   const currentExpenses = props.expense;
-  const barData = [];
-  const [budget, setBudget] = useState({});
+  const [barData, setBarData] = useState([]);
+  const [budget, setBudget] = useState({ category: "", amount: 0 });
 
   useEffect(() => {
     const fetchBudget = async () => {
       const resRaw = await fetch("/user/get-budget");
       const budgets = (await resRaw.json()).budget;
-
-      console.log("Got Budgets", budgets);
+      setBarData([]);
+      console.log(barData);
       Object.keys(currentExpenses).map((item) => {
         if (item in budgets) {
           let totalExpense = 0;
           currentExpenses[item].map((item) => {
             totalExpense += item.amount;
           });
-
           const object = {};
-          const ratio = ((totalExpense / budget) * 100).toFixed(2);
+          const ratio = ((totalExpense / budgets[item]) * 100).toFixed(2);
           object["amount"] = totalExpense;
           object["ratio"] = ratio;
-          object["budget"] = budget;
+          object["budget"] = budgets[item];
           object["category"] = item;
-          object["left"] = budget - totalExpense;
+          object["left"] = budgets[item] - totalExpense;
           barData.push(object);
         }
       });
+
+      setBarData(barData);
     };
     fetchBudget();
   }, [budget]);
@@ -39,6 +40,8 @@ export default function Budget(props) {
   function toggleBudgetPanel() {
     setBudgetPanel(!showBudgetPanel);
   }
+
+  console.log(barData);
 
   function getVariant(ratio) {
     if (ratio < 25) {
@@ -73,9 +76,9 @@ export default function Budget(props) {
                 now={item.amount.toFixed(2)}
                 variant={getVariant(item.ratio)}
                 label={`${item.ratio}%`}
-                max={budget}
+                max={item.budget}
               />
-              {`$${item.amount.toFixed(2)} of $${budget}`}
+              {`$${item.amount.toFixed(2)} of $${item.budget}`}
               <span style={{ float: "right" }}>
                 {item.left > 0
                   ? `${item.left.toFixed(2)} left`

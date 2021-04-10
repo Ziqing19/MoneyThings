@@ -3,7 +3,7 @@ import InputBox from "../../shared/InputBox.js";
 import propTypes from "prop-types";
 
 export default function SetBudget(props) {
-  const [amount, setAmount] = useState(0);
+  const [amount, setAmount] = useState("0");
   const [categories] = useState(props.user.categories.Expense);
   const [category, setCategory] = useState(props.user.categories.Expense[0]);
 
@@ -24,6 +24,7 @@ export default function SetBudget(props) {
       body: JSON.stringify(data),
     })
       .then((resRaw) => {
+        console.log(resRaw);
         if (!resRaw.ok) {
           resRaw.text().then((res) => {
             alert(res);
