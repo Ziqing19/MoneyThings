@@ -6,45 +6,42 @@ import SetBudget from "./SetBudget.js";
 export default function Budget(props) {
   const [showBudgetPanel, setBudgetPanel] = useState(false);
   const [barData, setBarData] = useState([]);
+  // TODO unused budget???
   const [budget, setBudget] = useState({ category: "", amount: 0 });
-  //const [budgets, setBudgets] = useState({});
 
-  console.log("currentExpense update?:", props.expense);
-  console.log(Object.keys(props.expense));
   useEffect(() => {
-    const fetchBudget = async () => {
-      const resRaw = await fetch("/user/get-budget");
-      const budgets = (await resRaw.json()).budget;
-      setBarData([]);
-      console.log("empty barData", barData);
-      Object.keys(props.expense).map((item) => {
-        if (item in budgets) {
-          let totalExpense = 0;
-          props.expense[item].map((item) => {
-            totalExpense += item.amount;
-          });
-          const object = {};
-          const ratio = ((totalExpense / budgets[item]) * 100).toFixed(2);
-          object["amount"] = totalExpense;
-          object["ratio"] = ratio;
-          object["budget"] = budgets[item];
-          object["category"] = item;
-          object["left"] = budgets[item] - totalExpense;
-          barData.push(object);
-        }
+    fetch("/user/get-budget")
+      .then((resRaw) => {
+        return resRaw.json().then((res) => {
+          return res.budget;
+        });
+      })
+      .then((budgets) => {
+        setBarData([]);
+        Object.keys(props.expense).map((category) => {
+          if (category in budgets) {
+            let totalExpense = 0;
+            props.expense[category].map((item) => {
+              totalExpense += item.amount;
+            });
+            const object = {};
+            const ratio = ((totalExpense / budgets[category]) * 100).toFixed(2);
+            object["amount"] = totalExpense;
+            object["ratio"] = ratio;
+            object["budget"] = budgets[category];
+            object["category"] = category;
+            object["left"] = budgets[category] - totalExpense;
+            setBarData((prev) => Array.from([...prev, object]));
+          }
+        });
+        console.log("updated barData", barData);
       });
-
-      setBarData(barData);
-      console.log("updated barData", barData);
-    };
-    fetchBudget();
-  }, [budget, props.dateGroup]);
+    console.log("budget", budget);
+  }, [props.expense]);
 
   function toggleBudgetPanel() {
     setBudgetPanel(!showBudgetPanel);
   }
-
-  //console.log(barData);
 
   function getVariant(ratio) {
     if (ratio < 25) {
