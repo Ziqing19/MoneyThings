@@ -39,7 +39,7 @@ export default function Trends(props) {
   return (
     <div className="flex-container">
       <div style={{ height: "calc(100vh - 6rem)" }}>
-        <ButtonGroup>
+        <ButtonGroup style={{ left: "30%" }}>
           <button
             className="btn btn-secondary"
             onClick={() => {

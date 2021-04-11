@@ -13,7 +13,10 @@ export default function SelectionPanel(props) {
 
   return (
     <div className="border-end flex-container">
-      <div className="text-center border-bottom py-3 position-relative">
+      <div
+        className="text-center border-bottom py-3 position-relative"
+        style={{ fontSize: "20px", fontWeight: "bold" }}
+      >
         Recent Transactions
         {showNewTrans ? null : (
           <div

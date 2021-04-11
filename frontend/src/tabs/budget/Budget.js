@@ -19,6 +19,7 @@ export default function Budget(props) {
       })
       .then((budgets) => {
         setBarData([]);
+        console.log("empty barData", barData);
         console.log(budgets);
         Object.keys(props.expense).map((category) => {
           if (category in budgets) {
@@ -36,10 +37,10 @@ export default function Budget(props) {
             setBarData((prev) => Array.from([...prev, object]));
           }
         });
-        console.log("updated barData", barData);
       });
     //console.log("budget", budget);
   }, [props.expense, budget]);
+  console.log("updated barData", barData);
 
   function toggleBudgetPanel() {
     setBudgetPanel(!showBudgetPanel);

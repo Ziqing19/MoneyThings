@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import propTypes from "prop-types";
 import Accordion from "./Accordion";
+import Button from "react-bootstrap/Button";
 
 export default function AllTime(props) {
   const [isGroupByDate, setIsGroupByDate] = useState(true);
@@ -49,21 +50,23 @@ export default function AllTime(props) {
         <div className="text-end border-bottom py-3 pe-5">
           Current Balance: {parseFloat(props.user.balance).toFixed(2)}
         </div>
-        <div>
-          <button
+        <div style={{ marginBottom: "10px" }}>
+          <Button
+            variant="secondary"
             onClick={() => {
               setIsGroupByDate(true);
             }}
           >
             group by date
-          </button>
-          <button
+          </Button>
+          <Button
+            variant="secondary"
             onClick={() => {
               setIsGroupByDate(false);
             }}
           >
             group by category
-          </button>
+          </Button>
         </div>
         {isGroupByDate ? (
           <div>{groupByDate()}</div>

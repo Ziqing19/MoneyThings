@@ -5,6 +5,10 @@ import DateRangePicker from "@wojtekmaj/react-daterange-picker";
 import DatePicker from "react-date-picker";
 import propTypes from "prop-types";
 import "react-datepicker/dist/react-datepicker.css";
+import "../../stylesheets/datePicker.css";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
+import Button from "react-bootstrap/Button";
+//import ListGroup from "react-bootstrap/ListGroup";
 
 export default function RecentTransaction(props) {
   const [page, setPage] = useState(1);
@@ -27,34 +31,40 @@ export default function RecentTransaction(props) {
   function AllTimeShortcuts() {
     return (
       <div>
-        <button
-          onClick={() => {
-            props.setDateRange(getToday());
-          }}
-        >
-          Today
-        </button>
-        <button
-          onClick={() => {
-            props.setDateRange(getLastWeek());
-          }}
-        >
-          Last Week
-        </button>
-        <button
-          onClick={() => {
-            props.setDateRange(getLastMonth());
-          }}
-        >
-          Last Month
-        </button>
-        <button
-          onClick={() => {
-            props.setDateRange(getLastYear());
-          }}
-        >
-          Last Year
-        </button>
+        <ButtonGroup>
+          <Button
+            variant="info"
+            onClick={() => {
+              props.setDateRange(getToday());
+            }}
+          >
+            Today
+          </Button>
+          <Button
+            variant="info"
+            onClick={() => {
+              props.setDateRange(getLastWeek());
+            }}
+          >
+            Last Week
+          </Button>
+          <Button
+            variant="info"
+            onClick={() => {
+              props.setDateRange(getLastMonth());
+            }}
+          >
+            Last Month
+          </Button>
+          <Button
+            variant="info"
+            onClick={() => {
+              props.setDateRange(getLastYear());
+            }}
+          >
+            Last Year
+          </Button>
+        </ButtonGroup>
       </div>
     );
   }
@@ -105,6 +115,24 @@ export default function RecentTransaction(props) {
         </div>
         <div>{match ? AllTimeShortcuts() : null}</div>
       </div>
+      <div style={{ marginTop: "20px" }}>
+        <ul className="list-group list-group-flush">
+          {props.recent.slice(page * 5 - 5, page * 5).map((i, index) => (
+            <Transaction
+              key={"RecentTransaction-" + index}
+              _id={i._id}
+              category={i.category}
+              amount={parseFloat(i.amount)}
+              date={i.date}
+              merchant={i.merchant}
+              type={i.type}
+              recent={props.recent}
+              setRecent={props.setRecent}
+              refreshPage={props.refreshPage}
+            />
+          ))}
+        </ul>
+      </div>
       <div
         className="row btn-group d-flex justify-content-center"
         role="group"
@@ -122,24 +150,6 @@ export default function RecentTransaction(props) {
         <button className="col-3 btn btn-secondary" onClick={nextPage}>
           Next
         </button>
-      </div>
-      <div>
-        <ul className="list-group">
-          {props.recent.slice(page * 5 - 5, page * 5).map((i, index) => (
-            <Transaction
-              key={"RecentTransaction-" + index}
-              _id={i._id}
-              category={i.category}
-              amount={parseFloat(i.amount)}
-              date={i.date}
-              merchant={i.merchant}
-              type={i.type}
-              recent={props.recent}
-              setRecent={props.setRecent}
-              refreshPage={props.refreshPage}
-            />
-          ))}
-        </ul>
       </div>
     </div>
   );

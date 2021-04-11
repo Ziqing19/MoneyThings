@@ -56,7 +56,10 @@ export default function Transaction(props) {
 
   return (
     <div className="mb-3 position-relative">
-      <li className="list-group-item d-flex justify-content-between align-item-center">
+      <li
+        className="list-group-item d-flex justify-content-between align-item-center list-group-item-light"
+        style={{ "font-weight": "bold" }}
+      >
         {props.merchant}
         <div>
           <Badge pill variant={props.type == "Expense" ? "danger" : "primary"}>
@@ -67,9 +70,12 @@ export default function Transaction(props) {
           ) : null}
         </div>
       </li>
-      <li className="list-group-item d-flex justify-content-between align-item-center">
+      <li
+        className="list-group-item d-flex justify-content-between align-item-center list-group-item-light"
+        style={{ fontSize: "15px" }}
+      >
         {props.category}
-        <div>{parseDate(props.date)}</div>
+        <div style={{ fontStyle: "italic" }}>{parseDate(props.date)}</div>
       </li>
     </div>
   );
