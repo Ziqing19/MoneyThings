@@ -82,7 +82,7 @@ export default function RecentTransaction(props) {
 
   return (
     <div className="flex-container">
-      <div className="py-3">
+      <div className="row">
         <div>
           {match ? (
             <DateRangePicker
@@ -100,7 +100,6 @@ export default function RecentTransaction(props) {
               maxDetail="year"
               minDate={new Date(0)}
               maxDate={new Date()}
-              format="dd-MM-yy"
             />
           )}
         </div>
@@ -110,6 +109,9 @@ export default function RecentTransaction(props) {
         className="row btn-group d-flex justify-content-center"
         role="group"
         aria-label="page navigation buttoon"
+        style={{
+          margin: "10px 0px",
+        }}
       >
         <button className="col-3 btn btn-secondary" onClick={prevPage}>
           Prev
@@ -121,20 +123,24 @@ export default function RecentTransaction(props) {
           Next
         </button>
       </div>
-      {props.recent.slice(page * 5 - 5, page * 5).map((i, index) => (
-        <Transaction
-          key={"RecentTransaction-" + index}
-          _id={i._id}
-          category={i.category}
-          amount={parseFloat(i.amount)}
-          date={i.date}
-          merchant={i.merchant}
-          type={i.type}
-          recent={props.recent}
-          setRecent={props.setRecent}
-          refreshPage={props.refreshPage}
-        />
-      ))}
+      <div>
+        <ul className="list-group">
+          {props.recent.slice(page * 5 - 5, page * 5).map((i, index) => (
+            <Transaction
+              key={"RecentTransaction-" + index}
+              _id={i._id}
+              category={i.category}
+              amount={parseFloat(i.amount)}
+              date={i.date}
+              merchant={i.merchant}
+              type={i.type}
+              recent={props.recent}
+              setRecent={props.setRecent}
+              refreshPage={props.refreshPage}
+            />
+          ))}
+        </ul>
+      </div>
     </div>
   );
 }

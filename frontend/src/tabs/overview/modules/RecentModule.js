@@ -9,7 +9,7 @@ export default function RecentModule(props) {
       style={{ overflowX: "hidden" }}
     >
       <div className="border-bottom py-2 px-3 fw-light">Recent</div>
-      <div className="d-flex flex-grow-1" style={{ width: "120%" }}>
+      <div className="d-flex flex-grow-1" style={{ width: "100%" }}>
         <div
           className="row mx-3 align-self-center"
           style={{

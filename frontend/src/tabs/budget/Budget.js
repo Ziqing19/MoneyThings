@@ -8,7 +8,8 @@ export default function Budget(props) {
   const [barData, setBarData] = useState([]);
   // TODO unused budget???
   const [budget, setBudget] = useState({ category: "", amount: 0 });
-
+  //const [budgets, SetBudgets] = useState({});
+  //console.log(budgets);
   useEffect(() => {
     fetch("/user/get-budget")
       .then((resRaw) => {
@@ -18,6 +19,7 @@ export default function Budget(props) {
       })
       .then((budgets) => {
         setBarData([]);
+        console.log(budgets);
         Object.keys(props.expense).map((category) => {
           if (category in budgets) {
             let totalExpense = 0;
@@ -36,8 +38,8 @@ export default function Budget(props) {
         });
         console.log("updated barData", barData);
       });
-    console.log("budget", budget);
-  }, [props.expense]);
+    //console.log("budget", budget);
+  }, [props.expense, budget]);
 
   function toggleBudgetPanel() {
     setBudgetPanel(!showBudgetPanel);

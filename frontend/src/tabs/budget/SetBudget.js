@@ -43,13 +43,13 @@ export default function SetBudget(props) {
   return (
     <div className="flex-container">
       <form onSubmit={handleSubmit}>
-        <div className="row text-center">
-          <button className="col-3" onClick={props.toggle}>
+        <div className="row text-center" style={{ margin: "10px 0px" }}>
+          <button className="col-3 btn btn-secondary" onClick={props.toggle}>
             Cancel
           </button>
           <div className="col-6"></div>
           <button
-            className="col-3"
+            className="col-3 btn btn-secondary"
             onClick={(evt) => {
               handleSubmit(evt);
             }}

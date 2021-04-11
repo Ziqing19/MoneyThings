@@ -31,6 +31,13 @@ export default function Overview(props) {
       });
   }, [props.user]);
 
+  console.log("recent", recent);
+  // for (var i = 0; i < recent.length; i++) {
+  //   if (recent[i].type == "Expense") {
+  //     console.log(recent[i].category);
+  //   }
+  // }
+
   return (
     <div className="flex-container container">
       <div className="flex-container row">
@@ -53,6 +60,7 @@ export default function Overview(props) {
 
 Overview.propTypes = {
   user: propTypes.object.isRequired,
+  expense: propTypes.object.isRequired,
 };
 
 function getLastMonth() {

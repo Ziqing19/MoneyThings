@@ -9,6 +9,7 @@ import Auth from "./auth/Auth.js";
 import NavigationComponent from "./NavigationComponent.js";
 
 import Workspace from "./Workspace.js";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 export default function App() {
   const [user, setUser] = useState();

@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import MyPie from "../../shared/Pie";
 import propTypes from "prop-types";
 import LineChartModule from "../../shared/LineChartModule";
+import ButtonGroup from "react-bootstrap/ButtonGroup";
 
 export default function Trends(props) {
   const [content, setContent] = useState("expense");
@@ -9,12 +10,12 @@ export default function Trends(props) {
   function typeData(type) {
     if (Object.keys(type).length === 0) return [];
     const data = [];
-    let totalExpense = 0;
-    Object.keys(type).map((item) => {
-      type[item].map((item) => {
-        totalExpense += item.amount;
-      });
-    });
+    // let totalExpense = 0;
+    // Object.keys(type).map((item) => {
+    //   type[item].map((item) => {
+    //     totalExpense += item.amount;
+    //   });
+    // });
     Object.keys(type).map((item) => {
       const object = {};
       const r = (Math.random() * 255).toFixed(0);
@@ -25,7 +26,7 @@ export default function Trends(props) {
         value += item.amount;
       });
 
-      object["value"] = (value / totalExpense).toFixed(2);
+      object["value"] = value.toFixed(2);
       object["id"] = item;
       object["label"] = item;
       object["color"] = `rgb(${r}, ${g}, ${b})`;
@@ -38,8 +39,9 @@ export default function Trends(props) {
   return (
     <div className="flex-container">
       <div style={{ height: "calc(100vh - 6rem)" }}>
-        <div>
+        <ButtonGroup>
           <button
+            className="btn btn-secondary"
             onClick={() => {
               setContent("income");
             }}
@@ -47,6 +49,7 @@ export default function Trends(props) {
             Show Income Category Pie
           </button>
           <button
+            className="btn btn-secondary"
             onClick={() => {
               setContent("expense");
             }}
@@ -54,13 +57,14 @@ export default function Trends(props) {
             Show Expense Category Pie
           </button>
           <button
+            className="btn btn-secondary"
             onClick={() => {
               setContent("dateGroup");
             }}
           >
             Show Daily Line Chart
           </button>
-        </div>
+        </ButtonGroup>
         <div style={{ height: "70%", marginTop: "5%" }}>
           {content === "dateGroup" ? (
             <LineChartModule data={props.dateGroup} />

@@ -74,6 +74,7 @@ export default function Workspace(props) {
     }
     // console.log(income, expense);
   }, [recent, props.user.categories]);
+  //console.log(props.user.categories["Expense"]);
 
   return (
     <div className="flex-grow-1 d-flex flex-column">

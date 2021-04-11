@@ -1,6 +1,9 @@
 import React from "react";
 import propTypes from "prop-types";
+import { TiDelete } from "react-icons/ti";
+import Badge from "react-bootstrap/Badge";
 import _ from "lodash";
+import "bootstrap/dist/css/bootstrap.min.css";
 
 /**
  * Transaction is a pure component that represents a transaction record.
@@ -53,21 +56,21 @@ export default function Transaction(props) {
 
   return (
     <div className="mb-3 position-relative">
-      {props.refreshPage !== undefined ? (
-        <button
-          type="button"
-          className="btn-close btn-warning position-absolute end-0 translate-middle-x"
-          aria-label="Close"
-          onClick={deleteTransaction}
-        />
-      ) : null}
-      <ul>
-        <li>{props.category}</li>
-        <li>{props.merchant}</li>
-        <li>{props.amount}</li>
-        <li>{props.type}</li>
-        <li>{parseDate(props.date)}</li>
-      </ul>
+      <li className="list-group-item d-flex justify-content-between align-item-center">
+        {props.merchant}
+        <div>
+          <Badge pill variant={props.type == "Expense" ? "danger" : "primary"}>
+            ${props.amount}
+          </Badge>{" "}
+          {props.refreshPage !== undefined ? (
+            <TiDelete size="1.5em" onClick={deleteTransaction} />
+          ) : null}
+        </div>
+      </li>
+      <li className="list-group-item d-flex justify-content-between align-item-center">
+        {props.category}
+        <div>{parseDate(props.date)}</div>
+      </li>
     </div>
   );
 }

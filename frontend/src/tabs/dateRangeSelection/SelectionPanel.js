@@ -24,6 +24,9 @@ export default function SelectionPanel(props) {
           </div>
         )}
       </div>
+      <div className="search-form">
+        <form action="/"></form>
+      </div>
       <div id="panel_content">
         {showNewTrans ? (
           <NewTransaction
