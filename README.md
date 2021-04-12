@@ -91,3 +91,7 @@ yarn backend
 ```
 Check the webpage on http://localhost:3001 
 
+## Copyright
+- This project is under [MIT license](./LICENSE). 
+- Sample images of the demo are provided by [Unsplash](https://unsplash.com/) and their license page is [here](https://unsplash.com/license).
+  - We appreciate the artworks of avinash-kumar, carlos-mesa, clayton-cardinalli, hakan-nural, jake-heidecker, kristina-manchenko, pablo-heimplatz, rahul-pandit, ruslan-bardash, stephen-walker, tengyart, tomas-malik, willian-justen-de-vasconcellos.
