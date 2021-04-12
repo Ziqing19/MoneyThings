@@ -1,0 +1,24 @@
+nav {
+  background-color: #2e4874;
+}
+
+.functional-navbar {
+  background-color: #869bb5;
+}
+
+body {
+  background-color: #f0f3f7;
+}
+
+a {
+  color: rgba(255,255,255,0.7);
+}
+
+a:hover {
+  color: rgba(255,255,255,0.9);
+}
+
+.active-link {
+  color: rgba(255,255,255,1);
+  text-decoration: underline;
+}

@@ -17,7 +17,7 @@ export default function Overview(props) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({
-        dateRange: [getLastMonth()[0].getTime(), getLastMonth()[1].getTime()],
+        dateRange: [getThisMonth()[0].getTime(), getThisMonth()[1].getTime()],
       }),
     })
       .then((res) => {
@@ -30,13 +30,6 @@ export default function Overview(props) {
         alert(err);
       });
   }, [props.user]);
-
-  console.log("recent", recent);
-  // for (var i = 0; i < recent.length; i++) {
-  //   if (recent[i].type == "Expense") {
-  //     console.log(recent[i].category);
-  //   }
-  // }
 
   return (
     <div className="flex-container container">
@@ -63,10 +56,13 @@ Overview.propTypes = {
   expense: propTypes.object.isRequired,
 };
 
-function getLastMonth() {
+function getThisMonth() {
   const end_date = new Date();
   const start_date = new Date();
-  start_date.setMonth(start_date.getMonth() - 1);
+  start_date.setDate(1);
+  start_date.setHours(0);
+  start_date.setMinutes(0);
+  start_date.setSeconds(0);
   return [start_date, end_date];
 }
 

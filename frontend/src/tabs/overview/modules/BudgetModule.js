@@ -10,8 +10,8 @@ export default function BudgetModule(props) {
 
   useEffect(() => {
     setExpense({});
-    for (var i = 0; i < props.recent.length; i++) {
-      if (props.recent[i].type == "Expense") {
+    for (let i = 0; i < props.recent.length; i++) {
+      if (props.recent[i].type === "Expense") {
         let category = props.recent[i].category;
         const array = props.recent.filter((item) => item.category === category);
         if (array.length === 0) continue;
@@ -53,10 +53,12 @@ export default function BudgetModule(props) {
   console.log("expense", expense);
   return (
     <div className="flex-container border d-flex flex-column">
-      <div className="border-bottom py-2 px-3 fw-light">Budget</div>
-      <div className="d-flex flex-grow-1" style={{ width: "100%" }}></div>
+      <div className="border-bottom py-2 px-3  fw-bold text-black-50">
+        Budget
+      </div>
+      <div className="d-flex flex-grow-1" style={{ width: "100%" }} />
       <div
-        className="row mx-3 align-self-center"
+        className="row mx-3 align-self-center hide-scroll"
         style={{
           height: "calc((100vh - 9rem) / 2 - 5rem)",
           width: "100%",

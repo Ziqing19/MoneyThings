@@ -1,5 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route, Link } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+  Redirect,
+} from "react-router-dom";
 import "./stylesheets/Workspace.css";
 import Overview from "./tabs/overview/Overview.js";
 import Account from "./tabs/account/Account.js";
@@ -77,63 +83,68 @@ export default function Workspace(props) {
   //console.log(props.user.categories["Expense"]);
 
   return (
-    <div className="flex-grow-1 d-flex flex-column">
-      <FunctionalNavbar />
-      <div className="flex-grow-1">
-        <Switch>
-          <Route path={["/all-time", "/trends", "/budget"]}>
-            <div className="row flex-container">
-              <div className="col-4 px-0">
-                <SelectionPanel
-                  user={props.user}
-                  refreshPage={props.refreshPage}
-                  dateRange={dateRange}
-                  setDateRange={setDateRange}
-                  recent={recent}
-                  setRecent={setRecent}
-                />
-              </div>
-              <div className="col-8 px-0">
-                <Route path="/all-time">
-                  <AllTime
+    <Router>
+      <div className="flex-grow-1 d-flex flex-column">
+        <FunctionalNavbar />
+        <div className="flex-grow-1">
+          <Switch>
+            <Route path={["/all-time", "/trends", "/budget"]}>
+              <div className="row flex-container">
+                <div className="col-4 px-0">
+                  <SelectionPanel
                     user={props.user}
-                    setUser={props.setUser}
                     refreshPage={props.refreshPage}
+                    dateRange={dateRange}
+                    setDateRange={setDateRange}
                     recent={recent}
                     setRecent={setRecent}
-                    income={income}
-                    expense={expense}
-                    dateGroup={dateGroup}
                   />
-                </Route>
-                <Route path="/trends">
-                  <Trends
-                    income={income}
-                    expense={expense}
-                    dateGroup={dateGroup}
-                  />
-                </Route>
-                <Route path="/budget">
-                  <Budget
-                    expense={expense}
-                    dateRange={dateRange}
-                    user={props.user}
-                    dateGroup={dateGroup}
-                    setUser={props.setUser}
-                  />
-                </Route>
+                </div>
+                <div className="col-8 px-0">
+                  <Route path="/all-time">
+                    <AllTime
+                      user={props.user}
+                      setUser={props.setUser}
+                      refreshPage={props.refreshPage}
+                      recent={recent}
+                      setRecent={setRecent}
+                      income={income}
+                      expense={expense}
+                      dateGroup={dateGroup}
+                    />
+                  </Route>
+                  <Route path="/trends">
+                    <Trends
+                      income={income}
+                      expense={expense}
+                      dateGroup={dateGroup}
+                    />
+                  </Route>
+                  <Route path="/budget">
+                    <Budget
+                      expense={expense}
+                      dateRange={dateRange}
+                      user={props.user}
+                      dateGroup={dateGroup}
+                      setUser={props.setUser}
+                    />
+                  </Route>
+                </div>
               </div>
-            </div>
-          </Route>
-          <Route path="/account">
-            <Account {...props} />
-          </Route>
-          <Route path="/">
-            <Overview {...props} />
-          </Route>
-        </Switch>
+            </Route>
+            <Route path="/account">
+              <Account {...props} />
+            </Route>
+            <Route path="/overview">
+              <Overview {...props} />
+            </Route>
+            <Route path="/">
+              <Redirect to="/overview" />
+            </Route>
+          </Switch>
+        </div>
       </div>
-    </div>
+    </Router>
   );
 }
 
@@ -145,20 +156,36 @@ Workspace.propTypes = {
 
 function FunctionalNavbar() {
   return (
-    <div className="d-flex justify-content-center py-3 border-top border-bottom">
+    <div className="d-flex justify-content-center py-3 functional-navbar">
       <div className="container row">
-        <Link className="col-3 text-center" to="/overview">
+        <NavLink
+          className="col-3 text-center fw-bold"
+          to="/overview"
+          activeClassName="active-link"
+        >
           OVERVIEW
-        </Link>
-        <Link className="col-3 text-center" to="/all-time">
+        </NavLink>
+        <NavLink
+          className="col-3 text-center fw-bold"
+          to="/all-time"
+          activeClassName="active-link"
+        >
           ALL TIME
-        </Link>
-        <Link className="col-3 text-center" to="/trends">
+        </NavLink>
+        <NavLink
+          className="col-3 text-center fw-bold"
+          to="/trends"
+          activeClassName="active-link"
+        >
           TRENDS
-        </Link>
-        <Link className="col-3 text-center" to="/budget">
+        </NavLink>
+        <NavLink
+          className="col-3 text-center fw-bold"
+          to="/budget"
+          activeClassName="active-link"
+        >
           BUDGET
-        </Link>
+        </NavLink>
       </div>
     </div>
   );

@@ -1,3 +1,20 @@
 .module {
   height: 50%;
 }
+
+.hide-scroll::-webkit-scrollbar {
+  display: none;
+}
+
+.hide-scroll {
+  -ms-overflow-style: none;  /* IE and Edge */
+  scrollbar-width: none;  /* Firefox */
+}
+
+.flex-container.border.d-flex.flex-column {
+  background-color: rgb(250, 252, 252);
+}
+
+.border-bottom.py-2.px-3 {
+  background-color: rgba(189, 191, 191, 0.1);
+}

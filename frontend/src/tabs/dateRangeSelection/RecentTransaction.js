@@ -8,7 +8,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import "../../stylesheets/datePicker.css";
 import ButtonGroup from "react-bootstrap/ButtonGroup";
 import Button from "react-bootstrap/Button";
-//import ListGroup from "react-bootstrap/ListGroup";
 
 export default function RecentTransaction(props) {
   const [page, setPage] = useState(1);
@@ -91,9 +90,9 @@ export default function RecentTransaction(props) {
   }, [match === null]);
 
   return (
-    <div className="flex-container">
+    <div className="flex-container d-flex flex-column">
       <div className="row">
-        <div>
+        <div className="text-center py-3">
           {match ? (
             <DateRangePicker
               onChange={handleDateRangeChange}
@@ -113,43 +112,42 @@ export default function RecentTransaction(props) {
             />
           )}
         </div>
-        <div>{match ? AllTimeShortcuts() : null}</div>
+        <div className="text-center">{match ? AllTimeShortcuts() : null}</div>
       </div>
-      <div style={{ marginTop: "20px" }}>
-        <ul className="list-group list-group-flush">
-          {props.recent.slice(page * 4 - 4, page * 4).map((i, index) => (
-            <Transaction
-              key={"RecentTransaction-" + index}
-              _id={i._id}
-              category={i.category}
-              amount={parseFloat(i.amount)}
-              date={i.date}
-              merchant={i.merchant}
-              type={i.type}
-              recent={props.recent}
-              setRecent={props.setRecent}
-              refreshPage={props.refreshPage}
-            />
-          ))}
-        </ul>
-      </div>
-      <div
-        className="row btn-group d-flex justify-content-center"
-        role="group"
-        aria-label="page navigation buttoon"
-        style={{
-          margin: "10px 0px",
-        }}
-      >
-        <button className="col-3 btn btn-secondary" onClick={prevPage}>
-          Prev
-        </button>
-        <div className="col-6 text-center">
-          Page {page}/{totalPages}
+      <div className="flex-grow-1 d-flex flex-column">
+        <div className="my-3 mx-2 text-center flex-grow-1">
+          <ul className="flex-container list-group list-group-flush d-flex justify-content-evenly">
+            {props.recent.slice(page * 4 - 4, page * 4).map((i, index) => (
+              <Transaction
+                key={"RecentTransaction-" + index}
+                _id={i._id}
+                category={i.category}
+                amount={parseFloat(i.amount)}
+                date={i.date}
+                merchant={i.merchant}
+                type={i.type}
+                recent={props.recent}
+                setRecent={props.setRecent}
+                refreshPage={props.refreshPage}
+              />
+            ))}
+          </ul>
         </div>
-        <button className="col-3 btn btn-secondary" onClick={nextPage}>
-          Next
-        </button>
+        <div
+          className="row btn-group d-flex justify-content-center mb-5 mt-3 mx-2"
+          role="group"
+          aria-label="page navigation button"
+        >
+          <button className="col-3 btn btn-secondary" onClick={prevPage}>
+            Prev
+          </button>
+          <div className="col-6 text-center">
+            Page {page}/{totalPages}
+          </div>
+          <button className="col-3 btn btn-secondary" onClick={nextPage}>
+            Next
+          </button>
+        </div>
       </div>
     </div>
   );

@@ -10,6 +10,7 @@ import NavigationComponent from "./NavigationComponent.js";
 
 import Workspace from "./Workspace.js";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "./stylesheets/Global.css";
 
 export default function App() {
   const [user, setUser] = useState();
@@ -22,8 +23,6 @@ export default function App() {
       console.log(user);
     });
   }, [flag]);
-
-  console.log("render user", user);
 
   return (
     <Router>

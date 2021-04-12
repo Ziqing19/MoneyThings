@@ -2,13 +2,13 @@
   width: 100%;
 }
 
-.text-end {
+a.text-end {
   color: black;
   cursor: pointer;
   text-decoration: wavy;
 }
 
-.text-end:hover {
+a.text-end:hover {
   color: #00B7FF;
   text-decoration: underline;
 }

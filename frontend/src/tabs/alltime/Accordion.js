@@ -16,7 +16,7 @@ export default function Accordion(props) {
     <div className="accordion-item">
       <h2 className="accordion-header">
         <button
-          className="accordion-button"
+          className="accordion-button collapsed fw-bold text-black-50"
           data-bs-toggle="collapse"
           data-bs-target={"#" + props.header.replace(/\s+/g, "")}
         >

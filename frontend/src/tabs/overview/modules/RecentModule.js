@@ -8,10 +8,12 @@ export default function RecentModule(props) {
       className="flex-container border d-flex flex-column"
       style={{ overflowX: "hidden" }}
     >
-      <div className="border-bottom py-2 px-3 fw-light">Recent</div>
+      <div className="border-bottom py-2 px-3  fw-bold text-black-50">
+        Recent
+      </div>
       <div className="d-flex flex-grow-1" style={{ width: "100%" }}>
         <div
-          className="row mx-3 align-self-center"
+          className="row mx-3 align-self-center hide-scroll"
           style={{
             height: "calc((100vh - 9rem) / 2 - 5rem)",
             width: "100%",
