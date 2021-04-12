@@ -117,7 +117,7 @@ export default function RecentTransaction(props) {
       </div>
       <div style={{ marginTop: "20px" }}>
         <ul className="list-group list-group-flush">
-          {props.recent.slice(page * 5 - 5, page * 5).map((i, index) => (
+          {props.recent.slice(page * 4 - 4, page * 4).map((i, index) => (
             <Transaction
               key={"RecentTransaction-" + index}
               _id={i._id}

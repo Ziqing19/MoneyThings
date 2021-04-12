@@ -26,7 +26,7 @@ export default function Trends(props) {
         value += item.amount;
       });
 
-      object["value"] = value.toFixed(2);
+      object["value"] = parseFloat(value).toFixed(2);
       object["id"] = item;
       object["label"] = item;
       object["color"] = `rgb(${r}, ${g}, ${b})`;
@@ -39,7 +39,7 @@ export default function Trends(props) {
   return (
     <div className="flex-container">
       <div style={{ height: "calc(100vh - 6rem)" }}>
-        <ButtonGroup style={{ left: "30%" }}>
+        <ButtonGroup style={{ left: "20%" }}>
           <button
             className="btn btn-secondary"
             onClick={() => {

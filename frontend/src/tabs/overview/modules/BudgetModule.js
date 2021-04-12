@@ -2,10 +2,12 @@ import React from "react";
 import { useState, useEffect } from "react";
 //import ProgressBar from "react-bootstrap/ProgressBar";
 import propTypes from "prop-types";
-import Budget from "../../budget/Budget.js";
+import BarPanel from "../../budget/barPanel.js";
 
 export default function BudgetModule(props) {
   const [expense, setExpense] = useState({});
+  const [barData, setBarData] = useState([]);
+
   useEffect(() => {
     setExpense({});
     for (var i = 0; i < props.recent.length; i++) {
@@ -17,6 +19,37 @@ export default function BudgetModule(props) {
       }
     }
   }, [props.recent]);
+
+  useEffect(() => {
+    fetch("/user/get-budget")
+      .then((resRaw) => {
+        return resRaw.json().then((res) => {
+          return res.budget;
+        });
+      })
+      .then((budgets) => {
+        setBarData([]);
+        console.log("empty barData", barData);
+        console.log(budgets);
+        Object.keys(expense).map((category) => {
+          if (category in budgets) {
+            let totalExpense = 0;
+            expense[category].map((item) => {
+              totalExpense += item.amount;
+            });
+            const object = {};
+            const ratio = ((totalExpense / budgets[category]) * 100).toFixed(2);
+            object["amount"] = totalExpense;
+            object["ratio"] = ratio;
+            object["budget"] = budgets[category];
+            object["category"] = category;
+            object["left"] = budgets[category] - totalExpense;
+            setBarData((prev) => Array.from([...prev, object]));
+          }
+        });
+      });
+  }, [expense]);
+
   console.log("expense", expense);
   return (
     <div className="flex-container border d-flex flex-column">
@@ -30,7 +63,7 @@ export default function BudgetModule(props) {
           overflowY: "auto",
         }}
       >
-        <Budget expense={expense} />
+        <BarPanel barData={barData} />
       </div>
     </div>
   );
