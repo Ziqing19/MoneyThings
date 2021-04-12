@@ -61,25 +61,34 @@ export default function NewTransaction(props) {
   return (
     <div className="flex-container">
       <form onSubmit={handleSubmit}>
-        <div className="row py-3 border-bottom text-center">
-          <button className="col-3 border-end" onClick={props.toggle}>
+        <div
+          className="row py-3 text-center"
+          style={{ marginLeft: 0, marginRight: 0 }}
+        >
+          <button
+            className="col-3 border-end btn btn-secondary"
+            onClick={props.toggle}
+          >
             Cancel
           </button>
-          <div
-            className="col-3 border-end"
+
+          <button
+            className="col-3 border-end btn btn-secondary"
             onClick={notIsIncome}
-            style={{ textDecoration: isIncome ? "underline" : "none" }}
+            style={{
+              textDecoration: isIncome ? "underline" : "none",
+            }}
           >
             Income
-          </div>
-          <div
-            className="col-3 border-end"
+          </button>
+          <button
+            className="col-3 border-end btn btn-secondary"
             onClick={notIsIncome}
             style={{ textDecoration: isIncome ? "none" : "underline" }}
           >
             Expense
-          </div>
-          <button className="col-3">Save</button>
+          </button>
+          <button className="col-3 btn btn-secondary">Save</button>
         </div>
         <div className="form-floating my-3">
           <select

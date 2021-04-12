@@ -52,20 +52,25 @@ export default function BudgetModule(props) {
 
   console.log("expense", expense);
   return (
-    <div className="flex-container border d-flex flex-column">
-      <div className="border-bottom py-2 px-3  fw-bold text-black-50">
-        Budget
-      </div>
-      <div className="d-flex flex-grow-1" style={{ width: "100%" }} />
-      <div
-        className="row mx-3 align-self-center hide-scroll"
-        style={{
-          height: "calc((100vh - 9rem) / 2 - 5rem)",
-          width: "100%",
-          overflowY: "auto",
-        }}
-      >
-        <BarPanel barData={barData} />
+    <div
+      className="flex-container border d-flex flex-column"
+      style={{ overflowX: "hidden", position: "relative" }}
+    >
+      <div className="border-bottom py-2 px-3 fw-bold text-black-50">Recent</div>
+      <div className="d-flex flex-grow-1" style={{ width: "100%" }}>
+        <div
+          className="row mx-3 align-self-center hide-scroll"
+          style={{
+            height: "calc((100vh - 9rem) / 2 - 5rem)",
+            width: "100%",
+            overflowX: "scroll",
+            position: "absolute",
+          }}
+        >
+          <div>
+            <BarPanel barData={barData} />
+          </div>
+        </div>
       </div>
     </div>
   );
