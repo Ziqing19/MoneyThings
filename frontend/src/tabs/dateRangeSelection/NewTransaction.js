@@ -61,48 +61,33 @@ export default function NewTransaction(props) {
   return (
     <div className="flex-container">
       <form onSubmit={handleSubmit}>
-        <div className="row py-3 border-bottom text-center">
+        <div
+          className="row py-3 text-center"
+          style={{ marginLeft: 0, marginRight: 0 }}
+        >
           <button
             className="col-3 border-end btn btn-secondary"
             onClick={props.toggle}
           >
             Cancel
           </button>
-          <nav className="col-6">
-            <div
-              className="nav nav-tabs"
-              onClick={notIsIncome}
-              id="nav-tab"
-              role="tablist"
-            >
-              <button
-                className="nav-link active border-end"
-                id="nav-home-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#nav-home"
-                type="button"
-                role="tab"
-                aria-controls="nav-home"
-                aria-selected="true"
-              >
-                Income
-              </button>
-              <button
-                className="nav-link border-end"
-                onClick={notIsIncome}
-                id="nav-profile-tab"
-                data-bs-toggle="tab"
-                data-bs-target="#nav-profile"
-                type="button"
-                role="tab"
-                aria-controls="nav-profile"
-                aria-selected="false"
-              >
-                Expense
-              </button>
-            </div>
-          </nav>
 
+          <button
+            className="col-3 border-end btn btn-secondary"
+            onClick={notIsIncome}
+            style={{
+              textDecoration: isIncome ? "underline" : "none",
+            }}
+          >
+            Income
+          </button>
+          <button
+            className="col-3 border-end btn btn-secondary"
+            onClick={notIsIncome}
+            style={{ textDecoration: isIncome ? "none" : "underline" }}
+          >
+            Expense
+          </button>
           <button className="col-3 btn btn-secondary">Save</button>
         </div>
         <div className="form-floating my-3">
