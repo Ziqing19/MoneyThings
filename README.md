@@ -1,5 +1,16 @@
 # MoneyThings
 
+## Author
+Qiqi Chen: chen.qiq(at)northeastern.edu
+
+Ziqing Mao: mao.zi(at)northeastern.edu
+
+## Links
+[Slides](https://docs.google.com/presentation/d/1y_3bIUTJU2RH0gSmEjfV3OPCCm_Lu_l-Vt82BG1s3_w/edit#slide=id.p)
+
+[CS5610 Web Development](https://johnguerra.co/classes/webDevelopment_spring_2021/)
+
+
 ## Project Structure
 
 ```
