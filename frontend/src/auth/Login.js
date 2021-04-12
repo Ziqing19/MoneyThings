@@ -69,10 +69,11 @@ export default function Login() {
         feedback="Please provide a valid password"
         required={true}
       />
+
       <div className="mb-3 form-check">
         <label className="form-check-label">
-          Keep Me Logged in
           <input type="checkbox" className="form-check-input" />
+          Keep Me Logged in
         </label>
       </div>
       <button className="mb-3 btn btn-primary text-center">Submit</button>

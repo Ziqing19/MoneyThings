@@ -62,24 +62,48 @@ export default function NewTransaction(props) {
     <div className="flex-container">
       <form onSubmit={handleSubmit}>
         <div className="row py-3 border-bottom text-center">
-          <button className="col-3 border-end" onClick={props.toggle}>
+          <button
+            className="col-3 border-end btn btn-secondary"
+            onClick={props.toggle}
+          >
             Cancel
           </button>
-          <div
-            className="col-3 border-end"
-            onClick={notIsIncome}
-            style={{ textDecoration: isIncome ? "underline" : "none" }}
-          >
-            Income
-          </div>
-          <div
-            className="col-3 border-end"
-            onClick={notIsIncome}
-            style={{ textDecoration: isIncome ? "none" : "underline" }}
-          >
-            Expense
-          </div>
-          <button className="col-3">Save</button>
+          <nav className="col-6">
+            <div
+              className="nav nav-tabs"
+              onClick={notIsIncome}
+              id="nav-tab"
+              role="tablist"
+            >
+              <button
+                className="nav-link active border-end"
+                id="nav-home-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-home"
+                type="button"
+                role="tab"
+                aria-controls="nav-home"
+                aria-selected="true"
+              >
+                Income
+              </button>
+              <button
+                className="nav-link border-end"
+                onClick={notIsIncome}
+                id="nav-profile-tab"
+                data-bs-toggle="tab"
+                data-bs-target="#nav-profile"
+                type="button"
+                role="tab"
+                aria-controls="nav-profile"
+                aria-selected="false"
+              >
+                Expense
+              </button>
+            </div>
+          </nav>
+
+          <button className="col-3 btn btn-secondary">Save</button>
         </div>
         <div className="form-floating my-3">
           <select
