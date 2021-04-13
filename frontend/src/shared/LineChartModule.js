@@ -87,5 +87,5 @@ export default function LineChartModule(props) {
 
 LineChartModule.propTypes = {
   data: propTypes.object.isRequired,
-  interval: propTypes.number,
+  interval: propTypes.string,
 };

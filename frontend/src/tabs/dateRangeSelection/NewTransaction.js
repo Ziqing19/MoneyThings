@@ -55,7 +55,7 @@ export default function NewTransaction(props) {
   function notIsIncome(flag) {
     setIsIncome(flag);
     setCategories(
-      isIncome ? props.user.categories.Expense : props.user.categories.Income
+      flag ? props.user.categories.Income : props.user.categories.Expense
     );
   }
 

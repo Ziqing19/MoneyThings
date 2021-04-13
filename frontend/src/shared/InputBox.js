@@ -24,7 +24,7 @@ export default function InputBox(props) {
         id={id}
         value={props.value}
         onChange={props.onChange}
-        placeholder="placeholder"
+        placeholder={""}
         required={props.required || false}
       />
       <label htmlFor={id}>{props.label}</label>
