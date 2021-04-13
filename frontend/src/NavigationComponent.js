@@ -13,6 +13,7 @@ export default function NavigationComponent(props) {
     }
     document.cookie = "_id=; expires=Thu, 01 Jan 1970 00:00:00 GMT";
     window.location = "/auth/login";
+    /* this doesn't redirect to the login page, I get an error instead*/
   }
 
   useEffect(() => {
