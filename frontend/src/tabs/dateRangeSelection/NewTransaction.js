@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import InputBox from "../../shared/InputBox.js";
 import propTypes from "prop-types";
 import DateTimePicker from "react-datetime-picker";
@@ -12,6 +12,14 @@ export default function NewTransaction(props) {
   const [category, setCategory] = useState(props.user.categories.Income[0]);
   const [remark, setRemark] = useState("");
   const [date, setDate] = useState(new Date());
+
+  useEffect(() => {
+    if (isIncome) {
+      setCategory(props.user.categories.Income[0]);
+    } else {
+      setCategory(props.user.categories.Expense[0]);
+    }
+  }, [props.user, isIncome]);
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -66,14 +74,14 @@ export default function NewTransaction(props) {
         className="flex-container d-flex flex-column"
       >
         <div className="row py-3 text-center btn-group mx-3" role="group">
-          <button
+          <div
             className="col-3 border-end btn btn-secondary"
             onClick={props.toggle}
           >
             Cancel
-          </button>
+          </div>
 
-          <button
+          <div
             className="col-3 border-end btn btn-secondary"
             onClick={() => notIsIncome(true)}
             style={{
@@ -81,14 +89,14 @@ export default function NewTransaction(props) {
             }}
           >
             Income
-          </button>
-          <button
+          </div>
+          <div
             className="col-3 border-end btn btn-secondary"
             onClick={() => notIsIncome(false)}
             style={{ textDecoration: isIncome ? "none" : "underline" }}
           >
             Expense
-          </button>
+          </div>
           <button className="col-3 btn btn-secondary">Save</button>
         </div>
         <div className="text-center my-3">
