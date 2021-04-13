@@ -9,10 +9,10 @@ export default function AllTime(props) {
   function groupByDate() {
     if (props.dateGroup.length === 0) return null;
     return (
-      <table className="table table-striped">
-        <tbody className="accordion accordion-flush">
+      <div className="table table-striped">
+        <div className="accordion accordion-flush">
           {Object.keys(props.dateGroup).map((key) => (
-            <tr key={"date-accordion-" + key}>
+            <div className="striped" key={"date-accordion-" + key}>
               <Accordion
                 header={key}
                 transactions={props.dateGroup[key]}
@@ -20,23 +20,23 @@ export default function AllTime(props) {
                 setRecent={props.setRecent}
                 refreshPage={props.refreshPage}
               />
-            </tr>
+            </div>
           ))}
-        </tbody>
-      </table>
+        </div>
+      </div>
     );
   }
 
   function groupByCategory(type, header) {
     if (Object.keys(type).length === 0) return null;
     return (
-      <table className="table table-striped">
+      <div className="table table-striped">
         <h3 className="text-end mb-3" style={{ color: "rgba(0,0,0,0.8)" }}>
           {header}
         </h3>
-        <tbody className="accordion accordion-flush">
+        <div className="accordion accordion-flush">
           {Object.keys(type).map((key) => (
-            <tr key={"category-accordion-" + key}>
+            <div className="striped" key={"category-accordion-" + key}>
               <Accordion
                 header={key}
                 transactions={type[key]}
@@ -44,10 +44,10 @@ export default function AllTime(props) {
                 setRecent={props.setRecent}
                 refreshPage={props.refreshPage}
               />
-            </tr>
+            </div>
           ))}
-        </tbody>
-      </table>
+        </div>
+      </div>
     );
   }
 

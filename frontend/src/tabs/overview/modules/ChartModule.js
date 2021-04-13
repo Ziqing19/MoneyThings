@@ -23,9 +23,7 @@ export default function ChartModule(props) {
 
   return (
     <div className="flex-container border d-flex flex-column">
-      <div className="border-bottom py-2 px-3  fw-bold text-black-50">
-        Chart
-      </div>
+      <div className="border-bottom py-2 px-3 fw-bold text-black-50">Chart</div>
       <div className="d-flex flex-grow-1 pb-3">
         <LineChartModule data={dateGroup} interval="3" />
       </div>

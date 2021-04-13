@@ -47,11 +47,11 @@ export default function BudgetModule(props) {
       });
   }, [expense]);
 
-  console.log(barData);
-
   return (
     <div className="flex-container border d-flex flex-column">
-      <div className="border-bottom py-2 px-3 fw-light">Budget</div>
+      <div className="border-bottom py-2 px-3 fw-bold text-black-50">
+        Budget
+      </div>
       <div
         className="row mt-4 mx-3 align-self-center hide-scroll"
         style={{
