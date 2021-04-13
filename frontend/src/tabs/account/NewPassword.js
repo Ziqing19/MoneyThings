@@ -40,7 +40,6 @@ export default function NewPassword() {
       }),
     })
       .then((resRaw) => {
-        console.log(resRaw);
         if (!resRaw.ok) {
           resRaw.text().then((res) => {
             alert(res);

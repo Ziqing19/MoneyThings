@@ -75,17 +75,17 @@ export default function NewTransaction(props) {
 
           <button
             className="col-3 border-end btn btn-secondary"
-            onClick={() => notIsIncome(false)}
+            onClick={() => notIsIncome(true)}
             style={{
-              textDecoration: isIncome ? "none" : "underline",
+              textDecoration: isIncome ? "underline" : "none",
             }}
           >
             Income
           </button>
           <button
             className="col-3 border-end btn btn-secondary"
-            onClick={() => notIsIncome(true)}
-            style={{ textDecoration: isIncome ? "underline" : "none" }}
+            onClick={() => notIsIncome(false)}
+            style={{ textDecoration: isIncome ? "none" : "underline" }}
           >
             Expense
           </button>

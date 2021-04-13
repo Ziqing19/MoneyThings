@@ -156,7 +156,6 @@ router.post("/update-budget", async (req, res) => {
         upsert: true,
       }
     );
-    console.log("update-budget:", resFind.result);
     res.sendStatus(200);
   } catch (err) {
     console.log(err);

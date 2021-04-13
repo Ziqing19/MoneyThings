@@ -10,7 +10,6 @@ export default function Overview(props) {
   const [recent, setRecent] = useState([]);
 
   useEffect(() => {
-    console.log("workspace", props.user);
     fetch("/transaction/recent", {
       method: "POST",
       headers: {
@@ -53,7 +52,7 @@ export default function Overview(props) {
 
 Overview.propTypes = {
   user: propTypes.object.isRequired,
-  expense: propTypes.object.isRequired,
+  expense: propTypes.object,
 };
 
 function getThisMonth() {
@@ -65,20 +64,3 @@ function getThisMonth() {
   start_date.setSeconds(0);
   return [start_date, end_date];
 }
-
-// function getAll() {
-//   fetch("/transaction/get-all")
-//     .then((res) => {
-//       return res.json();
-//     })
-//     .then((res) => {
-//       let array = new Array(res.map((item) => item.category))[0];
-//       const result = {};
-//       for (let i = 0; i < array.length; i++) {
-//         result[array[i]] = (result[array[i]] || 0) + 1;
-//       }
-//       Object.keys(result).map((key) => ({ [key]: result[key] }));
-//       console.log(Object.keys(result));
-//       console.log(result);
-//     });
-// }

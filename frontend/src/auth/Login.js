@@ -27,7 +27,6 @@ export default function Login() {
       password: password,
       checked: checked,
     };
-    console.log(data);
     fetch("/authentication/login", {
       method: "POST",
       headers: {
@@ -36,7 +35,6 @@ export default function Login() {
       body: JSON.stringify(data),
     })
       .then((resRaw) => {
-        console.log(resRaw);
         if (!resRaw.ok) {
           resRaw.text().then((res) => {
             alert(res);
@@ -77,11 +75,6 @@ export default function Login() {
         </label>
       </div>
       <button className="mb-3 btn btn-primary text-center">Submit</button>
-      <div className="mb-2 d-flex justify-content-end">
-        <Link className="text-end d-block" to="/auth/reset">
-          Forgot password?
-        </Link>
-      </div>
       <div className="mb-2 d-flex justify-content-end">
         <Link className="text-end d-block" to="/auth/signup">
           Sign up

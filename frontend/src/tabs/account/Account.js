@@ -6,7 +6,6 @@ import Categories from "./Categories";
 import propTypes from "prop-types";
 
 export default function Account(props) {
-  console.log(props.user);
   const history = useHistory();
   return (
     <div className="container flex-container row mx-auto">

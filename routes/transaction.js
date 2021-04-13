@@ -26,7 +26,6 @@ router.get("/all", async (req, res) => {
 router.get("/get-all", async (req, res) => {
   try {
     console.log(req.cookies._id);
-    // TODO use session in production
     const collection = await getCollection("Transactions");
     const resFind = await collection
       .find({ user_id: req.cookies._id })

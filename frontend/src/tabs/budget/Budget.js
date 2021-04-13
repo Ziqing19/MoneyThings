@@ -7,10 +7,7 @@ import BarPanel from "./barPanel.js";
 export default function Budget(props) {
   const [showBudgetPanel, setBudgetPanel] = useState(false);
   const [barData, setBarData] = useState([]);
-  // TODO unused budget???
   const [budget, setBudget] = useState({ category: "", amount: 0 });
-  //const [budgets, SetBudgets] = useState({});
-  //console.log(budgets);
   useEffect(() => {
     const fetchBudget = async () => {
       fetch("/user/get-budget")
@@ -21,8 +18,6 @@ export default function Budget(props) {
         })
         .then((budgets) => {
           setBarData([]);
-          console.log("empty barData", barData);
-          console.log(budgets);
           Object.keys(props.expense).map((category) => {
             if (category in budgets) {
               let totalExpense = 0;
@@ -44,9 +39,7 @@ export default function Budget(props) {
         });
     };
     fetchBudget();
-    //console.log("budget", budget);
   }, [props.expense, budget]);
-  console.log("updated barData", barData);
 
   function toggleBudgetPanel() {
     setBudgetPanel(!showBudgetPanel);

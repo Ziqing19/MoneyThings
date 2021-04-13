@@ -28,8 +28,6 @@ export default function BudgetModule(props) {
       })
       .then((budgets) => {
         setBarData([]);
-        console.log("empty barData", barData);
-        console.log(budgets);
         Object.keys(expense).map((category) => {
           if (category in budgets) {
             let totalExpense = 0;

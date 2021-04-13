@@ -89,5 +89,5 @@ export default function MyLineChart(props) {
 MyLineChart.propTypes = {
   data: propTypes.array.isRequired,
   isPrimaryGraph: propTypes.bool.isRequired,
-  interval: propTypes.number,
+  interval: propTypes.string,
 };

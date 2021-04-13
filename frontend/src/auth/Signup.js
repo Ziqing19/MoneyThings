@@ -34,9 +34,9 @@ export default function Signup() {
     if (!evt.target.checkValidity()) {
       return evt.target.classList.add("was-validated");
     }
-    // setEmail("");
-    // setPassword("");
-    // setPasswordConfirm("");
+    setEmail("");
+    setPassword("");
+    setPasswordConfirm("");
     fetch("/authentication/signup", {
       method: "POST",
       headers: {
@@ -48,13 +48,13 @@ export default function Signup() {
       }),
     })
       .then((resRaw) => {
-        console.log(resRaw);
         if (!resRaw.ok) {
           resRaw.text().then((res) => {
             alert(res);
           });
         } else {
           alert("Sign up succeed");
+          window.location = "/";
         }
       })
       .catch((err) => {

@@ -24,7 +24,6 @@ export default function SetBudget(props) {
       body: JSON.stringify(data),
     })
       .then((resRaw) => {
-        console.log(resRaw);
         if (!resRaw.ok) {
           resRaw.text().then((res) => {
             alert(res);
