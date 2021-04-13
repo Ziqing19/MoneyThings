@@ -65,28 +65,25 @@ router.post("/signup", async (req, res) => {
       email: req.body.email,
       username: req.body.email.split("@")[0],
       password: hash,
+      balance: 0,
+      categories: {
+        Income: ["Salary", "Transfer", "Stock"],
+        Expense: [
+          "Grocery",
+          "Health",
+          "Outdoors",
+          "Computers",
+          "Sports",
+          "Games",
+        ],
+      },
+      budget: {},
+      avatar: 0,
+      biography: "LifeStyle",
     };
     console.log(data);
     await getCollection("Users").insertOne(data);
     res.sendStatus(201);
-  } catch (err) {
-    console.log(err);
-    res.sendStatus(400);
-  }
-});
-
-//TODO backend implementation
-router.post("/reset", async (req, res) => {
-  if (req.body.email === undefined) {
-    return res.sendStatus(400);
-  }
-  try {
-    const collection = await getCollection("Users");
-    const resFind = await collection.find({ email: req.body.email }).toArray();
-    if (resFind.length !== 1) {
-      return res.sendStatus(404);
-    }
-    res.sendStatus(200);
   } catch (err) {
     console.log(err);
     res.sendStatus(400);
