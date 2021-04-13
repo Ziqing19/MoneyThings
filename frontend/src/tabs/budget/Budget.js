@@ -8,43 +8,38 @@ export default function Budget(props) {
   const [showBudgetPanel, setBudgetPanel] = useState(false);
   const [barData, setBarData] = useState([]);
   const [budget, setBudget] = useState({ category: "", amount: 0 });
+
   useEffect(() => {
-    const fetchBudget = async () => {
-      fetch("/user/get-budget")
-        .then((resRaw) => {
-          return resRaw.json().then((res) => {
-            return res.budget;
-          });
-        })
-        .then((budgets) => {
-          setBarData([]);
-          Object.keys(props.expense).map((category) => {
-            if (category in budgets) {
-              let totalExpense = 0;
-              props.expense[category].map((item) => {
-                totalExpense += item.amount;
-              });
-              const object = {};
-              const ratio = ((totalExpense / budgets[category]) * 100).toFixed(
-                2
-              );
-              object["amount"] = totalExpense;
-              object["ratio"] = ratio;
-              object["budget"] = budgets[category];
-              object["category"] = category;
-              object["left"] = budgets[category] - totalExpense;
-              setBarData((prev) => Array.from([...prev, object]));
-            }
-          });
+    fetch("/user/get-budget")
+      .then((resRaw) => {
+        return resRaw.json().then((res) => {
+          return res.budget;
         });
-    };
-    fetchBudget();
+      })
+      .then((budgets) => {
+        setBarData([]);
+        Object.keys(props.expense).map((category) => {
+          if (category in budgets) {
+            let totalExpense = 0;
+            props.expense[category].map((item) => {
+              totalExpense += parseFloat(item.amount);
+            });
+            const object = {};
+            const ratio = ((totalExpense / budgets[category]) * 100).toFixed(2);
+            object["amount"] = totalExpense;
+            object["ratio"] = ratio;
+            object["budget"] = budgets[category];
+            object["category"] = category;
+            object["left"] = budgets[category] - totalExpense;
+            setBarData((prev) => Array.from([...prev, object]));
+          }
+        });
+      });
   }, [props.expense, budget]);
 
   function toggleBudgetPanel() {
     setBudgetPanel(!showBudgetPanel);
   }
-
   return (
     <div
       className="flex-container"

@@ -9,7 +9,7 @@ export default function BudgetModule(props) {
 
   useEffect(() => {
     setExpense({});
-    for (var i = 0; i < props.recent.length; i++) {
+    for (let i = 0; i < props.recent.length; i++) {
       if (props.recent[i].type === "Expense") {
         let category = props.recent[i].category;
         const array = props.recent.filter((item) => item.category === category);
@@ -32,7 +32,7 @@ export default function BudgetModule(props) {
           if (category in budgets) {
             let totalExpense = 0;
             expense[category].map((item) => {
-              totalExpense += item.amount;
+              totalExpense += parseFloat(item.amount);
             });
             const object = {};
             const ratio = ((totalExpense / budgets[category]) * 100).toFixed(2);
@@ -46,6 +46,8 @@ export default function BudgetModule(props) {
         });
       });
   }, [expense]);
+
+  console.log(barData);
 
   return (
     <div className="flex-container border d-flex flex-column">
