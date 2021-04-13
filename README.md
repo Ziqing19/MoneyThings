@@ -60,11 +60,11 @@ MoneyThings
 
 ## Online demo
 
-
 ```https://moneythings.herokuapp.com/```
 
 ## Development
-for development start two servers
+
+For development, you need to start two servers
 ```
 yarn install
 cd frontend
@@ -80,6 +80,7 @@ The backend will run on http://localhost:3001
 Note: do not work on port 3001 as the express only provide api during development.
 
 ## Before deployment
+
 ```
 cd frontend
 yarn build (generate build folder)
