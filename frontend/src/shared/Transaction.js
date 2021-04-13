@@ -14,6 +14,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
  * @param props.amount (required)
  * @param props.date (required) unix timestamp
  * @param props.type (required) expense | income
+ * @param props.remark
  * @returns {JSX.Element}
  */
 export default function Transaction(props) {
@@ -60,7 +61,7 @@ export default function Transaction(props) {
         className="list-group-item d-flex justify-content-between align-item-center list-group-item-light"
         style={{ fontWeight: "bold" }}
       >
-        {props.merchant}
+        {(props.remark ? props.category + ": " : "") + props.merchant}
         <div>
           <Badge pill variant={props.type === "Expense" ? "danger" : "primary"}>
             ${props.amount}
@@ -74,7 +75,7 @@ export default function Transaction(props) {
         className="list-group-item d-flex justify-content-between align-item-center list-group-item-light"
         style={{ fontSize: "15px" }}
       >
-        {props.category}
+        {props.remark ? props.remark : props.category}
         <div style={{ fontStyle: "italic" }}>{parseDate(props.date)}</div>
       </li>
     </div>
@@ -91,4 +92,5 @@ Transaction.propTypes = {
   recent: propTypes.array.isRequired,
   setRecent: propTypes.func,
   refreshPage: propTypes.func,
+  remark: propTypes.string,
 };

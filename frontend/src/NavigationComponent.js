@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
-import logo from "./images/MoneyEmoji.png";
 
 export default function NavigationComponent(props) {
   const [avatar, setAvatar] = useState("");
@@ -31,7 +30,7 @@ export default function NavigationComponent(props) {
           style={{ color: "rgba(255,255,255,0.9)" }}
         >
           <img
-            src={logo}
+            src={"../images/MoneyEmoji.png"}
             alt="logo"
             width="30"
             height="24"

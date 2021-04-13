@@ -1,20 +1,28 @@
 # MoneyThings
 
+## Project Objective
+
+MoneyThings is a Single Page Application for personal finance management.
+
 ## Author
 Qiqi Chen: chen.qiq(at)northeastern.edu
 
 Ziqing Mao: mao.zi(at)northeastern.edu
 
 ## Links
-[Slides](https://docs.google.com/presentation/d/1y_3bIUTJU2RH0gSmEjfV3OPCCm_Lu_l-Vt82BG1s3_w/edit#slide=id.p)
 
-[CS5610 Web Development](https://johnguerra.co/classes/webDevelopment_spring_2021/)
+Class link: [CS5610 Web Development](https://johnguerra.co/classes/webDevelopment_spring_2021/)
 
+Demo Link: https://moneythings.herokuapp.com/
+
+Video Demo: https://www.youtube.com/watch?v=
+
+Slides: [Google Slides](https://docs.google.com/presentation/d/1y_3bIUTJU2RH0gSmEjfV3OPCCm_Lu_l-Vt82BG1s3_w/edit?ts=60740999)
 
 ## Project Structure
 
 ```
-root
+MoneyThings
 ├─bin                             // express entry
 ├─frontend                        // react project root
 │  ├─build                        // react app bundle
@@ -39,22 +47,6 @@ root
 └─src                             // backend src
 ```
 
-## Hierarchy (Routes)
-
-1. Login Page
-2. Main Page
-    1. Overview
-    2. All time
-        1. Group by date
-        2. Group by category
-    3. Trends
-        1. Daily usage (histogram)
-        2. Category proportion (pie chart)
-    4. Budget
-        1. Set budget
-        2. Display budget/spending
-    5. Edit Profile
-
 ## Features
 
 - [ ] Signup/Login/ResetPass
@@ -65,6 +57,11 @@ root
 - [ ] Add an entry
 - [ ] Search for specific entries (regex?)
 - [ ] Export/Import
+
+## Online demo
+
+
+```https://moneythings.herokuapp.com/```
 
 ## Development
 for development start two servers
@@ -80,7 +77,7 @@ The frontend will run on http://localhost:3000
 yarn backend
 ```
 The backend will run on http://localhost:3001
-
+Note: do not work on port 3001 as the express only provide api during development.
 
 ## Before deployment
 ```
@@ -93,5 +90,4 @@ Check the webpage on http://localhost:3001
 
 ## Copyright
 - This project is under [MIT license](./LICENSE). 
-- Sample images of the demo are provided by [Unsplash](https://unsplash.com/) and their license page is [here](https://unsplash.com/license).
-  - We appreciate the artworks of avinash-kumar, carlos-mesa, clayton-cardinalli, hakan-nural, jake-heidecker, kristina-manchenko, pablo-heimplatz, rahul-pandit, ruslan-bardash, stephen-walker, tengyart, tomas-malik, willian-justen-de-vasconcellos.
+- Sample avatars of the demo are provided by [Iconfinder](https://www.iconfinder.com/iconsets/business-avatar-1) and they are under a free license.

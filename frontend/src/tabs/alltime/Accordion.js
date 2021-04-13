@@ -40,6 +40,7 @@ export default function Accordion(props) {
               recent={props.recent}
               setRecent={props.setRecent}
               refreshPage={props.refreshPage}
+              remark={i.remark}
             />
           ))}
         </div>
