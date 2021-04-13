@@ -87,7 +87,8 @@ yarn build (generate build folder)
 cd ..
 yarn backend
 ```
-Check the webpage on http://localhost:3001 
+Check the webpage on http://localhost:3001
+Don't push the build/ folder to your deployment server.
 
 ## Copyright
 - This project is under [MIT license](./LICENSE). 
