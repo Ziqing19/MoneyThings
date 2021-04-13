@@ -7,6 +7,8 @@ import AllTime from "./tabs/alltime/AllTime.js";
 import Trends from "./tabs/trends/Trends.js";
 import Budget from "./tabs/budget/Budget.js";
 import SelectionPanel from "./tabs/dateRangeSelection/SelectionPanel.js";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import Instruction from "./shared/Instruction";
 import propTypes from "prop-types";
 
 /***
@@ -146,7 +148,7 @@ Workspace.propTypes = {
 function FunctionalNavbar() {
   return (
     <div className="d-flex justify-content-center py-3 functional-navbar">
-      <div className="container row">
+      <div className="container row position-relative">
         <NavLink
           className="col-3 text-center fw-bold"
           to="/overview"
@@ -175,6 +177,14 @@ function FunctionalNavbar() {
         >
           BUDGET
         </NavLink>
+        <div
+          className="position-absolute start-100 instruction-icon"
+          data-bs-toggle="modal"
+          data-bs-target="#instruction_modal"
+        >
+          <FontAwesomeIcon icon={["fas", "question"]} />
+        </div>
+        <Instruction />
       </div>
     </div>
   );
