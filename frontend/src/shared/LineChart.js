@@ -3,7 +3,9 @@ import { ResponsiveLine } from "@nivo/line";
 import propTypes from "prop-types";
 
 export default function MyLineChart(props) {
-  const axisXConfig = {
+  const interval = props.interval === undefined ? 2 : props.interval;
+
+  const axisYConfig = {
     tickSize: props.isPrimaryGraph ? 0 : 5,
     tickPadding: props.isPrimaryGraph ? 10 : 5,
     tickRotation: 0,
@@ -11,7 +13,12 @@ export default function MyLineChart(props) {
     legendPosition: "middle",
   };
 
-  const interval = props.interval === undefined ? 2 : props.interval;
+  const axisXConfig = {
+    format: "%b %d",
+    tickSize: 10,
+    tickPadding: 15,
+    tickValues: `every ${interval} days`,
+  };
 
   const legendConfig = [
     {
@@ -57,14 +64,9 @@ export default function MyLineChart(props) {
         max: "auto",
         stacked: false,
       }}
-      axisLeft={props.isPrimaryGraph ? null : axisXConfig}
-      axisRight={!props.isPrimaryGraph ? null : axisXConfig}
-      axisBottom={{
-        format: "%b %d",
-        tickSize: 10,
-        tickPadding: 15,
-        tickValues: `every ${interval} days`,
-      }}
+      axisLeft={props.isPrimaryGraph ? null : axisYConfig}
+      axisRight={!props.isPrimaryGraph ? null : axisYConfig}
+      axisBottom={props.isPrimaryGraph ? null : axisXConfig}
       yFormat=" >-.2f"
       axisTop={null}
       pointLabelYOffset={-12}
