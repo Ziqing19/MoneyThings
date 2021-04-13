@@ -21,6 +21,8 @@ Video Demo: https://www.youtube.com/watch?v=
 
 Slides: [Google Slides](https://docs.google.com/presentation/d/1y_3bIUTJU2RH0gSmEjfV3OPCCm_Lu_l-Vt82BG1s3_w/edit?ts=60740999)
 
+
+
 ## Project Structure
 
 ```
@@ -51,10 +53,27 @@ MoneyThings
 
 ## Features
 
+
+                                                         
 - Authentication system with bcrypt + salted secured private data storage
 - Transaction data displayed in groups by either date or category
+ 
+  Add Transaction
+  
+  <img src="./assets/AddTransaction.gif" height="400" alt="add" style="margin-right: 5%"></img>
+  
+  Delete Transaction
+  
+  <img src="./assets/DeleteTransaction.gif" height="400" alt="add" style="margin-right: 5%"></img>
+  
 - Data visualization by pie chart and line chart
+
+  <img src="./assets/Trend.gif" height="400" alt="add" style="margin-right: 5%"></img>
+  
 - Monthly Budget can be set and view by categories
+  
+  <img src="./assets/Budget.gif" height="400" alt="add" style="margin-right: 5%"></img>
+ 
 - Update account information including the password, the avatar, and the username   
 
 ## Online demo
