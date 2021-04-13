@@ -40,7 +40,7 @@ export default function Profile(props) {
             alert(res);
           });
         } else {
-          console.log("Profile updated");
+          alert("Profile updated");
           props.refreshPage((prev) => !prev);
         }
       })
@@ -114,6 +114,7 @@ Profile.propTypes = {
 };
 
 function UpdateAvatar({ dataHandler }) {
+  const [selected, setSelected] = useState();
   return (
     <div className="row">
       {[...Array(9).keys()].map((item, index) => (
@@ -121,11 +122,18 @@ function UpdateAvatar({ dataHandler }) {
           className="col-4"
           key={"avatar-" + index}
           onClick={() => {
+            setSelected(index);
             dataHandler(index);
           }}
         >
           <div className="ratio ratio-1x1">
-            <img src={`../images/avatar/${index}.png`} alt="avatar" />
+            <img
+              className={
+                selected === index ? "shadow rounded-circle" : "rounded-circle"
+              }
+              src={`../images/avatar/${index}.png`}
+              alt="avatar"
+            />
           </div>
         </div>
       ))}
