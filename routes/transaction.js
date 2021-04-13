@@ -78,10 +78,8 @@ router.post("/new", async (req, res) => {
   }
   try {
     req.body.user_id = req.session._id;
-    const collection = await getCollection("Transactions");
-    await collection.insertOne(req.body);
-    const userCollection = await getCollection("Users");
-    const user = await userCollection.findOne({
+    await getCollection("Transactions").insertOne(req.body);
+    const user = await getCollection("Users").findOne({
       _id: ObjectId(req.session._id),
     });
     if (user === null) {
@@ -92,10 +90,11 @@ router.post("/new", async (req, res) => {
       parseFloat(
         req.body.type === "Income" ? req.body.amount : -req.body.amount
       );
-    await userCollection.updateOne(
+    await getCollection("Users").updateOne(
       { _id: ObjectId(req.session._id) },
       { $set: { balance: new_balance } }
     );
+    console.log(req.session);
     req.session.user.balance = new_balance;
     res.sendStatus(201);
   } catch (err) {
@@ -157,34 +156,7 @@ router.get("/cal-balance", async (req, res) => {
         balance += amount;
       }
     });
-    // const user_collection = await getCollection("Users");
-    // await user_collection.updateOne(
-    //   { _id: ObjectId(req.cookies._id) },
-    //   { $set: { balance: parseFloat(balance.toFixed(2)) } }
-    // );
     res.send({ balance: balance.toFixed(2) });
-  } catch (err) {
-    console.log(err);
-    res.sendStatus(400);
-  }
-});
-
-// update income value
-router.get("/test", async (req, res) => {
-  try {
-    const collection = await getCollection("Transactions");
-    const cursor = await collection
-      .find({ user_id: req.cookies._id, type: "income" })
-      .sort({ date: -1 });
-    await cursor.forEach((item) => {
-      const _id = item._id;
-      const amount = parseFloat(item.amount);
-      collection.updateOne(
-        { _id: ObjectId(_id) },
-        { $set: { amount: amount } }
-      );
-    });
-    res.sendStatus(200);
   } catch (err) {
     console.log(err);
     res.sendStatus(400);

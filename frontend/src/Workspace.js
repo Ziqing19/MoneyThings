@@ -1,11 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  NavLink,
-  Redirect,
-} from "react-router-dom";
+import { Switch, Route, NavLink, Redirect } from "react-router-dom";
 import "./stylesheets/Workspace.css";
 import Overview from "./tabs/overview/Overview.js";
 import Account from "./tabs/account/Account.js";
@@ -83,68 +77,66 @@ export default function Workspace(props) {
   //console.log(props.user.categories["Expense"]);
 
   return (
-    <Router>
-      <div className="flex-grow-1 d-flex flex-column">
-        <FunctionalNavbar />
-        <div className="flex-grow-1">
-          <Switch>
-            <Route path={["/all-time", "/trends", "/budget"]}>
-              <div className="row flex-container">
-                <div className="col-4 px-0">
-                  <SelectionPanel
+    <div className="flex-grow-1 d-flex flex-column">
+      <FunctionalNavbar />
+      <div className="flex-grow-1">
+        <Switch>
+          <Route path={["/all-time", "/trends", "/budget"]}>
+            <div className="row flex-container">
+              <div className="col-4 px-0">
+                <SelectionPanel
+                  user={props.user}
+                  refreshPage={props.refreshPage}
+                  dateRange={dateRange}
+                  setDateRange={setDateRange}
+                  recent={recent}
+                  setRecent={setRecent}
+                />
+              </div>
+              <div className="col-8 px-0">
+                <Route path="/all-time">
+                  <AllTime
                     user={props.user}
+                    setUser={props.setUser}
                     refreshPage={props.refreshPage}
-                    dateRange={dateRange}
-                    setDateRange={setDateRange}
                     recent={recent}
                     setRecent={setRecent}
+                    income={income}
+                    expense={expense}
+                    dateGroup={dateGroup}
                   />
-                </div>
-                <div className="col-8 px-0">
-                  <Route path="/all-time">
-                    <AllTime
-                      user={props.user}
-                      setUser={props.setUser}
-                      refreshPage={props.refreshPage}
-                      recent={recent}
-                      setRecent={setRecent}
-                      income={income}
-                      expense={expense}
-                      dateGroup={dateGroup}
-                    />
-                  </Route>
-                  <Route path="/trends">
-                    <Trends
-                      income={income}
-                      expense={expense}
-                      dateGroup={dateGroup}
-                    />
-                  </Route>
-                  <Route path="/budget">
-                    <Budget
-                      expense={expense}
-                      dateRange={dateRange}
-                      user={props.user}
-                      dateGroup={dateGroup}
-                      setUser={props.setUser}
-                    />
-                  </Route>
-                </div>
+                </Route>
+                <Route path="/trends">
+                  <Trends
+                    income={income}
+                    expense={expense}
+                    dateGroup={dateGroup}
+                  />
+                </Route>
+                <Route path="/budget">
+                  <Budget
+                    expense={expense}
+                    dateRange={dateRange}
+                    user={props.user}
+                    dateGroup={dateGroup}
+                    setUser={props.setUser}
+                  />
+                </Route>
               </div>
-            </Route>
-            <Route path="/account">
-              <Account {...props} />
-            </Route>
-            <Route path="/overview">
-              <Overview {...props} />
-            </Route>
-            <Route path="/">
-              <Redirect to="/overview" />
-            </Route>
-          </Switch>
-        </div>
+            </div>
+          </Route>
+          <Route path="/account">
+            <Account {...props} />
+          </Route>
+          <Route path="/overview">
+            <Overview {...props} />
+          </Route>
+          <Route path="/">
+            <Redirect to="/overview" />
+          </Route>
+        </Switch>
       </div>
-    </Router>
+    </div>
   );
 }
 

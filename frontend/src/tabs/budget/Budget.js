@@ -58,7 +58,7 @@ export default function Budget(props) {
       style={{ height: "80vh", overflowY: "scroll" }}
     >
       <div
-        className="setBudgetButton flex-container"
+        className="setBudgetButton flex-container mt-5"
         style={{ padding: "5px", width: "70%", margin: "0 auto" }}
       >
         <div>

@@ -2422,7 +2422,7 @@
     "@webassemblyjs/wast-parser" "1.9.0"
     "@xtuc/long" "4.2.2"
 
-"@wojtekmaj/date-utils@^1.0.2", "@wojtekmaj/date-utils@^1.0.3":
+"@wojtekmaj/date-utils@^1.0.0", "@wojtekmaj/date-utils@^1.0.2", "@wojtekmaj/date-utils@^1.0.3":
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/@wojtekmaj/date-utils/-/date-utils-1.0.3.tgz#2dcfd92881425c5923e429c2aec86fb3609032a1"
   integrity sha512-1VPkkTBk07gMR1fjpBtse4G+oJqpmE+0gUFB0dg3VIL7qJmUVaBoD/vlzMm/jNeOPfvlmerl1lpnsZyBUFIRuw==
@@ -9645,6 +9645,15 @@ react-calendar@^3.3.1:
     merge-class-names "^1.1.1"
     prop-types "^15.6.0"
 
+react-clock@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/react-clock/-/react-clock-3.0.0.tgz#0d29f8e682ef516574061d1d24b1a286cb2da89b"
+  integrity sha512-D3K82D3YGcDtzxZCfiACLcDTL8cJXSgpdrzTY9ff3H5vflxlLzTSLF8apZRo6JZzOFrZQvw5mrS7TkQzj9nG0A==
+  dependencies:
+    "@wojtekmaj/date-utils" "^1.0.0"
+    merge-class-names "^1.1.1"
+    prop-types "^15.6.0"
+
 react-date-picker@^8.1.0, react-date-picker@^8.1.1:
   version "8.1.1"
   resolved "https://registry.yarnpkg.com/react-date-picker/-/react-date-picker-8.1.1.tgz#1959608cd042c9bfcf2faa6d63a56e9ef6b17e2b"
@@ -9659,6 +9668,22 @@ react-date-picker@^8.1.0, react-date-picker@^8.1.1:
     react-calendar "^3.3.1"
     react-fit "^1.0.3"
     update-input-width "^1.1.1"
+
+react-datetime-picker@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/react-datetime-picker/-/react-datetime-picker-3.2.0.tgz#eec4e8cda5c4f5621cbb1f6d0d4486f62da45913"
+  integrity sha512-zmjm4olduGsgOXStePYAsqFD+Xy4dLMClBl87IVqh6ymFSLuOPgZzjmeLyqLsdb3lnXA8gdtpNXi0LNQkEX3ZQ==
+  dependencies:
+    "@wojtekmaj/date-utils" "^1.0.3"
+    get-user-locale "^1.2.0"
+    make-event-props "^1.1.0"
+    merge-class-names "^1.1.1"
+    prop-types "^15.6.0"
+    react-calendar "^3.3.1"
+    react-clock "^3.0.0"
+    react-date-picker "^8.1.0"
+    react-fit "^1.0.3"
+    react-time-picker "^4.2.0"
 
 react-dev-utils@^11.0.3:
   version "11.0.4"
@@ -9867,6 +9892,20 @@ react-spring@9.0.0-rc.3:
     "@react-spring/three" "9.0.0-rc.3"
     "@react-spring/web" "9.0.0-rc.3"
     "@react-spring/zdog" "9.0.0-rc.3"
+
+react-time-picker@^4.2.0:
+  version "4.2.1"
+  resolved "https://registry.yarnpkg.com/react-time-picker/-/react-time-picker-4.2.1.tgz#b27f0bbc2e58534f20dbf10b14d0b8f3334fcb07"
+  integrity sha512-T0aEabJ3bz54l8LV3pdpB5lOZuO3pRIbry5STcUV58UndlrWLcHpdpvS1IC8JLNXhbLxzGs1MmpASb5k1ddlsg==
+  dependencies:
+    "@wojtekmaj/date-utils" "^1.0.0"
+    get-user-locale "^1.2.0"
+    make-event-props "^1.1.0"
+    merge-class-names "^1.1.1"
+    prop-types "^15.6.0"
+    react-clock "^3.0.0"
+    react-fit "^1.0.3"
+    update-input-width "^1.1.1"
 
 react-transition-group@^4.4.1:
   version "4.4.1"

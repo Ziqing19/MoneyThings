@@ -84,7 +84,7 @@ export default function RecentTransaction(props) {
     if (!match) {
       setDate(new Date());
       setPage(1);
-      props.setDateRange(getLastMonth(new Date()));
+      props.setDateRange(getThisMonth());
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [match === null]);
@@ -102,14 +102,17 @@ export default function RecentTransaction(props) {
               maxDate={new Date()}
             />
           ) : (
-            <DatePicker
-              onChange={handleDateChange}
-              value={date}
-              clearIcon={null}
-              maxDetail="year"
-              minDate={new Date(0)}
-              maxDate={new Date()}
-            />
+            <div className="mt-4">
+              <DatePicker
+                className="fs-4"
+                onChange={handleDateChange}
+                value={date}
+                clearIcon={null}
+                maxDetail="year"
+                minDate={new Date(0)}
+                maxDate={new Date()}
+              />
+            </div>
           )}
         </div>
         <div className="text-center">{match ? AllTimeShortcuts() : null}</div>
@@ -198,5 +201,15 @@ function getMonthRange(start_date) {
   end_date.setHours(23);
   end_date.setMinutes(59);
   end_date.setSeconds(59);
+  return [start_date, end_date];
+}
+
+function getThisMonth() {
+  const end_date = new Date();
+  const start_date = new Date();
+  start_date.setDate(1);
+  start_date.setHours(0);
+  start_date.setMinutes(0);
+  start_date.setSeconds(0);
   return [start_date, end_date];
 }

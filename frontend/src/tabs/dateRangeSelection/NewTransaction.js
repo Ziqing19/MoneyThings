@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import InputBox from "../../shared/InputBox.js";
 import propTypes from "prop-types";
+import DateTimePicker from "react-datetime-picker";
 import _ from "lodash";
 
 export default function NewTransaction(props) {
@@ -10,7 +11,7 @@ export default function NewTransaction(props) {
   const [categories, setCategories] = useState(props.user.categories.Income);
   const [category, setCategory] = useState(props.user.categories.Income[0]);
   const [remark, setRemark] = useState("");
-  const [date, setDate] = useState("");
+  const [date, setDate] = useState(new Date());
 
   function handleSubmit(evt) {
     evt.preventDefault();
@@ -22,7 +23,7 @@ export default function NewTransaction(props) {
       category: category,
       merchant: merchant,
       amount: amount,
-      date: new Date().getTime(),
+      date: date.getTime(),
       remark: remark,
     };
     fetch("/transaction/new", {
@@ -51,8 +52,8 @@ export default function NewTransaction(props) {
       });
   }
 
-  function notIsIncome() {
-    setIsIncome(!isIncome);
+  function notIsIncome(flag) {
+    setIsIncome(flag);
     setCategories(
       isIncome ? props.user.categories.Expense : props.user.categories.Income
     );
@@ -60,11 +61,11 @@ export default function NewTransaction(props) {
 
   return (
     <div className="flex-container">
-      <form onSubmit={handleSubmit}>
-        <div
-          className="row py-3 text-center"
-          style={{ marginLeft: 0, marginRight: 0 }}
-        >
+      <form
+        onSubmit={handleSubmit}
+        className="flex-container d-flex flex-column"
+      >
+        <div className="row py-3 text-center btn-group mx-3" role="group">
           <button
             className="col-3 border-end btn btn-secondary"
             onClick={props.toggle}
@@ -74,21 +75,24 @@ export default function NewTransaction(props) {
 
           <button
             className="col-3 border-end btn btn-secondary"
-            onClick={notIsIncome}
+            onClick={() => notIsIncome(false)}
             style={{
-              textDecoration: isIncome ? "underline" : "none",
+              textDecoration: isIncome ? "none" : "underline",
             }}
           >
             Income
           </button>
           <button
             className="col-3 border-end btn btn-secondary"
-            onClick={notIsIncome}
-            style={{ textDecoration: isIncome ? "none" : "underline" }}
+            onClick={() => notIsIncome(true)}
+            style={{ textDecoration: isIncome ? "underline" : "none" }}
           >
             Expense
           </button>
           <button className="col-3 btn btn-secondary">Save</button>
+        </div>
+        <div className="text-center my-3">
+          <DateTimePicker onChange={setDate} value={date} clearIcon={null} />
         </div>
         <div className="form-floating my-3">
           <select
@@ -121,21 +125,14 @@ export default function NewTransaction(props) {
           onChange={(evt) => setAmount(evt.target.value)}
           required={true}
         />
-        <InputBox
-          label="Date"
-          value={date}
-          onChange={(evt) => setDate(evt.target.value)}
-          required={true}
-        />
-        <div className="form-floating my-3">
+        <div className="form-floating mt-3 mb-5 flex-grow-1">
           <textarea
             id="remark"
-            rows="5"
             value={remark}
             className="form-control"
             placeholder="textarea"
             onChange={(evt) => setRemark(evt.target.value)}
-            style={{ height: "auto" }}
+            style={{ height: "100%" }}
           />
           <label htmlFor="remark">Remark</label>
         </div>

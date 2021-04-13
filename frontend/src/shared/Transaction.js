@@ -58,11 +58,11 @@ export default function Transaction(props) {
     <div className="mb-3 position-relative">
       <li
         className="list-group-item d-flex justify-content-between align-item-center list-group-item-light"
-        style={{ "font-weight": "bold" }}
+        style={{ fontWeight: "bold" }}
       >
         {props.merchant}
         <div>
-          <Badge pill variant={props.type == "Expense" ? "danger" : "primary"}>
+          <Badge pill variant={props.type === "Expense" ? "danger" : "primary"}>
             ${props.amount}
           </Badge>{" "}
           {props.refreshPage !== undefined ? (

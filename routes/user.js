@@ -177,7 +177,6 @@ router.get("/get-budget", async (req, res) => {
         },
       }
     );
-    console.log(resFind);
     res.send(resFind);
   } catch (err) {
     console.log(err);
