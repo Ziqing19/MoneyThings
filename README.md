@@ -4,6 +4,8 @@
 
 MoneyThings is a Single Page Application for personal finance management.
 
+![index](./assets/index.jpg)
+
 ## Author
 Qiqi Chen: chen.qiq(at)northeastern.edu
 
@@ -49,14 +51,11 @@ MoneyThings
 
 ## Features
 
-- [ ] Signup/Login/ResetPass
-- [ ] Multiple accounts (checking account, credit card, stock(I have no idea about it))
-- [ ] Default spending categories
-- [ ] Diagrams showing proportions of spending (Pie chart? Use a library?)
-- [ ] Set budget (show warning if exceeds)
-- [ ] Add an entry
-- [ ] Search for specific entries (regex?)
-- [ ] Export/Import
+- Authentication system with bcrypt + salted secured private data storage
+- Transaction data displayed in groups by either date or category
+- Data visualization by pie chart and line chart
+- Monthly Budget can be set and view by categories
+- Update account information including the password, the avatar, and the username   
 
 ## Online demo
 
@@ -77,6 +76,7 @@ The frontend will run on http://localhost:3000
 yarn backend
 ```
 The backend will run on http://localhost:3001
+
 Note: do not work on port 3001 as the express only provide api during development.
 
 ## Before deployment

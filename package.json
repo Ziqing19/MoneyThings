@@ -4,7 +4,8 @@
   "private": true,
   "scripts": {
     "backend": "node ./node_modules/nodemon/bin/nodemon.js ./bin/www",
-    "frontend": "cd frontend && yarn start"
+    "frontend": "cd frontend && yarn start",
+    "heroku-postbuild": "cd frontend && yarn && yarn run build"
   },
   "author": "Qiqi Chen Ziqing Mao",
   "license": "MIT",
