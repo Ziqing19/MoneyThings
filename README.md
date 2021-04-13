@@ -2,7 +2,7 @@
 
 ## Project Objective
 
-MoneyThings is a Single Page Application for personal finance management.
+MoneyThings is a desktop Single Page Application for personal finance management.
 
 ![index](./assets/index.jpg)
 
@@ -53,9 +53,7 @@ MoneyThings
 
 ## Features
 
-
-                                                         
-- Authentication system with bcrypt + salted secured private data storage
+- Authentication system stores bcrypt + salted hashcode for sensitive data security
 - Transaction data displayed in groups by either date or category
  
   Add Transaction
@@ -107,6 +105,7 @@ cd ..
 yarn backend
 ```
 Check the webpage on http://localhost:3001
+
 Don't push the build/ folder to your deployment server.
 
 ## Copyright
