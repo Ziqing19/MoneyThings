@@ -21,7 +21,12 @@ Video Demo: https://www.youtube.com/watch?v=
 
 Slides: [Google Slides](https://docs.google.com/presentation/d/1y_3bIUTJU2RH0gSmEjfV3OPCCm_Lu_l-Vt82BG1s3_w/edit?ts=60740999)
 
+## Guest Account
 
+```
+username: Ziqing
+password:　111
+```
 
 ## Project Structure
 
