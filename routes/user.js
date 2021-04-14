@@ -27,6 +27,8 @@ router.post("/new-password", async (req, res) => {
   }
 });
 
+/*why is this in user? it is an authentication function. this also doesn't seem to actually redirect at all.
+if you are doing the redirect on the backend, it is going to bug out.*/
 router.get("/logout", async (req, res) => {
   req.session.destroy((err) => {
     if (err) {
